@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BaseCharacter
 {
-    string Name { get; }
+    public string Name { get; }
     public int HP { get; set; }
     public int Atk { get; set; }
     public float AtkSpeed { get; set; }
