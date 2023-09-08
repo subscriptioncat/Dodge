@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using System.Linq;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -14,11 +15,25 @@ public class MonsterPattern : ScriptableObject
     public MonsterEndCondition EndCondition;
     protected int count = 0;
 
-    public virtual Pattern GetPattern()
+    /// <summary>
+    /// 다음 None 혹은 Move이 나오기 전까지의 패턴 배열을 리턴한다.
+    /// </summary>
+    /// <returns></returns>
+    public virtual Pattern[] GetPattern()
     {
-        if (count >= Patterns.Count) count = 0;
-        return Patterns[count++];
+        LinkedList<Pattern> ret = new LinkedList<Pattern>();
+        while (Patterns[count].Type != ePatternType.None && Patterns[count].Type != ePatternType.Move)
+        {
+            ret.AddLast(Patterns[count++]);
+            if (count >= Patterns.Count) count = 0;
+        }
+        return ret.ToArray();
     }
+
+    /// <summary>
+    /// EndCondition의 IsEnd를 리턴한다.
+    /// </summary>
+    /// <returns></returns>
     public virtual bool GetEndCondition()
     {
         return EndCondition.IsEnd;
@@ -26,6 +41,7 @@ public class MonsterPattern : ScriptableObject
 }
 public enum ePatternType
 {
+    None,
     Move,
     Fire,
     Look
