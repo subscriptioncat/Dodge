@@ -36,3 +36,10 @@ public class MonsterController// : TopDownCharacterController
 
     }
 }
+public enum ePatternType
+{
+    Move,
+    Aim,
+    Fire,
+    Look
+}
