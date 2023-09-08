@@ -24,6 +24,14 @@ public class MonsterPattern : ScriptableObject
         return EndCondition.IsEnd;
     }
 }
+public enum ePatternType
+{
+    Move,
+    Aim,
+    Fire,
+    Look
+}
+
 [Serializable]
 public struct Pattern
 {
