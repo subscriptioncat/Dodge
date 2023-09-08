@@ -8,38 +8,63 @@ public class MonsterController : TopDownCharacterController
     public List<MonsterPattern> _pattern = new List<MonsterPattern>();
     public void Pattern()
     {
-        CallMoveEvnet(_pattern[0].Move());
+
     }
 
+    /// <summary>
+    /// 현재 위치에서 지정된 방향으로 이동
+    /// </summary>
+    public void Move()
+    {
+
+    }
+
+    /// <summary>
+    /// 현재 위치에서 Bullet을 지정된 방향으로 발사.
+    /// </summary>
     public void Fire()
     {
         GameObject bulletModel = DataManager.Instance.Bullet;
-        var bulletFired = GameObject.Instantiate(bulletModel, this.transform, true);
-    }
-    
-    public void Aim()
-    {
 
     }
-    
+
+    /// <summary>
+    /// 현재 위치에서 지정된 방향을 바라봄.
+    /// </summary>
     public void Look()
     {
 
     }
-    
+
+    public enum ePatternType
+    {
+        Move,
+        Aim,
+        Fire,
+        Look
+    }
+
     [CreateAssetMenu(fileName = "MonsterPattern", menuName = "Monster/Pattern", order = 0)]
     public class MonsterPattern : ScriptableObject
     {
-        public List<Vector2> Positions = new List<Vector2>();
+        // 패턴 
+        public List<(Vector2, ePatternType)> Patterns = new List<(Vector2, ePatternType)>();
         private int count = 0;
-        public virtual Vector2 Move()
+
+        public virtual (Vector2, ePatternType) GetPattern()
         {
-            if (count >= Positions.Count) count = 0;
-            return Positions[count++];
+            if (count >= Patterns.Count) count = 0;
+            return Patterns[count++];
         }
-        public virtual bool Condition()
+        public virtual bool EndCondition()
         {
             return false;
         }
+    }
+
+    [CreateAssetMenu(fileName = "MonsterEndCondition", menuName = "Monster/EndCondition", order = 0)]
+    public class MonsterEndCondition : ScriptableObject
+    {
+
     }
 }
