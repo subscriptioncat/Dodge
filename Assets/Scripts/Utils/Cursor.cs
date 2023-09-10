@@ -4,57 +4,130 @@ public class Cursor : MonoBehaviour
 {
     protected Direction direction;
 
-    Vector3 cursorPosition = Vector2.zero;
-    readonly float cursorSpace = 1.5f;
-    bool isSelect = false;
-    string playerAirplane;
+    private int pastCursorLocation;
+    public int currentCursorLocation;
+    protected bool isSelect;
+    private string playerAirplane;
+    int airplanesCount;
+    int airplanesRowCount;
+
+    private void Start()
+    {
+        airplanesCount = SelectManager.instance.airplanesCount;
+        airplanesRowCount = airplanesCount / 2;
+        pastCursorLocation = -1;
+        isSelect = false;
+    }
 
     protected void CursorDirection(Direction direction)
     {
-        if (isSelect != true)
-        {
-            switch (direction)
-            {
-                case Direction.Up:
-                    cursorPosition = Vector2.up;
-                    break;
-                case Direction.Left:
-                    cursorPosition = Vector2.left;
-                    break;
-                case Direction.Right:
-                    cursorPosition = Vector2.right;
-                    break;
-                case Direction.Down:
-                    cursorPosition = Vector2.down;
-                    break;
-            }
+        pastCursorLocation = currentCursorLocation;
 
-            transform.position += cursorPosition * cursorSpace;
+        SelectManager.instance.airplanesStatus[pastCursorLocation] = SelectManager
+            .Airplane
+            .Unselected;
+
+        switch (direction)
+        {
+            case Direction.Up:
+                do
+                {
+                    currentCursorLocation -= airplanesRowCount;
+
+                    if (currentCursorLocation < 0)
+                    {
+                        currentCursorLocation += airplanesCount;
+                    }
+                } while (
+                    SelectManager.instance.airplanesStatus[currentCursorLocation]
+                    != SelectManager.Airplane.Unselected
+                );
+                break;
+
+            case Direction.Down:
+                do
+                {
+                    currentCursorLocation += airplanesRowCount;
+
+                    if ((airplanesCount - 1) < currentCursorLocation)
+                    {
+                        currentCursorLocation -= airplanesCount;
+                    }
+                } while (
+                    SelectManager.instance.airplanesStatus[currentCursorLocation]
+                    != SelectManager.Airplane.Unselected
+                );
+                break;
+
+            case Direction.Left:
+                do
+                {
+                    currentCursorLocation -= 1;
+
+                    if (currentCursorLocation < 0)
+                    {
+                        currentCursorLocation += airplanesCount;
+                    }
+                } while (
+                    SelectManager.instance.airplanesStatus[currentCursorLocation]
+                    != SelectManager.Airplane.Unselected
+                );
+                break;
+
+            case Direction.Right:
+                do
+                {
+                    currentCursorLocation += 1;
+
+                    if (airplanesCount - 1 < currentCursorLocation)
+                    {
+                        currentCursorLocation -= airplanesCount;
+                    }
+                } while (
+                    SelectManager.instance.airplanesStatus[currentCursorLocation]
+                    != SelectManager.Airplane.Unselected
+                );
+                break;
         }
+
+        transform.position = SelectManager.instance.airplanes[currentCursorLocation]
+            .transform
+            .position;
+        SelectManager.instance.airplanesStatus[currentCursorLocation] = SelectManager
+            .Airplane
+            .Standby;
     }
 
     public void SelectAirplane()
     {
         isSelect = true;
 
-        Debug.Log("Player : " + playerAirplane);
+        SelectManager.instance.airplanesStatus[currentCursorLocation] = SelectManager
+            .Airplane
+            .Selected;
+
+        transform.Find("UnselectedCursor").gameObject.SetActive(false);
+        transform.Find("SelectedCursor").gameObject.SetActive(true);
     }
 
     protected void OnTriggerEnter2D(Collider2D other)
     {
-        other.transform.parent.Find("AirplaneSelected").gameObject.SetActive(true);
-        other.transform.parent.Find("AirplaneUnselected").gameObject.SetActive(false);
-
-        if (isSelect == false)
+        if (other != null)
         {
+            other.transform.parent.Find("AirplaneSelected").gameObject.SetActive(true);
+            other.transform.parent.Find("AirplaneUnselected").gameObject.SetActive(false);
+
             playerAirplane = other.transform.parent.name;
         }
     }
 
     protected void OnTriggerExit2D(Collider2D other)
     {
-        other.transform.parent.Find("AirplaneSelected").gameObject.SetActive(false);
-        other.transform.parent.Find("AirplaneUnselected").gameObject.SetActive(true);
+        if (other != null)
+        {
+            other.transform.parent.Find("AirplaneSelected").gameObject.SetActive(false);
+            other.transform.parent.Find("AirplaneUnselected").gameObject.SetActive(true);
+        }
     }
 
     protected enum Direction
