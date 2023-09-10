@@ -3,9 +3,8 @@ using UnityEngine;
 public class Cursor : MonoBehaviour
 {
     private int pastCursorLocation; // 이전 커서 위치
-    public int currentCursorLocation; // 현재 커서 위치
+    private int currentCursorLocation; // 현재 커서 위치
     protected bool isSelect; // 플레이어 비행기 확정 선택 여부
-    private string playerAirplane; // 선택한 비행기 이름
     int airplanesCount; // 등록된 비행기 개수
     int airplanesRowCount; // 각 가로줄마다 위치하고 있는 비행기 개수
 
@@ -105,7 +104,7 @@ public class Cursor : MonoBehaviour
     }
 
     // 비행기 선택 시
-    public void SelectAirplane()
+    public int SelectAirplane()
     {
         // 해당 커서의 isSelect = true
         isSelect = true;
@@ -118,6 +117,13 @@ public class Cursor : MonoBehaviour
         // 커서 이미지 변경
         transform.Find("UnselectedCursor").gameObject.SetActive(false);
         transform.Find("SelectedCursor").gameObject.SetActive(true);
+
+        return currentCursorLocation;
+    }
+
+    public void InitCursorLocation(int initIndex)
+    {
+        currentCursorLocation = initIndex;
     }
 
     // 콜라이더를 빠져나오면 비행기 스프라이트 변경
@@ -127,8 +133,6 @@ public class Cursor : MonoBehaviour
         {
             other.transform.parent.Find("AirplaneSelected").gameObject.SetActive(true);
             other.transform.parent.Find("AirplaneUnselected").gameObject.SetActive(false);
-
-            playerAirplane = other.transform.parent.name;
         }
     }
 
