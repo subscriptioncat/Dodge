@@ -76,15 +76,15 @@ public class SelectManager : MonoBehaviour
 
     private void GameControll()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space)) // MainScene으로 씬 이동
         {
             SceneManager.LoadScene("MainScene");
         }
-        else if (Input.GetKeyDown(KeyCode.F1))
+        else if (Input.GetKeyDown(KeyCode.F1)) // 플레이어 1 비행기 선택
         {
             player1Cursor.GetComponent<Player1Cursor>().SelectAirplane();
         }
-        else if (Input.GetKeyDown(KeyCode.F2))
+        else if (Input.GetKeyDown(KeyCode.F2)) // 플레이어 2 커서 추가
         {
             if (player[2] == false)
             {
@@ -92,26 +92,26 @@ public class SelectManager : MonoBehaviour
 
                 for (int i = 0; i < airplanesCount; i++)
                 {
-                    if (airplanesStatus[i] == Airplane.Unselected)
+                    if (airplanesStatus[i] == Airplane.Unselected) // 비행기 배열 0번부터 미선택된 비행기를 찾아
                     {
-                        player2Cursor.transform.position = airplanes[i].transform.position;
-                        airplanesStatus[i] = Airplane.Standby;
-                        player2Cursor.GetComponent<Player2Cursor>().currentCursorLocation = i;
+                        player2Cursor.transform.position = airplanes[i].transform.position; // 해당 위치로 Player2 커서 이동
+                        airplanesStatus[i] = Airplane.Standby; // 해당 인덱스의 비행기 상태를 'Standby'로 변경
+                        player2Cursor.GetComponent<Player2Cursor>().currentCursorLocation = i; // 현재 인덱스 값을 Player2Cursor 스크립트로 넘겨줌
                         break;
                     }
                 }
             }
             else
             {
-                player2Cursor.GetComponent<Player2Cursor>().SelectAirplane();
+                player2Cursor.GetComponent<Player2Cursor>().SelectAirplane(); // 플레이어 2 비행기 선택
             }
         }
     }
 
     public enum Airplane
     {
-        Unselected,
-        Standby,
-        Selected
+        Unselected, // 미선택한 비행기
+        Standby, // 현재 커서가 위치하고 있음
+        Selected // 선택된 비행기
     }
 }
