@@ -19,8 +19,7 @@ public class MonsterController// : TopDownCharacterController
         }
         if (_currentPattern != null)
         {
-            
-            switch(_currentPattern[_index].Type)
+            switch (_currentPattern[_index].Type)
             {
                 case ePatternType.None:
                     break;
@@ -30,6 +29,28 @@ public class MonsterController// : TopDownCharacterController
                     break;
                 case ePatternType.Look:
                     break;
+            }
+        }
+    }
+
+    public void Update()
+    {
+        foreach (var pattern in _currentPattern)
+        {
+            if (pattern.IsEnd())
+                continue;
+            pattern.Loop();
+            if (pattern.Count < pattern.TimeElpased / pattern.Duration)
+            {
+                switch (pattern.Type)
+                {
+                    case ePatternType.None:
+                        break;
+                    case ePatternType.Move:
+                        Move();
+                        break;
+
+                }
             }
         }
     }

@@ -15,33 +15,15 @@ public class MonsterPattern : ScriptableObject
     public MonsterPattern()
     {
         PatternBundles.Add(new PatternBundle());
-        PatternBundles.First().Patterns.Add(new Pattern()
-        {
-            Type = ePatternType.None,
-            Direction = new Vector2(),
-            Duration = 10.0f,
-            Power = 0,
-            Condition = null
-        });
     }
 
     /// <summary>
-    /// 다음 None 혹은 Move이 나오기 전까지의 패턴 배열을 리턴한다.
+    /// 1개의 Pattern Bundle을 리턴한다.
     /// </summary>
     /// <returns></returns>
     public virtual Pattern[] GetPattern(int index)
     {
-        LinkedList<Pattern> ret = new LinkedList<Pattern>();
-        return ret.ToArray();
-    }
-
-    /// <summary>
-    /// EndCondition의 IsEnd를 리턴한다.
-    /// </summary>
-    /// <returns></returns>
-    public virtual bool GetEndCondition(int index)
-    {
-        return false;
+        return PatternBundles[index].Patterns.ToArray();
     }
 }
 public enum ePatternType
@@ -68,19 +50,25 @@ public class Pattern
         Type = ePatternType.None;
         Direction = new Vector2();
         Power = 0;
-        Duration = 0;
-        Condition = null;
-        m_TimeElpased = 0;
+        Duration = .0f;
+        Condition = new EndCondition();
+        TimeElpased = .0f;
+        Count = 0;
     }
-    public ePatternType Type { get; set; }
-    public Vector2 Direction { get; set; }
-    public int Power { get; set; }
-    public float Duration { get; set; }
-    public MonsterEndCondition Condition { get; set; }
-    private float m_TimeElpased;
+    public ePatternType Type;
+    public Vector2 Direction;
+    public int Power;
+    public float Duration;
+    public EndCondition Condition;
+    public float TimeElpased;
+    public int Count;
     public virtual bool IsEnd()
     {
-        return Condition.IsEnd(m_TimeElpased);
+        return Condition.IsEnd(TimeElpased, Count);
+    }
+    public virtual void Loop()
+    {
+        TimeElpased += Time.deltaTime;
     }
 }
 
@@ -89,51 +77,32 @@ public class Pattern
 public class MonsterPatternEditor : Editor
 {
     SerializedProperty m_PatternBundlesListProperty;
-    SerializedProperty m_EndConditionProperty;
 
-    List<string> m_EndConditionList;
+    List<string> m_EndConditionNameList;
 
-    int[][] m_Select;
-    bool[] m_FoldOut;
+    int[][] m_Condition = new int[][] { };
+    bool[] m_FoldOut = new bool[] { };
 
     private void OnEnable()
     {
         m_PatternBundlesListProperty = serializedObject.FindProperty(nameof(MonsterPattern.PatternBundles));
-        var lookup = typeof(MonsterEndCondition);
-        m_EndConditionList = System.AppDomain.CurrentDomain.GetAssemblies()
-            .SelectMany(assembly => assembly.GetTypes())
-            .Where(x => x.IsClass && x.IsAbstract && x.IsSubclassOf(lookup))
-            .Select(type => type.Name)
-            .ToList();
-
-        if (m_PatternBundlesListProperty != null)
-        {
-            m_Select = new int[m_PatternBundlesListProperty.arraySize][];
-            for (int i = 0; i < m_PatternBundlesListProperty.arraySize; ++i)
-            {
-                var patternBundle = m_PatternBundlesListProperty.GetArrayElementAtIndex(i);
-                var patterns = patternBundle.FindPropertyRelative(nameof(PatternBundle.Patterns));
-                int[] selectNums = new int[patterns.arraySize];
-                for (int j = 0; j < patterns.arraySize; ++j)
-                {
-                    var entry = patterns.GetArrayElementAtIndex(j);
-                    var condition = entry.FindPropertyRelative(nameof(Pattern.Condition));
-                    if (condition != null)
-                        selectNums[j] = m_EndConditionList.IndexOf(condition.type);
-                    else
-                        selectNums[j] = -1;
-                }
-                m_Select[i] = selectNums;
-            }
-            m_FoldOut = new bool[m_PatternBundlesListProperty.arraySize];
-        }
+        var lookup = typeof(EndCondition);
+        //m_EndConditionNameList = System.AppDomain.CurrentDomain.GetAssemblies()
+        //    .SelectMany(assembly => assembly.GetTypes())
+        //    .Where(x => x.IsClass && x.IsSubclassOf(lookup))
+        //    .Select(type => type.Name)
+        //    .ToList();
+        m_EndConditionNameList = new List<string>();
+        for (int i = 0; i < (int)EndCondition.eEndType.Time+1; ++i)
+            m_EndConditionNameList.Add(((EndCondition.eEndType)i).ToString());
+        UpdateLength();
     }
 
     private void UpdateLength()
     {
         if (m_PatternBundlesListProperty != null)
         {
-            m_Select = new int[m_PatternBundlesListProperty.arraySize][];
+            m_Condition = new int[m_PatternBundlesListProperty.arraySize][];
             for (int i = 0; i < m_PatternBundlesListProperty.arraySize; ++i)
             {
                 var patternBundle = m_PatternBundlesListProperty.GetArrayElementAtIndex(i);
@@ -143,45 +112,81 @@ public class MonsterPatternEditor : Editor
                 {
                     var entry = patterns.GetArrayElementAtIndex(j);
                     var condition = entry.FindPropertyRelative(nameof(Pattern.Condition));
+                    var type = condition.FindPropertyRelative(nameof(EndCondition.Type));
                     if (condition != null)
-                        selectNums[j] = m_EndConditionList.IndexOf(condition.type);
+                    {
+                        Debug.Log(condition.type);
+                        selectNums[j] = m_EndConditionNameList.IndexOf(type.displayName);
+                    }
                     else
                         selectNums[j] = -1;
                 }
-                m_Select[i] = selectNums;
+                m_Condition[i] = selectNums;
             }
-            m_FoldOut = new bool[m_PatternBundlesListProperty.arraySize];
+            var tempFoldOut = new bool[m_PatternBundlesListProperty.arraySize];
+            Array.Copy(m_FoldOut, tempFoldOut, m_FoldOut.Length > tempFoldOut.Length ? tempFoldOut.Length:m_FoldOut.Length);
+            m_FoldOut = tempFoldOut;
         }
+    }
+
+    private bool CheckLength()
+    {
+        if (m_Condition.Length != m_PatternBundlesListProperty.arraySize)
+            return true;
+        else
+        {
+            for (int i = 0; i < m_PatternBundlesListProperty.arraySize; ++i)
+            {
+                var patterns = m_PatternBundlesListProperty.GetArrayElementAtIndex(i).FindPropertyRelative(nameof(PatternBundle.Patterns));
+                if (m_Condition[i].Length != patterns.arraySize)
+                    return true;
+            }
+            return false;
+        }
+    }
+
+    private static class size
+    {
+        public static int typeSize = 60;
+        public static int directionSize = 120;
+        public static int powerSize = 60;
+        public static int durationSize = 60;
+        public static int conditionNameSize = 120;
+        public static int conditionSize = 60;
     }
 
     public override void OnInspectorGUI()
     {
         serializedObject.Update();
-        if (m_FoldOut.Length != m_PatternBundlesListProperty.arraySize)
+        if (CheckLength())
             UpdateLength();
 
         int toDelete = -1;
-        EditorGUILayout.BeginHorizontal();
-        GUILayout.Label(nameof(Pattern.Type));
-        GUILayout.Label(nameof(Pattern.Direction));
-        GUILayout.Label(nameof(Pattern.Power));
-        GUILayout.Label(nameof(Pattern.Duration));
-        GUILayout.Label(nameof(Pattern.Condition));
-        GUILayout.Space(16);
-        EditorGUILayout.EndHorizontal();
         if (m_PatternBundlesListProperty != null)
         {
             for (int i = 0; i < m_PatternBundlesListProperty.arraySize; ++i)
             {
-                m_FoldOut[i] = EditorGUILayout.BeginFoldoutHeaderGroup(m_FoldOut[i], $"{i} Pattern");
+                EditorGUILayout.BeginHorizontal();
+                EditorGUILayout.BeginVertical();
+                m_FoldOut[i] = EditorGUILayout.BeginFoldoutHeaderGroup(m_FoldOut[i], $"{i} Pattern Bundle");
                 if (m_FoldOut[i])
                 {
+                    EditorGUILayout.BeginHorizontal();
+                    GUILayout.Label(nameof(Pattern.Type), GUILayout.MinWidth(size.typeSize));
+                    GUILayout.Label(nameof(Pattern.Direction), GUILayout.MinWidth(size.directionSize));
+                    GUILayout.Label(nameof(Pattern.Power), GUILayout.MinWidth(size.powerSize));
+                    GUILayout.Label(nameof(Pattern.Duration), GUILayout.MinWidth(size.durationSize));
+                    GUILayout.Label(nameof(Pattern.Condition), GUILayout.MinWidth(size.conditionNameSize));
+                    GUILayout.Space(16);
+                    EditorGUILayout.EndHorizontal();
+
                     var patternBundle = m_PatternBundlesListProperty.GetArrayElementAtIndex(i);
                     var patterns = patternBundle.FindPropertyRelative(nameof(PatternBundle.Patterns));
 
                     for (int j = 0; j < patterns.arraySize; ++j)
                     {
                         var entryProp = patterns.GetArrayElementAtIndex(j);
+                        //Debug.Log($"{entryProp.displayName}");
 
                         var typeProp = entryProp.FindPropertyRelative(nameof(Pattern.Type));
                         var direcProp = entryProp.FindPropertyRelative(nameof(Pattern.Direction));
@@ -189,44 +194,73 @@ public class MonsterPatternEditor : Editor
                         var durationProp = entryProp.FindPropertyRelative(nameof(Pattern.Duration));
 
                         EditorGUILayout.BeginHorizontal();
-                        EditorGUILayout.TextField($"{j}");
-                        EditorGUILayout.PropertyField(typeProp, GUIContent.none);
-                        EditorGUILayout.PropertyField(direcProp, GUIContent.none);
-                        EditorGUILayout.PropertyField(powerProp, GUIContent.none);
-                        EditorGUILayout.PropertyField(durationProp, GUIContent.none);
-                        int isNew = EditorGUILayout.Popup("EndCondition", m_Select[i][j], m_EndConditionList.ToArray());
-                        if (isNew != m_Select[i][j])
+                        //EditorGUILayout.PropertyField(entryProp, GUIContent.none);
+                        EditorGUILayout.PropertyField(typeProp, GUIContent.none, GUILayout.MinWidth(size.typeSize));
+                        EditorGUILayout.PropertyField(direcProp, GUIContent.none, GUILayout.MinWidth(size.directionSize));
+                        EditorGUILayout.PropertyField(powerProp, GUIContent.none, GUILayout.MinWidth(size.powerSize));
+                        EditorGUILayout.PropertyField(durationProp, GUIContent.none, GUILayout.MinWidth(size.durationSize));
+                        int isNew = EditorGUILayout.Popup(GUIContent.none, m_Condition[i][j], m_EndConditionNameList.ToArray(), GUILayout.MinWidth(size.conditionNameSize));
+                        if (isNew != m_Condition[i][j])
                         {
-                            if (m_Select[i][j] != -1)
+                            if (m_Condition[i][j] == -1)
                             {
-                                var item = entryProp.FindPropertyRelative(nameof(Pattern.Condition)).objectReferenceValue;
-                                DestroyImmediate(item, true);
-                            }
-                            m_Select[i][j] = isNew;
-                            var newInstance = ScriptableObject.CreateInstance(m_EndConditionList[isNew]);
+                                //추가
+                                //var newInstance = ScriptableObject.CreateInstance(m_EndConditionNameList[isNew]);
 
-                            AssetDatabase.AddObjectToAsset(newInstance, target);
-                            m_EndConditionProperty.objectReferenceValue = newInstance;
+                                //AssetDatabase.AddObjectToAsset(newInstance, target);
+                                //var endConditionProp = entryProp.FindPropertyRelative(nameof(Pattern.Condition));
+                                //endConditionProp.objectReferenceValue = newInstance;
+                            }
+                            else
+                            {
+                                //변경
+                                //var newInstance = ScriptableObject.CreateInstance(m_EndConditionNameList[isNew]);
+
+                                //AssetDatabase.AddObjectToAsset(newInstance, target);
+                                //var endConditionProp = entryProp.FindPropertyRelative(nameof(Pattern.Condition));
+                                //Destroy(endConditionProp.objectReferenceValue);
+                                //endConditionProp.objectReferenceValue = newInstance;
+                            }
+                            m_Condition[i][j] = isNew;
+                        }
+                        // 표시
+                        if (m_Condition[i][j] != -1)
+                        {
+                            var endConditionProp = entryProp.FindPropertyRelative(nameof(Pattern.Condition));
+                            var type = endConditionProp.FindPropertyRelative(nameof(EndCondition.Type));
+                            if (type.enumValueIndex == (int)EndCondition.eEndType.Count)
+                                EditorGUILayout.PropertyField(endConditionProp.FindPropertyRelative(nameof(EndCondition.intPoint)), GUILayout.MinWidth(size.conditionSize));
+                            else if (type.enumValueIndex == (int)EndCondition.eEndType.Time)
+                                EditorGUILayout.PropertyField(endConditionProp.FindPropertyRelative(nameof(EndCondition.floatPoint)), GUILayout.MinWidth(size.conditionSize));
+                        }
+                        if (GUILayout.Button("-", GUILayout.Width(16)))
+                        {
+                            toDelete = j;
+                        }
+                        EditorGUILayout.EndHorizontal();
+
+                        if (toDelete != -1)
+                        {
+                            patterns.DeleteArrayElementAtIndex(toDelete);
+                            toDelete = -1;
                         }
                     }
-
-
-                    if (GUILayout.Button("-", GUILayout.Width(16)))
-                    {
-                        toDelete = i;
-                    }
-                    EditorGUILayout.EndHorizontal();
-
-                    if (toDelete != -1)
-                    {
-                        patterns.DeleteArrayElementAtIndex(toDelete);
-                    }
-
                     if (GUILayout.Button("Add Pattern", GUILayout.Width(200)))
                     {
                         patterns.InsertArrayElementAtIndex(patterns.arraySize);
                     }
                 }
+                EditorGUILayout.EndVertical();
+                if (GUILayout.Button("-", GUILayout.Width(32)))
+                {
+                    toDelete = i;
+                }
+                if (toDelete != -1)
+                {
+                    m_PatternBundlesListProperty.DeleteArrayElementAtIndex(toDelete);
+                    toDelete = -1;
+                }
+                EditorGUILayout.EndHorizontal();
                 EditorGUILayout.EndFoldoutHeaderGroup();
             }
 
