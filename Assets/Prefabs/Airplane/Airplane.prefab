@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5441614691759613045}
   - component: {fileID: 5114367930581292839}
+  - component: {fileID: 7061777254633493433}
   m_Layer: 0
   m_Name: Airplane
   m_TagString: Airplane
@@ -62,6 +63,20 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 7
+--- !u!114 &7061777254633493433
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2738463739362758812}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9b4e254fb0d7449680a82656eddab67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  unselectedAirplane: {fileID: 4598595801783680430}
+  selectedAirplane: {fileID: 3081881900744301468}
 --- !u!1 &3081881900744301468
 GameObject:
   m_ObjectHideFlags: 0

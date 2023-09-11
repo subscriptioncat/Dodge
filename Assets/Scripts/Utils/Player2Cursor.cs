@@ -1,11 +1,11 @@
 using UnityEngine;
 
-public class Player2Cursor : Cursor
+public class Player2Cursor : SelectCursor
 {
-    // ë°©í–¥í‚¤ ì…ë ¥ ë°›ì•„ì„œ CursorDirection ë©”ì„œë“œ í˜¸ì¶œ
+    // ¹æÇâÅ° ÀÔ·Â ¹Ş¾Æ¼­ CursorDirection ¸Ş¼­µå È£Ãâ
     private void Update()
     {
-        // í”Œë ˆì´ì–´ 2 ì¶”ê°€ ì—¬ë¶€ í™•ì¸ && ì•„ì§ í”Œë ˆì´ì–´ ë¹„í–‰ê¸°ë¥¼ ì„ íƒí•˜ì§€ ì•Šì•˜ë‹¤ë©´
+        // ÇÃ·¹ÀÌ¾î 2 Ãß°¡ ¿©ºÎ È®ÀÎ && ¾ÆÁ÷ ÇÃ·¹ÀÌ¾î ºñÇà±â¸¦ ¼±ÅÃÇÏÁö ¾Ê¾Ò´Ù¸é
         if (SelectManager.instance.player[2] == true && isSelect == false)
         {
             if (Input.GetKeyDown(KeyCode.UpArrow))

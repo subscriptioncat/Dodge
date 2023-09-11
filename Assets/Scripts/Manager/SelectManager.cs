@@ -5,18 +5,26 @@ public class SelectManager : MonoBehaviour
 {
     public static SelectManager instance = null;
 
+    [SerializeField]
     private GameObject player1Cursor;
+
+    [SerializeField]
     private GameObject player2Cursor;
 
-    // ë‹¤ìŒ ì”¬ìœ¼ë¡œ ì „ë‹¬í•  ì˜¤ë¸Œì íŠ¸
+    [SerializeField]
+    public int airplanesRowCount; // °¢ Çà¿¡ À§Ä¡ÇÑ ºñÇà±â °³¼ö
+
+    // ´ÙÀ½ ¾ÀÀ¸·Î Àü´ŞÇÒ ¿ÀºêÁ§Æ®
     private GameObject player1Airplane;
     private GameObject player2Airplane;
 
-    public GameObject[] airplanes; // í•˜ì´ì–´ë¼ì´í‚¤ì— ìœ„ì¹˜í•˜ëŠ” ë¹„í–‰ê¸° ì˜¤ë¸Œì íŠ¸
-    public Airplane[] airplanesStatus; // ê° ì¸ë±ìŠ¤ ë³„ ë¹„í–‰ê¸° ìƒíƒœë¥¼ ë‹´ì•„ë‘˜ ë°°ì—´
-    public int airplanesCount; // ë¹„í–‰ê¸° ì´ ê°œìˆ˜
+    private Player1Cursor player1CursorComponent;
+    private Player2Cursor player2CursorComponent;
 
-    public bool[] player; // player[1] : í”Œë ˆì´ì–´ 1 í”Œë ˆì´ ì—¬ë¶€ | player[2] : í”Œë ˆì´ì–´ 2 í”Œë ˆì´ ì—¬ë¶€
+    public GameObject[] airplanes; // ÇÏÀÌ¾î¶óÀÌÅ°¿¡ À§Ä¡ÇÏ´Â ºñÇà±â ¿ÀºêÁ§Æ®
+    public Airplane[] airplanesStatus; // °¢ ÀÎµ¦½º º° ºñÇà±â »óÅÂ¸¦ ´ã¾ÆµÑ ¹è¿­
+    public int airplanesCount; // ºñÇà±â ÃÑ °³¼ö
+    public bool[] player; // player[1] : ÇÃ·¹ÀÌ¾î 1 ÇÃ·¹ÀÌ ¿©ºÎ | player[2] : ÇÃ·¹ÀÌ¾î 2 ÇÃ·¹ÀÌ ¿©ºÎ
 
     private void Awake()
     {
@@ -32,8 +40,6 @@ public class SelectManager : MonoBehaviour
         //     }
         // }
 
-        instance = this;
-
         InitPlayer();
         InitAirplane();
         InitCursor();
@@ -46,32 +52,32 @@ public class SelectManager : MonoBehaviour
 
     public void InitPlayer()
     {
-        // í”Œë ˆì´ì–´ ìˆ˜ ì´ˆê¸°í™”
+        // ÇÃ·¹ÀÌ¾î ¼ö ÃÊ±âÈ­
+        player1Airplane = null;
+        player2Airplane = null;
         player = new bool[3];
-        player[2] = false; // Player2ëŠ” ë¹„í™œì„±í™”
+        player[2] = false; // Player2´Â ºñÈ°¼ºÈ­
     }
 
-    // ì»¤ì„œ ì´ˆê¸°í™”
+    // Ä¿¼­ ÃÊ±âÈ­
     private void InitCursor()
     {
-        // ì»¤ì„œ ì˜¤ë¸Œì íŠ¸ ë§µí•‘
-        player1Cursor = GameObject.Find("Player1Cursor");
-        player2Cursor = GameObject.Find("Player2Cursor");
+        player1CursorComponent = player1Cursor.GetComponent<Player1Cursor>();
+        player2CursorComponent = player2Cursor.GetComponent<Player2Cursor>();
 
-        // ì²« ë²ˆì§¸ ë¹„í–‰ê¸° positionì— Player1 ì»¤ì„œ ë°°ì¹˜
+        // Ã¹ ¹øÂ° ºñÇà±â position¿¡ Player1 Ä¿¼­ ¹èÄ¡
         player1Cursor.transform.position = airplanes[0].transform.position;
         airplanesStatus[0] = Airplane.Standby;
-        player1Cursor.GetComponent<Player1Cursor>().InitCursorLocation(0);
+        player1CursorComponent.InitCursorLocation(0);
     }
 
-    // ë¹„í–‰ê¸° ì˜¤ë¸Œì íŠ¸ ì´ˆê¸°í™”
+    // ºñÇà±â ¿ÀºêÁ§Æ® ÃÊ±âÈ­
     private void InitAirplane()
     {
-        airplanes = GameObject.FindGameObjectsWithTag("Airplane");
         airplanesCount = airplanes.Length;
         airplanesStatus = new Airplane[airplanesCount];
 
-        // ë°°ì—´ì— ë‹´ì€ ëª¨ë“  ë¹„í–‰ê¸° ìƒíƒœë¥¼ 'Unselected'ë¡œ ì´ˆê¸°í™”
+        // ¹è¿­¿¡ ´ãÀº ¸ğµç ºñÇà±â »óÅÂ¸¦ 'Unselected'·Î ÃÊ±âÈ­
         for (int i = 0; i < airplanesCount; i++)
         {
             airplanesStatus[i] = Airplane.Unselected;
@@ -80,17 +86,21 @@ public class SelectManager : MonoBehaviour
 
     private void GameControll()
     {
-        if (Input.GetKeyDown(KeyCode.Space)) // MainSceneìœ¼ë¡œ ì”¬ ì´ë™
+        if (Input.GetKeyDown(KeyCode.Space)) // MainSceneÀ¸·Î ¾À ÀÌµ¿
         {
-            SceneManager.LoadScene("MainScene");
+            if (
+                ((player[2] == false) && (player1Airplane != null))
+                || ((player[2] == true) && (player1Airplane != null) && (player2Airplane != null))
+            )
+            {
+                SceneManager.LoadScene("MainScene");
+            }
         }
-        else if (Input.GetKeyDown(KeyCode.F1)) // í”Œë ˆì´ì–´ 1 ë¹„í–‰ê¸° ì„ íƒ
+        else if (Input.GetKeyDown(KeyCode.F1)) // ÇÃ·¹ÀÌ¾î 1 ºñÇà±â ¼±ÅÃ
         {
-            player1Airplane = airplanes[
-                player1Cursor.GetComponent<Player1Cursor>().SelectAirplane()
-            ];
+            player1Airplane = airplanes[player1CursorComponent.SelectAirplane()];
         }
-        else if (Input.GetKeyDown(KeyCode.F2)) // í”Œë ˆì´ì–´ 2 ì»¤ì„œ ì¶”ê°€
+        else if (Input.GetKeyDown(KeyCode.F2)) // ÇÃ·¹ÀÌ¾î 2 Ä¿¼­ Ãß°¡
         {
             if (player[2] == false)
             {
@@ -98,28 +108,26 @@ public class SelectManager : MonoBehaviour
 
                 for (int i = 0; i < airplanesCount; i++)
                 {
-                    if (airplanesStatus[i] == Airplane.Unselected) // ë¹„í–‰ê¸° ë°°ì—´ 0ë²ˆë¶€í„° ë¯¸ì„ íƒëœ ë¹„í–‰ê¸°ë¥¼ ì°¾ì•„
+                    if (airplanesStatus[i] == Airplane.Unselected) // ºñÇà±â ¹è¿­ 0¹øºÎÅÍ ¹Ì¼±ÅÃµÈ ºñÇà±â¸¦ Ã£¾Æ
                     {
-                        player2Cursor.transform.position = airplanes[i].transform.position; // í•´ë‹¹ ìœ„ì¹˜ë¡œ Player2 ì»¤ì„œ ì´ë™
-                        airplanesStatus[i] = Airplane.Standby; // í•´ë‹¹ ì¸ë±ìŠ¤ì˜ ë¹„í–‰ê¸° ìƒíƒœë¥¼ 'Standby'ë¡œ ë³€ê²½
-                        player2Cursor.GetComponent<Player2Cursor>().InitCursorLocation(i); // í˜„ì¬ ì¸ë±ìŠ¤ ê°’ì„ Player2Cursor ìŠ¤í¬ë¦½íŠ¸ë¡œ ë„˜ê²¨ì¤Œ
+                        player2Cursor.transform.position = airplanes[i].transform.position; // ÇØ´ç À§Ä¡·Î Player2 Ä¿¼­ ÀÌµ¿
+                        airplanesStatus[i] = Airplane.Standby; // ÇØ´ç ÀÎµ¦½ºÀÇ ºñÇà±â »óÅÂ¸¦ 'Standby'·Î º¯°æ
+                        player2CursorComponent.InitCursorLocation(i); // ÇöÀç ÀÎµ¦½º °ªÀ» Player2Cursor ½ºÅ©¸³Æ®·Î ³Ñ°ÜÁÜ
                         break;
                     }
                 }
             }
-            else // í”Œë ˆì´ì–´ 2 ë¹„í–‰ê¸° ì„ íƒ
+            else // ÇÃ·¹ÀÌ¾î 2 ºñÇà±â ¼±ÅÃ
             {
-                player2Airplane = airplanes[
-                    player2Cursor.GetComponent<Player2Cursor>().SelectAirplane()
-                ];
+                player2Airplane = airplanes[player2CursorComponent.SelectAirplane()];
             }
         }
     }
 
     public enum Airplane
     {
-        Unselected, // ë¯¸ì„ íƒí•œ ë¹„í–‰ê¸°
-        Standby, // í˜„ì¬ ì»¤ì„œê°€ ìœ„ì¹˜í•˜ê³  ìˆìŒ
-        Selected // ì„ íƒëœ ë¹„í–‰ê¸°
+        Unselected, // ¹Ì¼±ÅÃÇÑ ºñÇà±â
+        Standby, // ÇöÀç Ä¿¼­°¡ À§Ä¡ÇÏ°í ÀÖÀ½
+        Selected // ¼±ÅÃµÈ ºñÇà±â
     }
 }
