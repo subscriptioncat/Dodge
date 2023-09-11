@@ -21,9 +21,13 @@ public class MonsterPattern : ScriptableObject
     /// 1개의 Pattern Bundle을 리턴한다.
     /// </summary>
     /// <returns></returns>
-    public virtual Pattern[] GetPattern(int index)
+    public virtual Pattern[] GetPattern(ref int index)
     {
-        return PatternBundles[index].Patterns.ToArray();
+        if (index >= PatternBundles.Count)
+        {
+            index = 0;
+        }
+        return PatternBundles[index++].Patterns.ToArray();
     }
 }
 public enum ePatternType

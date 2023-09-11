@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class MonsterController : TopDownCharacterController
 {
-    public MonsterPattern Pattern { get; set; } = new MonsterPattern();
+    [SerializeField] public MonsterPattern Pattern;
     private Pattern[] _currentPattern = null;
     private int _index = 0;
     private void PatternUpdate()
@@ -21,6 +21,7 @@ public class MonsterController : TopDownCharacterController
             else
             {
                 pattern.Loop();
+                Debug.Log($"{_index} | {pattern.Type} | {pattern.Duration}");
                 switch (pattern.Type)
                 {
                     case ePatternType.None:
@@ -41,13 +42,17 @@ public class MonsterController : TopDownCharacterController
         }
         if (_currentPattern == null || endCount >= _currentPattern.Length)
         {
-            _currentPattern = Pattern.GetPattern(_index++);
+            _currentPattern = Pattern.GetPattern(ref _index);
         }
     }
 
-    protected override void Update()
+    void Start()
     {
-        base.Update();
+        _currentPattern = Pattern.GetPattern(ref _index);
+    }
+
+    void FixedUpdate()
+    {
         PatternUpdate();
     }
 
