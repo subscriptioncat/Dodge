@@ -277,7 +277,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectileSpawnPosition: {fileID: 671930971}
-  testPrefab: {fileID: 783845233890724201, guid: ad2ccac20a7a9e44d82512ef700a59b7, type: 3}
+  bulletPrefab: {fileID: 783845233890724201, guid: ad2ccac20a7a9e44d82512ef700a59b7, type: 3}
   bulletData: {fileID: 11400000, guid: 226b687431d77f044a794119b1525347, type: 2}
 --- !u!114 &671930973
 MonoBehaviour:

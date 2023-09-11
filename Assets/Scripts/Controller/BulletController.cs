@@ -19,17 +19,17 @@ public class BulletController : MonoBehaviour
         GetComponent<Rigidbody2D>().velocity = direction * thisObjectData.AtkSpeed;
         Destroy(gameObject, bulletData.Duration);
     }
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.tag  == "Player")
-        {
-            //피까는 처리
-            Debug.Log("플레이어 피격");
-        }
-        else if(other.tag == "Monster")
-        {
-            //피까는처리
-            Debug.Log("몬스터 피격");
-        }
-    }
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    if (other.tag  == "Player")
+    //    {
+    //        //피까는 처리
+    //        Debug.Log("플레이어 피격");
+    //    }
+    //    else if(other.tag == "Monster")
+    //    {
+    //        //피까는처리
+    //        Debug.Log("몬스터 피격");
+    //    }
+    //}
 }
