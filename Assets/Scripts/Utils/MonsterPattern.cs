@@ -59,9 +59,9 @@ public class Pattern
     public Vector2 Direction;
     public int Power;
     public float Duration;
-    public EndCondition Condition;
     public float TimeElpased;
     public int Count;
+    public EndCondition Condition;
     public virtual bool IsEnd()
     {
         return Condition.IsEnd(TimeElpased, Count);
@@ -86,12 +86,6 @@ public class MonsterPatternEditor : Editor
     private void OnEnable()
     {
         m_PatternBundlesListProperty = serializedObject.FindProperty(nameof(MonsterPattern.PatternBundles));
-        var lookup = typeof(EndCondition);
-        //m_EndConditionNameList = System.AppDomain.CurrentDomain.GetAssemblies()
-        //    .SelectMany(assembly => assembly.GetTypes())
-        //    .Where(x => x.IsClass && x.IsSubclassOf(lookup))
-        //    .Select(type => type.Name)
-        //    .ToList();
         m_EndConditionNameList = new List<string>();
         for (int i = 0; i < (int)EndCondition.eEndType.Time+1; ++i)
             m_EndConditionNameList.Add(((EndCondition.eEndType)i).ToString());
@@ -110,13 +104,15 @@ public class MonsterPatternEditor : Editor
                 int[] selectNums = new int[patterns.arraySize];
                 for (int j = 0; j < patterns.arraySize; ++j)
                 {
-                    var entry = patterns.GetArrayElementAtIndex(j);
-                    var condition = entry.FindPropertyRelative(nameof(Pattern.Condition));
+                    var pattern = patterns.GetArrayElementAtIndex(j);
+                    //Debug.Log($"{pattern.displayName}");
+                    var condition = pattern.FindPropertyRelative(nameof(Pattern.Condition));
+                    //Debug.Log($"{condition.displayName}");
                     var type = condition.FindPropertyRelative(nameof(EndCondition.Type));
+                    //Debug.Log($"{type.enumValueIndex}");
                     if (condition != null)
                     {
-                        Debug.Log(condition.type);
-                        selectNums[j] = m_EndConditionNameList.IndexOf(type.displayName);
+                        selectNums[j] = type.enumValueIndex;
                     }
                     else
                         selectNums[j] = -1;
@@ -124,9 +120,11 @@ public class MonsterPatternEditor : Editor
                 m_Condition[i] = selectNums;
             }
             var tempFoldOut = new bool[m_PatternBundlesListProperty.arraySize];
-            Array.Copy(m_FoldOut, tempFoldOut, m_FoldOut.Length > tempFoldOut.Length ? tempFoldOut.Length:m_FoldOut.Length);
+            Array.Copy(m_FoldOut, tempFoldOut, m_FoldOut.Length > tempFoldOut.Length ? tempFoldOut.Length : m_FoldOut.Length);
             m_FoldOut = tempFoldOut;
         }
+        //else
+            //Debug.Log($"m_PatternBundlesListProperty is Null");
     }
 
     private bool CheckLength()
@@ -151,7 +149,7 @@ public class MonsterPatternEditor : Editor
         public static int directionSize = 120;
         public static int powerSize = 60;
         public static int durationSize = 60;
-        public static int conditionNameSize = 120;
+        public static int conditionNameSize = 60;
         public static int conditionSize = 60;
     }
 
@@ -177,6 +175,7 @@ public class MonsterPatternEditor : Editor
                     GUILayout.Label(nameof(Pattern.Power), GUILayout.MinWidth(size.powerSize));
                     GUILayout.Label(nameof(Pattern.Duration), GUILayout.MinWidth(size.durationSize));
                     GUILayout.Label(nameof(Pattern.Condition), GUILayout.MinWidth(size.conditionNameSize));
+                    GUILayout.Label("Limit", GUILayout.MinWidth(size.conditionSize));
                     GUILayout.Space(16);
                     EditorGUILayout.EndHorizontal();
 
@@ -194,46 +193,37 @@ public class MonsterPatternEditor : Editor
                         var durationProp = entryProp.FindPropertyRelative(nameof(Pattern.Duration));
 
                         EditorGUILayout.BeginHorizontal();
-                        //EditorGUILayout.PropertyField(entryProp, GUIContent.none);
                         EditorGUILayout.PropertyField(typeProp, GUIContent.none, GUILayout.MinWidth(size.typeSize));
                         EditorGUILayout.PropertyField(direcProp, GUIContent.none, GUILayout.MinWidth(size.directionSize));
                         EditorGUILayout.PropertyField(powerProp, GUIContent.none, GUILayout.MinWidth(size.powerSize));
                         EditorGUILayout.PropertyField(durationProp, GUIContent.none, GUILayout.MinWidth(size.durationSize));
+
                         int isNew = EditorGUILayout.Popup(GUIContent.none, m_Condition[i][j], m_EndConditionNameList.ToArray(), GUILayout.MinWidth(size.conditionNameSize));
-                        if (isNew != m_Condition[i][j])
-                        {
-                            if (m_Condition[i][j] == -1)
-                            {
-                                //추가
-                                //var newInstance = ScriptableObject.CreateInstance(m_EndConditionNameList[isNew]);
-
-                                //AssetDatabase.AddObjectToAsset(newInstance, target);
-                                //var endConditionProp = entryProp.FindPropertyRelative(nameof(Pattern.Condition));
-                                //endConditionProp.objectReferenceValue = newInstance;
-                            }
-                            else
-                            {
-                                //변경
-                                //var newInstance = ScriptableObject.CreateInstance(m_EndConditionNameList[isNew]);
-
-                                //AssetDatabase.AddObjectToAsset(newInstance, target);
-                                //var endConditionProp = entryProp.FindPropertyRelative(nameof(Pattern.Condition));
-                                //Destroy(endConditionProp.objectReferenceValue);
-                                //endConditionProp.objectReferenceValue = newInstance;
-                            }
-                            m_Condition[i][j] = isNew;
-                        }
                         // 표시
                         if (m_Condition[i][j] != -1)
                         {
+                            if (isNew != m_Condition[i][j])
+                            {
+                                m_Condition[i][j] = isNew;
+                            }
                             var endConditionProp = entryProp.FindPropertyRelative(nameof(Pattern.Condition));
                             var type = endConditionProp.FindPropertyRelative(nameof(EndCondition.Type));
+                            type.enumValueIndex = isNew;
                             if (type.enumValueIndex == (int)EndCondition.eEndType.Count)
-                                EditorGUILayout.PropertyField(endConditionProp.FindPropertyRelative(nameof(EndCondition.intPoint)), GUILayout.MinWidth(size.conditionSize));
+                            {
+                                var item = endConditionProp.FindPropertyRelative(nameof(EndCondition.intPoint));
+                                var input = EditorGUILayout.IntField(item.intValue, GUILayout.MinWidth(size.conditionSize));
+                                item.intValue = input;
+                            }
                             else if (type.enumValueIndex == (int)EndCondition.eEndType.Time)
-                                EditorGUILayout.PropertyField(endConditionProp.FindPropertyRelative(nameof(EndCondition.floatPoint)), GUILayout.MinWidth(size.conditionSize));
+                            {
+                                var item = endConditionProp.FindPropertyRelative(nameof(EndCondition.floatPoint));
+                                var input = EditorGUILayout.FloatField(item.floatValue, GUILayout.MinWidth(size.conditionSize));
+                                item.floatValue = input;
+                            }
                         }
-                        if (GUILayout.Button("-", GUILayout.Width(16)))
+                        
+                        if (GUILayout.Button("-", GUILayout.Width(32)))
                         {
                             toDelete = j;
                         }
@@ -242,6 +232,7 @@ public class MonsterPatternEditor : Editor
                         if (toDelete != -1)
                         {
                             patterns.DeleteArrayElementAtIndex(toDelete);
+                            //Debug.Log(toDelete);
                             toDelete = -1;
                         }
                     }

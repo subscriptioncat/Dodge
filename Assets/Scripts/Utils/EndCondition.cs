@@ -5,8 +5,10 @@ using UnityEditorInternal;
 using UnityEngine;
 
 //[CreateAssetMenu(fileName = "MonsterEndCondition", menuName = "Monster/EndCondition", order = 2)]
+[Serializable]
 public class EndCondition
 {
+    [SerializeField]
     public enum eEndType
     {
         Count,
