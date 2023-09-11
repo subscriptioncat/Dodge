@@ -7,18 +7,29 @@ public class BulletController : MonoBehaviour
     [SerializeField]
     private BulletData bulletData;
     public BulletData BulletData { set { bulletData = value; } }
+
+    [SerializeField]
+    private BaseCharacter thisObjectData;
+    public BaseCharacter ThisObjectData { set { thisObjectData = value; } }
+
+    private Vector2 direction;
+    public Vector2 Direction { set { direction = value; } }
     void Start()
     {
-        Destroy(gameObject, 3f);
+        GetComponent<Rigidbody2D>().velocity = direction * thisObjectData.AtkSpeed;
+        Destroy(gameObject, bulletData.Duration);
     }
-    /// <summary>
-    /// 발사하는 객체의 로테이션 값을 넘겨주면 됩니다.
-    /// </summary>
-    /// <param name="quaternion"></param>
-    public void Bang(Quaternion quaternion)
+    private void OnTriggerEnter(Collider other)
     {
-        float z = quaternion.z;
-        Vector2 front = new Vector2(Mathf.Cos(z * Mathf.Deg2Rad), Mathf.Sin(z * Mathf.Deg2Rad));
-        GetComponent<Rigidbody2D>().velocity = front * bulletData.Speed;
+        if (other.tag  == "Player")
+        {
+            //피까는 처리
+            Debug.Log("플레이어 피격");
+        }
+        else if(other.tag == "Monster")
+        {
+            //피까는처리
+            Debug.Log("몬스터 피격");
+        }
     }
 }
