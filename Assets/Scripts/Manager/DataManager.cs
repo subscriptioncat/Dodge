@@ -13,5 +13,8 @@ public class DataManager
             Instance = this;
     }
 
-    [SerializeField] public GameObject Bullet { get; private set; }
+    public GameObject Bullet { get; set; }
+    public Sprite User1Image { get; set; }
+    public Sprite User2Image { get; set; }
+    
 }
