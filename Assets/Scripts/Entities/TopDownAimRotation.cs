@@ -24,14 +24,14 @@ public class TopDownAimRotation : MonoBehaviour
     public void OnAim(Vector2 newAimDirection)
     {   
         RotateCharacter(newAimDirection);
-       
+        
 
     }
 
     private void RotateCharacter(Vector2 direction)
     {
         
-        float characterRotZ = Mathf.Atan2(direction.x, direction.y) * Mathf.Rad2Deg;
+        float characterRotZ = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
                
         characterRenderer.transform.rotation = Quaternion.Euler(0, 0, characterRotZ);
     }

@@ -22,8 +22,9 @@ public class PlayerInputController : TopDownCharacterController
 
     public void OnLook(InputValue value)
     {
-        Vector2 lookInput = value.Get<Vector2>().normalized;            
-        CallLookEvent(lookInput);
+        Vector2 lookInput = value.Get<Vector2>().normalized;
+        Vector2 modifiedLookInput = new Vector2(lookInput.y, -lookInput.x);
+        CallLookEvent(modifiedLookInput);
     }
 
     public void OnFire(InputValue value)
