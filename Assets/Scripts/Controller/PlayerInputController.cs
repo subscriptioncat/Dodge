@@ -29,8 +29,8 @@ public class PlayerInputController : TopDownCharacterController
 
     public void OnFire(InputValue value)
     {
-       Vector2 fireInput = value.Get<Vector2>().normalized;
-       CallFireEvent(fireInput);
+
+        IsAttacking = value.isPressed;
        
     }
 

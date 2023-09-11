@@ -15,19 +15,19 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Fire",
+                    "name": "Look",
                     "type": "Value",
-                    "id": "019226db-04e9-4b8b-84f4-391a5e704e6f",
+                    "id": "828dd528-8ea4-4b7a-ab7b-bfb4e9efd5b8",
                     "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Look",
+                    "name": "Fire",
                     "type": "Value",
-                    "id": "828dd528-8ea4-4b7a-ab7b-bfb4e9efd5b8",
-                    "expectedControlType": "Vector2",
+                    "id": "1c32aaf5-aea3-43f7-a9b1-89b204d089cb",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
@@ -90,39 +90,6 @@
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "One Modifier",
-                    "id": "645b7830-32a1-4f42-b8b7-1c5563121e6e",
-                    "path": "OneModifier",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Fire",
-                    "isComposite": true,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "modifier",
-                    "id": "afa5eec6-7fcc-4043-b72e-4ee572423ce5",
-                    "path": "<Keyboard>/leftShift",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Fire",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "",
-                    "id": "17863c23-7224-4372-bed8-1404f9b2972b",
-                    "path": "",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Look",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
                     "name": "2D Vector",
                     "id": "e4285b40-0b22-44a5-b0b2-770a85e7c40d",
                     "path": "2DVector",
@@ -176,6 +143,17 @@
                     "action": "Look",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "f74ffcd1-e9a3-49d6-b20c-100947077ce9",
+                    "path": "<Keyboard>/leftShift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Fire",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }
