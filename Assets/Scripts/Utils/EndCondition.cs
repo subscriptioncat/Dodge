@@ -19,6 +19,16 @@ public class EndCondition
     public int intPoint;
     public virtual bool IsEnd(float time, int count)
     {
+        if (Type == eEndType.Count)
+        {
+            if (intPoint < count)
+                return true;
+        }
+        else if (Type == eEndType.Time)
+        {
+            if (floatPoint < time)
+                return true;
+        }
         return false;
     }
 }

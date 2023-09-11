@@ -3,80 +3,80 @@ using System.Collections.Generic;
 using System.Data;
 using UnityEngine;
 
-public class MonsterController// : TopDownCharacterController
+public class MonsterController : TopDownCharacterController
 {
     public MonsterPattern Pattern { get; set; } = new MonsterPattern();
     private Pattern[] _currentPattern = null;
     private int _index = 0;
-    private float _time = 0;
-    public void PatternLoop()
+    private void PatternUpdate()
     {
-        _time += Time.deltaTime;
-        if (_currentPattern == null || _index >= _currentPattern.Length)
-        {
-            _currentPattern = Pattern.GetPattern(_index);
-            _index = 0;
-        }
-        if (_currentPattern != null)
-        {
-            switch (_currentPattern[_index].Type)
-            {
-                case ePatternType.None:
-                    break;
-                case ePatternType.Move:
-                    break;
-                case ePatternType.Fire:
-                    break;
-                case ePatternType.Look:
-                    break;
-            }
-        }
-    }
-
-    public void Update()
-    {
+        int endCount = 0;
         foreach (var pattern in _currentPattern)
         {
             if (pattern.IsEnd())
-                continue;
-            pattern.Loop();
-            if (pattern.Count < pattern.TimeElpased / pattern.Duration)
             {
+                ++endCount;
+                continue;
+            }
+            else
+            {
+                pattern.Loop();
                 switch (pattern.Type)
                 {
                     case ePatternType.None:
                         break;
                     case ePatternType.Move:
-                        Move();
+                        Move(pattern);
                         break;
-
+                    case ePatternType.Fire:
+                        Fire(pattern);
+                        break;
+                    case ePatternType.Look:
+                        Look(pattern);
+                        break;
+                    default:
+                        break;
                 }
             }
         }
+        if (_currentPattern == null || endCount >= _currentPattern.Length)
+        {
+            _currentPattern = Pattern.GetPattern(_index++);
+        }
+    }
+
+    protected override void Update()
+    {
+        base.Update();
+        PatternUpdate();
     }
 
     /// <summary>
     /// 현재 위치에서 지정된 방향으로 이동
     /// </summary>
-    public void Move()
+    private void Move(Pattern pattern)
     {
-
+        var currentPos = this.gameObject.transform.position;
+        Vector2 targetPos = (Vector2)currentPos + pattern.Direction;
+        CallMoveEvent(targetPos);
     }
 
     /// <summary>
     /// 현재 위치에서 Bullet을 지정된 방향으로 발사.
     /// </summary>
-    public void Fire()
+    private void Fire(Pattern pattern)
     {
-        GameObject bulletModel = DataManager.Instance.Bullet;
-
+        if (pattern.IsNeedRun())
+            CallFireEvent(pattern.Direction);
     }
 
     /// <summary>
-    /// 현재 위치에서 지정된 방향을 바라봄.
+    /// 현재 위치 기준에서 지정된 방향을 바라봄.
     /// </summary>
-    public void Look()
+    private void Look(Pattern pattern)
     {
-
+        var currentPos = this.gameObject.transform.position;
+        Vector2 targetPos = (Vector2)currentPos + pattern.Direction;
+        CallLookEvent(targetPos);
     }
 }

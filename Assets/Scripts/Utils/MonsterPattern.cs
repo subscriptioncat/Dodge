@@ -42,6 +42,15 @@ public class PatternBundle
         Patterns.Add(new Pattern());
     }
 }
+/// <summary>
+/// Type = 패턴타입,
+/// Direction = 방향,
+/// Power = 세기,
+/// Duration = 패턴실행시간,
+/// TimeElpased = 패턴실행 후 지난 시간,
+/// Count = 패턴 반복회수,
+/// Condition = 종료조건,
+/// </summary>
 [Serializable]
 public class Pattern
 {
@@ -59,9 +68,11 @@ public class Pattern
     public Vector2 Direction;
     public int Power;
     public float Duration;
-    public float TimeElpased;
-    public int Count;
     public EndCondition Condition;
+
+    private float TimeElpased;
+    private int Count;
+    private bool Flag;
     public virtual bool IsEnd()
     {
         return Condition.IsEnd(TimeElpased, Count);
@@ -69,6 +80,16 @@ public class Pattern
     public virtual void Loop()
     {
         TimeElpased += Time.deltaTime;
+        if (TimeElpased / Duration > Count )
+        {
+            Flag = true;
+        }
+    }
+    public virtual bool IsNeedRun()
+    {
+        bool flag = Flag;
+        Flag = false;
+        return flag;
     }
 }
 
