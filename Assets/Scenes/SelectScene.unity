@@ -780,7 +780,7 @@ MonoBehaviour:
   m_text: Airplane Select
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 41e3101bb084d44ae8ccf8571888d2c0, type: 2}
-  m_sharedMaterial: {fileID: 5739660602127386725, guid: 41e3101bb084d44ae8ccf8571888d2c0, type: 2}
+  m_sharedMaterial: {fileID: -1351661342297756422, guid: 41e3101bb084d44ae8ccf8571888d2c0, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -946,7 +946,7 @@ MonoBehaviour:
   m_text: Press 'SpaceBar' To Start
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 41e3101bb084d44ae8ccf8571888d2c0, type: 2}
-  m_sharedMaterial: {fileID: 5739660602127386725, guid: 41e3101bb084d44ae8ccf8571888d2c0, type: 2}
+  m_sharedMaterial: {fileID: -1351661342297756422, guid: 41e3101bb084d44ae8ccf8571888d2c0, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1527,7 +1527,7 @@ MonoBehaviour:
   m_text: Press 'F2' To Add Player2
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 41e3101bb084d44ae8ccf8571888d2c0, type: 2}
-  m_sharedMaterial: {fileID: 5739660602127386725, guid: 41e3101bb084d44ae8ccf8571888d2c0, type: 2}
+  m_sharedMaterial: {fileID: -1351661342297756422, guid: 41e3101bb084d44ae8ccf8571888d2c0, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
