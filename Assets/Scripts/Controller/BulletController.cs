@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,16 +9,13 @@ public class BulletController : MonoBehaviour
     private BulletData bulletData;
     public BulletData BulletData { set { bulletData = value; } }
 
-    [SerializeField]
-    private BaseCharacter thisObjectData;
-    public BaseCharacter ThisObjectData { set { thisObjectData = value; } }
-
     private Vector2 direction;
     public Vector2 Direction { set { direction = value; } }
+
     void Start()
     {
-        GetComponent<Rigidbody2D>().velocity = direction * thisObjectData.AtkSpeed;
-        Destroy(gameObject, bulletData.Duration);
+        GetComponent<Rigidbody2D>().velocity = direction * bulletData.Speed;
+        Destroy(gameObject, 5f);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

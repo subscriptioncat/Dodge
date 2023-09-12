@@ -6,11 +6,15 @@ using UnityEngine;
 public class TopDownShooting : MonoBehaviour
 {
     private TopDownCharacterController _contoller;
-    [SerializeField] private Transform projectileSpawnPosition;
     private Vector2 _aimDirection = Vector2.right;
-    public GameObject bulletPrefab;
+
+    [SerializeField]
+    private Transform projectileSpawnPosition;
+    [SerializeField]
+    private GameObject bulletPrefab;
     [SerializeField]
     private BulletData bulletData;
+
     private void Awake()
     {
         _contoller = GetComponent<TopDownCharacterController>();
@@ -18,7 +22,7 @@ public class TopDownShooting : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _contoller.OnAttackEvent += OnShoot;
+        _contoller.OnFireEvent += OnShoot;
         _contoller.OnLookEvent += OnAim;
     }
 
@@ -26,17 +30,25 @@ public class TopDownShooting : MonoBehaviour
     {
         _aimDirection = newAimDirection;
     }
-    private void OnShoot()
+    private void OnShoot(Vector2 Direction)
     {
-        CreateProjectile();
+        CreateProjectile(Direction);
     }
 
-    private void CreateProjectile()
+    private void CreateProjectile(Vector2 Direction)
     {
         var newBullet = Instantiate(bulletPrefab, projectileSpawnPosition.position, projectileSpawnPosition.rotation).GetComponent<BulletController>();
         newBullet.BulletData = bulletData;
-        newBullet.Direction = bulletData.Foward(transform.rotation);
-        //newBullet.ThisObjectData = ObjectData;
+        if(bulletData.IsPlayer == false)
+            newBullet.Direction = Direction;
+        else
+            newBullet.Direction = Foward(transform.rotation);
+        
+    }
+    public Vector2 Foward(Quaternion quaternion)
+    {
+        float z = quaternion.eulerAngles.z + 90f;
+        return new Vector2(Mathf.Cos(z * Mathf.Deg2Rad), Mathf.Sin(z * Mathf.Deg2Rad));
     }
 
 }
