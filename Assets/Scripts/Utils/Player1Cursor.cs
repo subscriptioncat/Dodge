@@ -1,11 +1,11 @@
 using UnityEngine;
 
-public class Player1Cursor : Cursor
+public class Player1Cursor : SelectCursor
 {
-    // WASD í‚¤ ì…ë ¥ ë°›ì•„ì„œ CursorDirection ë©”ì„œë“œ í˜¸ì¶œ
+    // WASD Å° ÀÔ·Â ¹Ş¾Æ¼­ CursorDirection ¸Ş¼­µå È£Ãâ
     private void Update()
     {
-        // ì•„ì§ í”Œë ˆì´ì–´ ë¹„í–‰ê¸°ë¥¼ ì„ íƒí•˜ì§€ ì•Šì•˜ë‹¤ë©´
+        // ¾ÆÁ÷ ÇÃ·¹ÀÌ¾î ºñÇà±â¸¦ ¼±ÅÃÇÏÁö ¾Ê¾Ò´Ù¸é
         if (isSelect == false)
         {
             if (Input.GetKeyDown(KeyCode.W))

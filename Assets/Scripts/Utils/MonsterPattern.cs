@@ -11,32 +11,23 @@ using UnityEditor;
 public class MonsterPattern : ScriptableObject
 {
     // 패턴
-    public List<Pattern> Patterns;
-    public MonsterEndCondition EndCondition;
-    protected int count = 0;
-
-    /// <summary>
-    /// 다음 None 혹은 Move이 나오기 전까지의 패턴 배열을 리턴한다.
-    /// </summary>
-    /// <returns></returns>
-    public virtual Pattern[] GetPattern()
+    public List<PatternBundle> PatternBundles = new List<PatternBundle>();
+    public MonsterPattern()
     {
-        LinkedList<Pattern> ret = new LinkedList<Pattern>();
-        while (Patterns[count].Type != ePatternType.None && Patterns[count].Type != ePatternType.Move)
-        {
-            ret.AddLast(Patterns[count++]);
-            if (count >= Patterns.Count) count = 0;
-        }
-        return ret.ToArray();
+        PatternBundles.Add(new PatternBundle());
     }
 
     /// <summary>
-    /// EndCondition의 IsEnd를 리턴한다.
+    /// 1개의 Pattern Bundle을 리턴한다.
     /// </summary>
     /// <returns></returns>
-    public virtual bool GetEndCondition()
+    public virtual Pattern[] GetPattern(ref int index)
     {
-        return EndCondition.IsEnd;
+        if (index >= PatternBundles.Count)
+        {
+            index = 0;
+        }
+        return PatternBundles[index++].Patterns.ToArray();
     }
 }
 public enum ePatternType
@@ -46,72 +37,254 @@ public enum ePatternType
     Fire,
     Look
 }
-
 [Serializable]
-public struct Pattern
+public class PatternBundle
 {
-    public Vector2 Direction;
+    public List<Pattern> Patterns = new List<Pattern>();
+    public PatternBundle()
+    {
+        Patterns.Add(new Pattern());
+    }
+}
+/// <summary>
+/// Type = 패턴타입,
+/// Direction = 방향,
+/// Power = 세기,
+/// Duration = 패턴실행시간,
+/// TimeElpased = 패턴실행 후 지난 시간,
+/// Count = 패턴 반복회수,
+/// Condition = 종료조건,
+/// </summary>
+[Serializable]
+public class Pattern
+{
+    public Pattern()
+    {
+        Type = ePatternType.None;
+        Direction = new Vector2();
+        Power = 0;
+        Duration = .0f;
+        Condition = new EndCondition();
+        TimeElpased = .0f;
+        Count = 0;
+    }
     public ePatternType Type;
-    public float Time;
+    public Vector2 Direction;
+    public int Power;
+    public float Duration;
+    public EndCondition Condition;
+
+    private float TimeElpased;
+    private int Count;
+    private bool Flag;
+    public virtual bool IsEnd()
+    {
+        return Condition.IsEnd(TimeElpased, Count);
+    }
+    public virtual void Loop()
+    {
+        TimeElpased += Time.deltaTime;
+        if (TimeElpased / Duration > Count )
+        {
+            Flag = true;
+        }
+    }
+    public virtual bool IsNeedRun()
+    {
+        bool flag = Flag;
+        Flag = false;
+        return flag;
+    }
 }
 
 #if UNITY_EDITOR
 [CustomEditor(typeof(MonsterPattern))]
 public class MonsterPatternEditor : Editor
 {
-    SerializedProperty _PatternListProperty;
-    SerializedProperty _EndConditionProperty;
+    SerializedProperty m_PatternBundlesListProperty;
+
+    List<string> m_EndConditionNameList;
+
+    int[][] m_Condition = new int[][] { };
+    bool[] m_FoldOut = new bool[] { };
 
     private void OnEnable()
     {
-        _EndConditionProperty = serializedObject.FindProperty(nameof(MonsterPattern.EndCondition));
-        _PatternListProperty = serializedObject.FindProperty(nameof(MonsterPattern.Patterns));
+        m_PatternBundlesListProperty = serializedObject.FindProperty(nameof(MonsterPattern.PatternBundles));
+        m_EndConditionNameList = new List<string>();
+        for (int i = 0; i < (int)EndCondition.eEndType.Time+1; ++i)
+            m_EndConditionNameList.Add(((EndCondition.eEndType)i).ToString());
+        UpdateLength();
+    }
+
+    private void UpdateLength()
+    {
+        if (m_PatternBundlesListProperty != null)
+        {
+            m_Condition = new int[m_PatternBundlesListProperty.arraySize][];
+            for (int i = 0; i < m_PatternBundlesListProperty.arraySize; ++i)
+            {
+                var patternBundle = m_PatternBundlesListProperty.GetArrayElementAtIndex(i);
+                var patterns = patternBundle.FindPropertyRelative(nameof(PatternBundle.Patterns));
+                int[] selectNums = new int[patterns.arraySize];
+                for (int j = 0; j < patterns.arraySize; ++j)
+                {
+                    var pattern = patterns.GetArrayElementAtIndex(j);
+                    //Debug.Log($"{pattern.displayName}");
+                    var condition = pattern.FindPropertyRelative(nameof(Pattern.Condition));
+                    //Debug.Log($"{condition.displayName}");
+                    var type = condition.FindPropertyRelative(nameof(EndCondition.Type));
+                    //Debug.Log($"{type.enumValueIndex}");
+                    if (condition != null)
+                    {
+                        selectNums[j] = type.enumValueIndex;
+                    }
+                    else
+                        selectNums[j] = -1;
+                }
+                m_Condition[i] = selectNums;
+            }
+            var tempFoldOut = new bool[m_PatternBundlesListProperty.arraySize];
+            Array.Copy(m_FoldOut, tempFoldOut, m_FoldOut.Length > tempFoldOut.Length ? tempFoldOut.Length : m_FoldOut.Length);
+            m_FoldOut = tempFoldOut;
+        }
+        //else
+            //Debug.Log($"m_PatternBundlesListProperty is Null");
+    }
+
+    private bool CheckLength()
+    {
+        if (m_Condition.Length != m_PatternBundlesListProperty.arraySize)
+            return true;
+        else
+        {
+            for (int i = 0; i < m_PatternBundlesListProperty.arraySize; ++i)
+            {
+                var patterns = m_PatternBundlesListProperty.GetArrayElementAtIndex(i).FindPropertyRelative(nameof(PatternBundle.Patterns));
+                if (m_Condition[i].Length != patterns.arraySize)
+                    return true;
+            }
+            return false;
+        }
+    }
+
+    private static class size
+    {
+        public static int typeSize = 60;
+        public static int directionSize = 120;
+        public static int powerSize = 60;
+        public static int durationSize = 60;
+        public static int conditionNameSize = 60;
+        public static int conditionSize = 60;
     }
 
     public override void OnInspectorGUI()
     {
         serializedObject.Update();
-        EditorGUILayout.PropertyField(_EndConditionProperty);
+        if (CheckLength())
+            UpdateLength();
 
         int toDelete = -1;
-        for (int i = 0; i < _PatternListProperty.arraySize; ++i)
+        if (m_PatternBundlesListProperty != null)
         {
-            EditorGUILayout.BeginHorizontal();
-            GUILayout.Label("Direction");
-            GUILayout.Label("Type");
-            GUILayout.Label("Time");
-            GUILayout.Space(16);
-            EditorGUILayout.EndHorizontal();
-
-            var entryProp = _PatternListProperty.GetArrayElementAtIndex(i);
-
-            var direcProp = entryProp.FindPropertyRelative("Direction");
-            var typeProp = entryProp.FindPropertyRelative("Type");
-            var timeProp = entryProp.FindPropertyRelative("Time");
-
-            EditorGUILayout.BeginHorizontal();
-            EditorGUILayout.PropertyField(direcProp, GUIContent.none);
-            EditorGUILayout.PropertyField(typeProp, GUIContent.none);
-            EditorGUILayout.PropertyField(timeProp, GUIContent.none);
-            if (GUILayout.Button("-", GUILayout.Width(16)))
+            for (int i = 0; i < m_PatternBundlesListProperty.arraySize; ++i)
             {
-                toDelete = i;
+                EditorGUILayout.BeginHorizontal();
+                EditorGUILayout.BeginVertical();
+                m_FoldOut[i] = EditorGUILayout.BeginFoldoutHeaderGroup(m_FoldOut[i], $"{i} Pattern Bundle");
+                if (m_FoldOut[i])
+                {
+                    EditorGUILayout.BeginHorizontal();
+                    GUILayout.Label(nameof(Pattern.Type), GUILayout.MinWidth(size.typeSize));
+                    GUILayout.Label(nameof(Pattern.Direction), GUILayout.MinWidth(size.directionSize));
+                    GUILayout.Label(nameof(Pattern.Power), GUILayout.MinWidth(size.powerSize));
+                    GUILayout.Label(nameof(Pattern.Duration), GUILayout.MinWidth(size.durationSize));
+                    GUILayout.Label(nameof(Pattern.Condition), GUILayout.MinWidth(size.conditionNameSize));
+                    GUILayout.Label("Limit", GUILayout.MinWidth(size.conditionSize));
+                    GUILayout.Space(16);
+                    EditorGUILayout.EndHorizontal();
+
+                    var patternBundle = m_PatternBundlesListProperty.GetArrayElementAtIndex(i);
+                    var patterns = patternBundle.FindPropertyRelative(nameof(PatternBundle.Patterns));
+
+                    for (int j = 0; j < patterns.arraySize; ++j)
+                    {
+                        var entryProp = patterns.GetArrayElementAtIndex(j);
+                        //Debug.Log($"{entryProp.displayName}");
+
+                        var typeProp = entryProp.FindPropertyRelative(nameof(Pattern.Type));
+                        var direcProp = entryProp.FindPropertyRelative(nameof(Pattern.Direction));
+                        var powerProp = entryProp.FindPropertyRelative(nameof(Pattern.Power));
+                        var durationProp = entryProp.FindPropertyRelative(nameof(Pattern.Duration));
+
+                        EditorGUILayout.BeginHorizontal();
+                        EditorGUILayout.PropertyField(typeProp, GUIContent.none, GUILayout.MinWidth(size.typeSize));
+                        EditorGUILayout.PropertyField(direcProp, GUIContent.none, GUILayout.MinWidth(size.directionSize));
+                        EditorGUILayout.PropertyField(powerProp, GUIContent.none, GUILayout.MinWidth(size.powerSize));
+                        EditorGUILayout.PropertyField(durationProp, GUIContent.none, GUILayout.MinWidth(size.durationSize));
+
+                        int isNew = EditorGUILayout.Popup(GUIContent.none, m_Condition[i][j], m_EndConditionNameList.ToArray(), GUILayout.MinWidth(size.conditionNameSize));
+                        // 표시
+                        if (m_Condition[i][j] != -1)
+                        {
+                            if (isNew != m_Condition[i][j])
+                            {
+                                m_Condition[i][j] = isNew;
+                            }
+                            var endConditionProp = entryProp.FindPropertyRelative(nameof(Pattern.Condition));
+                            var type = endConditionProp.FindPropertyRelative(nameof(EndCondition.Type));
+                            type.enumValueIndex = isNew;
+                            if (type.enumValueIndex == (int)EndCondition.eEndType.Count)
+                            {
+                                var item = endConditionProp.FindPropertyRelative(nameof(EndCondition.intPoint));
+                                var input = EditorGUILayout.IntField(item.intValue, GUILayout.MinWidth(size.conditionSize));
+                                item.intValue = input;
+                            }
+                            else if (type.enumValueIndex == (int)EndCondition.eEndType.Time)
+                            {
+                                var item = endConditionProp.FindPropertyRelative(nameof(EndCondition.floatPoint));
+                                var input = EditorGUILayout.FloatField(item.floatValue, GUILayout.MinWidth(size.conditionSize));
+                                item.floatValue = input;
+                            }
+                        }
+                        
+                        if (GUILayout.Button("-", GUILayout.Width(32)))
+                        {
+                            toDelete = j;
+                        }
+                        EditorGUILayout.EndHorizontal();
+
+                        if (toDelete != -1)
+                        {
+                            patterns.DeleteArrayElementAtIndex(toDelete);
+                            //Debug.Log(toDelete);
+                            toDelete = -1;
+                        }
+                    }
+                    if (GUILayout.Button("Add Pattern", GUILayout.Width(200)))
+                    {
+                        patterns.InsertArrayElementAtIndex(patterns.arraySize);
+                    }
+                }
+                EditorGUILayout.EndVertical();
+                if (GUILayout.Button("-", GUILayout.Width(32)))
+                {
+                    toDelete = i;
+                }
+                if (toDelete != -1)
+                {
+                    m_PatternBundlesListProperty.DeleteArrayElementAtIndex(toDelete);
+                    toDelete = -1;
+                }
+                EditorGUILayout.EndHorizontal();
+                EditorGUILayout.EndFoldoutHeaderGroup();
             }
-            EditorGUILayout.EndHorizontal();
-        }
 
-        if (toDelete != -1)
-        {
-            //Debug.Log($"Delete {toDelete}");
-            _PatternListProperty.DeleteArrayElementAtIndex(toDelete);
+            if (GUILayout.Button("Add Pattern Bundle", GUILayout.Width(200)))
+            {
+                m_PatternBundlesListProperty.InsertArrayElementAtIndex(m_PatternBundlesListProperty.arraySize);
+            }
         }
-
-        if (GUILayout.Button("Add New Pattern", GUILayout.Width(200)))
-        {
-            //Debug.Log($"Add {_PatternListProperty.arraySize}");
-            _PatternListProperty.InsertArrayElementAtIndex(_PatternListProperty.arraySize);
-        }
-
         serializedObject.ApplyModifiedProperties();
     }
 }
