@@ -63,10 +63,22 @@ public class Pattern
         Type = ePatternType.None;
         Direction = new Vector2();
         Power = 0;
-        Duration = .0f;
+        Duration = 0.0f;
         Condition = new EndCondition();
-        TimeElpased = .0f;
+        TimeElpased = 0.0f;
         Count = 0;
+        Flag = true;
+    }
+    public Pattern(Pattern pattern)
+    {
+        Type = pattern.Type;
+        Direction = pattern.Direction;
+        Power = pattern.Power;
+        Duration = pattern.Duration;
+        Condition = pattern.Condition;
+        TimeElpased = 0.0f;
+        Count = 0;
+        Flag = true;
     }
     public ePatternType Type;
     public Vector2 Direction;
@@ -92,6 +104,7 @@ public class Pattern
     public virtual bool IsNeedRun()
     {
         bool flag = Flag;
+        if ( Flag ) { ++Count; }
         Flag = false;
         return flag;
     }

@@ -9,30 +9,56 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a973ab2d01e139438f384c28db5b69d, type: 3}
+  m_Script: {fileID: 11500000, guid: a37fc43aece4c954ba481b231e4f5ad4, type: 3}
   m_Name: Normal
   m_EditorClassIdentifier: 
   PatternBundles:
   - Patterns:
-    - Type: 3
-      Direction: {x: 0, y: -5}
+    - Type: 1
+      Direction: {x: 2, y: 0}
       Power: 0
-      Duration: 4
+      Duration: 0.5
       Condition:
         Type: 1
-        floatPoint: 5
-        intPoint: 1
+        floatPoint: 0.5
+        intPoint: 0
+  - Patterns:
+    - Type: 0
+      Direction: {x: 0, y: 0}
+      Power: 0
+      Duration: 1
+      Condition:
+        Type: 1
+        floatPoint: 1
+        intPoint: 2
+    - Type: 2
+      Direction: {x: 0, y: 0}
+      Power: 0
+      Duration: 1
+      Condition:
+        Type: 0
+        floatPoint: 0
+        intPoint: 5
   - Patterns:
     - Type: 1
-      Direction: {x: 5, y: 5}
+      Direction: {x: -2, y: 0}
       Power: 0
-      Duration: 4
+      Duration: 0.5
       Condition:
         Type: 1
-        floatPoint: 5
-        intPoint: 1
+        floatPoint: 0.5
+        intPoint: 0
+  - Patterns:
+    - Type: 0
+      Direction: {x: 0, y: 0}
+      Power: 0
+      Duration: 1
+      Condition:
+        Type: 1
+        floatPoint: 1
+        intPoint: 0
     - Type: 3
-      Direction: {x: 0, y: 5}
+      Direction: {x: 0, y: 0}
       Power: 0
       Duration: 1
       Condition:
@@ -41,10 +67,28 @@ MonoBehaviour:
         intPoint: 1
   - Patterns:
     - Type: 1
-      Direction: {x: 0, y: 0}
+      Direction: {x: 0, y: -2}
       Power: 0
-      Duration: 4
+      Duration: 0.5
       Condition:
         Type: 1
-        floatPoint: 5
+        floatPoint: 0.5
         intPoint: 0
+  - Patterns:
+    - Type: 0
+      Direction: {x: 0, y: 0}
+      Power: 0
+      Duration: 1
+      Condition:
+        Type: 1
+        floatPoint: 1
+        intPoint: 1
+  - Patterns:
+    - Type: 1
+      Direction: {x: 0, y: 2}
+      Power: 0
+      Duration: 0.5
+      Condition:
+        Type: 1
+        floatPoint: 0.5
+        intPoint: 1
