@@ -48,7 +48,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 64
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -106,71 +106,6 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: Android
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: iPhone
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: Windows Store Apps
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: tvOS
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -189,8 +124,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 82b8d7cab8902439f805d5c7dd9a11f8
-      internalID: -1711337899
+      spriteID: 43f6b351b04874c21ae856d1301dd508
+      internalID: 913727961
       vertices: []
       indices: 
       edges: []
@@ -210,14 +145,35 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2d9dd20a3a12042e5b8aaa39f69e89a6
-      internalID: 588631599
+      spriteID: 244c067257f754a30ac2698fc4121b44
+      internalID: -2062841429
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
       name: SelectUI_2
+      rect:
+        serializedVersion: 2
+        x: 131
+        y: 86
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 461841f3fa75b40a2b7d4c8793cb0911
+      internalID: -616570288
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SelectUI_3
       rect:
         serializedVersion: 2
         x: 1
@@ -231,14 +187,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: da4ef3bfa31ee4451a469c3b9cc4a98b
-      internalID: 1997410487
+      spriteID: 0bfd93e4270f54d15861022d449245ba
+      internalID: -857626793
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SelectUI_3
+      name: SelectUI_4
       rect:
         serializedVersion: 2
         x: 66
@@ -252,8 +208,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 253716608326a423a8b5d3f89018ef5e
-      internalID: -820893207
+      spriteID: 5ef50ee3310bf488ab960c4995434893
+      internalID: 1729863721
       vertices: []
       indices: 
       edges: []
@@ -269,10 +225,11 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      SelectUI_0: -1711337899
-      SelectUI_1: 588631599
-      SelectUI_2: 1997410487
-      SelectUI_3: -820893207
+      SelectUI_0: 913727961
+      SelectUI_1: -2062841429
+      SelectUI_2: -616570288
+      SelectUI_3: -857626793
+      SelectUI_4: 1729863721
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
