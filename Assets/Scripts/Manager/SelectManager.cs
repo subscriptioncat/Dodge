@@ -89,6 +89,15 @@ public class SelectManager : MonoBehaviour
                 || ((player[2] == true) && (player1Airplane != null) && (player2Airplane != null))
             )
             {
+                if (player[2] == false)
+                {
+                    DataManager.Instance.playerCount = 1;
+                }
+                else
+                {
+                    DataManager.Instance.playerCount = 2;
+                }
+
                 SceneManager.LoadScene("MainScene");
             }
         }

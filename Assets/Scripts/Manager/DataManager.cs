@@ -14,6 +14,7 @@ public class DataManager : MonoBehaviour
             Instance = this;
     }
 
+    public int playerCount { get; set; }
     public GameObject Bullet { get; set; }
     public Sprite User1Image { get; set; }
     public Sprite User2Image { get; set; }

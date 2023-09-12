@@ -113,8 +113,8 @@ TextureImporter:
       name: SelectUI_0
       rect:
         serializedVersion: 2
-        x: 1
-        y: 86
+        x: 0
+        y: 87
         width: 64
         height: 64
       alignment: 0
@@ -124,8 +124,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 43f6b351b04874c21ae856d1301dd508
-      internalID: 913727961
+      spriteID: a851dc7a5c7fc450fb4703d059de8429
+      internalID: -445478335
       vertices: []
       indices: 
       edges: []
@@ -134,8 +134,8 @@ TextureImporter:
       name: SelectUI_1
       rect:
         serializedVersion: 2
-        x: 66
-        y: 86
+        x: 64
+        y: 87
         width: 64
         height: 64
       alignment: 0
@@ -145,8 +145,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 244c067257f754a30ac2698fc4121b44
-      internalID: -2062841429
+      spriteID: 04e6591a927ea4c1cb4f22f0fe88d4b0
+      internalID: 1636189754
       vertices: []
       indices: 
       edges: []
@@ -155,8 +155,8 @@ TextureImporter:
       name: SelectUI_2
       rect:
         serializedVersion: 2
-        x: 131
-        y: 86
+        x: 128
+        y: 87
         width: 64
         height: 64
       alignment: 0
@@ -166,8 +166,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 461841f3fa75b40a2b7d4c8793cb0911
-      internalID: -616570288
+      spriteID: 8501305f4c82e4a69bdf5f1c09dc3130
+      internalID: -206084703
       vertices: []
       indices: 
       edges: []
@@ -176,8 +176,8 @@ TextureImporter:
       name: SelectUI_3
       rect:
         serializedVersion: 2
-        x: 1
-        y: 21
+        x: 192
+        y: 87
         width: 64
         height: 64
       alignment: 0
@@ -187,8 +187,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0bfd93e4270f54d15861022d449245ba
-      internalID: -857626793
+      spriteID: d9104cfa4cd02423fa5328071c6860dc
+      internalID: 324657151
       vertices: []
       indices: 
       edges: []
@@ -197,8 +197,8 @@ TextureImporter:
       name: SelectUI_4
       rect:
         serializedVersion: 2
-        x: 66
-        y: 21
+        x: 256
+        y: 87
         width: 64
         height: 64
       alignment: 0
@@ -208,8 +208,176 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5ef50ee3310bf488ab960c4995434893
-      internalID: 1729863721
+      spriteID: 0acd775f7d3194d1197bfadda4ac3db2
+      internalID: -1305735784
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SelectUI_5
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 87
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 06b7e0bd95e744fcabfae31c2ac48a4c
+      internalID: 836859889
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SelectUI_6
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 87
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7402a5ec8715d45aca446080051400b6
+      internalID: 683314175
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SelectUI_7
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 87
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bd9b6725d89de48c0b0c108c6c16fded
+      internalID: 1299042900
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SelectUI_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 23
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c1d7312b5a315400887702006d1f91b1
+      internalID: -1074880945
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SelectUI_9
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 23
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 59781072b74094b1b870789514aab609
+      internalID: -1752944620
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SelectUI_10
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 23
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e0b06708f10f643bf90172c5321deaf0
+      internalID: -1292289759
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SelectUI_11
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 23
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ee8362e6f4dbd423fa10a421f58a2d0f
+      internalID: -838335747
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SelectUI_12
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 23
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 168c83540f27d476e99d39a686966cd8
+      internalID: -1334612653
       vertices: []
       indices: 
       edges: []
@@ -225,11 +393,19 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      SelectUI_0: 913727961
-      SelectUI_1: -2062841429
-      SelectUI_2: -616570288
-      SelectUI_3: -857626793
-      SelectUI_4: 1729863721
+      SelectUI_0: -445478335
+      SelectUI_1: 1636189754
+      SelectUI_10: -1292289759
+      SelectUI_11: -838335747
+      SelectUI_12: -1334612653
+      SelectUI_2: -206084703
+      SelectUI_3: 324657151
+      SelectUI_4: -1305735784
+      SelectUI_5: 836859889
+      SelectUI_6: 683314175
+      SelectUI_7: 1299042900
+      SelectUI_8: -1074880945
+      SelectUI_9: -1752944620
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
