@@ -15,36 +15,36 @@ MonoBehaviour:
   PatternBundles:
   - Patterns:
     - Type: 3
-      Direction: {x: 0, y: -5}
+      Direction: {x: 0, y: -1}
       Power: 0
-      Duration: 4
+      Duration: 5
       Condition:
         Type: 1
-        floatPoint: 5
+        floatPoint: 3
         intPoint: 1
   - Patterns:
     - Type: 1
-      Direction: {x: 5, y: 5}
+      Direction: {x: 0, y: 1}
       Power: 0
-      Duration: 4
+      Duration: 5
       Condition:
         Type: 1
-        floatPoint: 5
+        floatPoint: 3
         intPoint: 1
     - Type: 3
-      Direction: {x: 0, y: 5}
+      Direction: {x: 0, y: 1}
       Power: 0
-      Duration: 1
+      Duration: 5
       Condition:
-        Type: 0
-        floatPoint: 0
+        Type: 1
+        floatPoint: 3
         intPoint: 1
   - Patterns:
     - Type: 1
-      Direction: {x: 0, y: 0}
+      Direction: {x: 0, y: -1}
       Power: 0
-      Duration: 4
+      Duration: 5
       Condition:
         Type: 1
-        floatPoint: 5
+        floatPoint: 3
         intPoint: 0

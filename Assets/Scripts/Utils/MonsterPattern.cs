@@ -67,6 +67,18 @@ public class Pattern
         Condition = new EndCondition();
         TimeElpased = .0f;
         Count = 0;
+        Flag = false;
+    }
+    public Pattern(Pattern pattern)
+    {
+        Type = pattern.Type;
+        Direction = pattern.Direction;
+        Power = pattern.Power;
+        Duration = pattern.Duration;
+        Condition = pattern.Condition;
+        TimeElpased = .0f;
+        Count = 0;
+        Flag = false;
     }
     public ePatternType Type;
     public Vector2 Direction;
@@ -92,6 +104,7 @@ public class Pattern
     public virtual bool IsNeedRun()
     {
         bool flag = Flag;
+        if ( Flag ) { ++Count; }
         Flag = false;
         return flag;
     }

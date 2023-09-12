@@ -22,12 +22,18 @@ public class EndCondition
         if (Type == eEndType.Count)
         {
             if (intPoint < count)
+            {
+                Debug.Log($"{Type} {count}/{intPoint} expired");
                 return true;
+            }
         }
         else if (Type == eEndType.Time)
         {
             if (floatPoint < time)
+            {
+                Debug.Log($"{Type} {time}/{floatPoint} expired");
                 return true;
+            }
         }
         return false;
     }
