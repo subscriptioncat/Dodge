@@ -24,6 +24,7 @@ public class TopDownShooting : MonoBehaviour
     {
         _contoller.OnAttackEvent += OnShoot;
         _contoller.OnLookEvent += OnAim;
+        _contoller.OnFireEvent += OnShoot;
     }
 
     private void OnAim(Vector2 newAimDirection)
@@ -37,10 +38,21 @@ public class TopDownShooting : MonoBehaviour
 
     private void CreateProjectile()
     {
-        var newBullet = Instantiate(bulletPrefab, projectileSpawnPosition.position, Quaternion.identity).GetComponent<BulletController>();
+        var newBullet = Instantiate(bulletPrefab, projectileSpawnPosition.position, projectileSpawnPosition.rotation).GetComponent<BulletController>();
         newBullet.BulletData = bulletData;
         newBullet.Direction = Foward(transform.rotation);
         
+    }
+    private void OnShoot(Vector2 Direction)
+    {
+        CreateProjectile(Direction);
+    }
+    private void CreateProjectile(Vector2 Direction)
+    {
+        var newBullet = Instantiate(bulletPrefab, projectileSpawnPosition.position, projectileSpawnPosition.rotation).GetComponent<BulletController>();
+        newBullet.BulletData = bulletData;
+        newBullet.Direction = Foward(transform.rotation);
+
     }
     public Vector2 Foward(Quaternion quaternion)
     {
