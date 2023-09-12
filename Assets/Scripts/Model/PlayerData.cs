@@ -7,7 +7,7 @@ using UnityEngine.UIElements.Experimental;
 
 public class PlayerData : BaseCharacter
 {
-    public string Name { get { return name; } }
+    public string Name { get { return m_Name; } }
     public int HP { get { return hp; } }
     public int ATK { get { return atk; } }
     public float ATKSpeed { get { return atkSpeed; } }
@@ -24,7 +24,7 @@ public class PlayerData : BaseCharacter
 
     public PlayerData(string _name, int _hp, int _atk, float _atkSpeed, float _speed)
     {
-        name = _name;
+        m_Name = _name;
         hp = _hp;
         atk = _atk;
         atkSpeed = _atkSpeed;

@@ -67,7 +67,7 @@ public class Pattern
         Condition = new EndCondition();
         TimeElpased = 0.0f;
         Count = 0;
-        Flag = false;
+        Flag = true;
     }
     public Pattern(Pattern pattern)
     {
@@ -78,7 +78,7 @@ public class Pattern
         Condition = pattern.Condition;
         TimeElpased = 0.0f;
         Count = 0;
-        Flag = false;
+        Flag = true;
     }
     public ePatternType Type;
     public Vector2 Direction;
