@@ -37,7 +37,7 @@ public class TopDownShooting : MonoBehaviour
 
     private void CreateProjectile()
     {
-        var newBullet = Instantiate(bulletPrefab, projectileSpawnPosition.position, Quaternion.identity).GetComponent<BulletController>();
+        var newBullet = Instantiate(bulletPrefab, projectileSpawnPosition.position, projectileSpawnPosition.rotation).GetComponent<BulletController>();
         newBullet.BulletData = bulletData;
         newBullet.Direction = Foward(transform.rotation);
         

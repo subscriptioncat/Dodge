@@ -20,13 +20,13 @@ public class BulletController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.tag == "Player")
+        if(collision.tag == "Player" && bulletData.IsPlayer == false)
         {
 
             //GameManager.TakeDamage(thisObjectData.collision.GetComponent<MonsterData>());
             NowDestroy();
         }
-        else if(collision.tag == "Monster")
+        else if(collision.tag == "Monster" && bulletData.IsPlayer == true)
         {
             //GameManager.TakeDamage(thisObjectData.collision.GetComponent<PlayerData>());
             NowDestroy();
