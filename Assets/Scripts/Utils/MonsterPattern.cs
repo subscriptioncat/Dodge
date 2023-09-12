@@ -63,9 +63,9 @@ public class Pattern
         Type = ePatternType.None;
         Direction = new Vector2();
         Power = 0;
-        Duration = .0f;
+        Duration = 0.0f;
         Condition = new EndCondition();
-        TimeElpased = .0f;
+        TimeElpased = 0.0f;
         Count = 0;
         Flag = false;
     }
@@ -76,7 +76,7 @@ public class Pattern
         Power = pattern.Power;
         Duration = pattern.Duration;
         Condition = pattern.Condition;
-        TimeElpased = .0f;
+        TimeElpased = 0.0f;
         Count = 0;
         Flag = false;
     }

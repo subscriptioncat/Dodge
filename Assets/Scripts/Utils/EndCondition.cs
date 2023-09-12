@@ -23,7 +23,7 @@ public class EndCondition
         {
             if (intPoint < count)
             {
-                Debug.Log($"{Type} {count}/{intPoint} expired");
+                //Debug.Log($"{Type} {count}/{intPoint} expired");
                 return true;
             }
         }
@@ -31,7 +31,7 @@ public class EndCondition
         {
             if (floatPoint < time)
             {
-                Debug.Log($"{Type} {time}/{floatPoint} expired");
+                //Debug.Log($"{Type} {time}/{floatPoint} expired");
                 return true;
             }
         }

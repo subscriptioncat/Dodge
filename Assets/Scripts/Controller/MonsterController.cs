@@ -12,17 +12,20 @@ public class MonsterController : TopDownCharacterController
     private void PatternUpdate()
     {
         int endCount = 0;
-        foreach (var pattern in _currentPattern)
+        if (_currentPattern != null)
         {
-            if (pattern.IsEnd())
+            foreach (var pattern in _currentPattern)
             {
-                ++endCount;
-                Debug.Log($"[{_index}] {pattern.Type} End");
-                continue;
-            }
-            else
-            {
-                pattern.Loop();
+                if (pattern.IsEnd())
+                {
+                    ++endCount;
+                    //Debug.Log($"[{_index}] {pattern.Type} End");
+                    continue;
+                }
+                else
+                {
+                    pattern.Loop();
+                }
                 switch (pattern.Type)
                 {
                     case ePatternType.None:
@@ -39,6 +42,7 @@ public class MonsterController : TopDownCharacterController
                     default:
                         break;
                 }
+
             }
         }
         if (_currentPattern == null || endCount >= _currentPattern.Length)
@@ -55,7 +59,7 @@ public class MonsterController : TopDownCharacterController
 
     void Start()
     {
-        _currentPattern = Pattern.GetPattern(ref _index);
+        //_currentPattern = Pattern.GetPattern(ref _index);
     }
 
     void FixedUpdate()
@@ -68,7 +72,11 @@ public class MonsterController : TopDownCharacterController
     /// </summary>
     private void Move(Pattern pattern)
     {
-        if (pattern.IsNeedRun())
+        if (pattern.IsEnd())
+        {
+            CallMoveEvent(Vector2.zero);
+        }
+        else if (pattern.IsNeedRun())
         {
             //var currentPos = this.gameObject.transform.position;
             //Vector2 targetPos = (Vector2)currentPos + pattern.Direction;
@@ -83,7 +91,11 @@ public class MonsterController : TopDownCharacterController
     /// </summary>
     private void Fire(Pattern pattern)
     {
-        if (pattern.IsNeedRun())
+        if (pattern.IsEnd())
+        {
+            //CallFireEvent(Vector2.zero);
+        }
+        else if (pattern.IsNeedRun())
         {
             Debug.Log($"[{_index}] {pattern.Type}");
             CallFireEvent(pattern.Direction);
@@ -95,7 +107,11 @@ public class MonsterController : TopDownCharacterController
     /// </summary>
     private void Look(Pattern pattern)
     {
-        if (pattern.IsNeedRun())
+        if (pattern.IsEnd())
+        {
+            //CallLookEvent(Vector2.zero);
+        }
+        else if (pattern.IsNeedRun())
         {
             //var currentPos = this.gameObject.transform.position;
             //Vector2 targetPos = (Vector2)currentPos + pattern.Direction;
