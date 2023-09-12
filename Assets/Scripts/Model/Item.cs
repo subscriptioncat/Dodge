@@ -2,13 +2,29 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Item : MonoBehaviour
-{
+public class Item : MonoBehaviour {
     public string type;
     Rigidbody2D rigid;
 
     private void Awake() {
         rigid = GetComponent<Rigidbody2D>();
-        rigid.velocity = Vector2.down * 5;
+    }
+
+    void Start() {
+        Jump();
+    }
+
+    void Jump() {
+        float randomJumpForce = Random.Range(3f, 6f);
+        Vector2 jumpVelocity = Vector2.up * randomJumpForce;
+        jumpVelocity.x = Random.Range(-2f, 2f);
+        rigid.AddForce(jumpVelocity, ForceMode2D.Impulse);
+    }
+
+    void Update() {
+        // 10 ¿¡ y ÁÂÇ¥ ³Ö±â
+        //if (transform.position.y < 10) {
+        //    Destroy(gameObject);
+        //}
     }
 }
