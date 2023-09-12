@@ -1,11 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.UIElements.Experimental;
 
-public class PlayerData : BaseCharacter
+public class PlayerData : MonoBehaviour, BaseCharacter
 {
     public string Name { get; set; }
     public string Type { get; set; } // boss, enemy, player
