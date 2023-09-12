@@ -18,8 +18,8 @@ public class SelectManager : MonoBehaviour
     private GameObject player1Airplane;
     private GameObject player2Airplane;
 
-    private Player1Cursor player1CursorComponent;
-    private Player2Cursor player2CursorComponent;
+    private PlayerCursor player1CursorComponent;
+    private PlayerCursor player2CursorComponent;
 
     public GameObject[] airplanes; // 하이어라이키에 위치하는 비행기 오브젝트
     public Airplane[] airplanesStatus; // 각 인덱스 별 비행기 상태를 담아둘 배열
@@ -62,8 +62,8 @@ public class SelectManager : MonoBehaviour
     // 커서 초기화
     private void InitCursor()
     {
-        player1CursorComponent = player1Cursor.GetComponent<Player1Cursor>();
-        player2CursorComponent = player2Cursor.GetComponent<Player2Cursor>();
+        player1CursorComponent = player1Cursor.GetComponent<PlayerCursor>();
+        player2CursorComponent = player2Cursor.GetComponent<PlayerCursor>();
 
         // 첫 번째 비행기 position에 Player1 커서 배치
         player1Cursor.transform.position = airplanes[0].transform.position;
