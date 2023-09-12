@@ -11,14 +11,9 @@ public class TopDownShooting : MonoBehaviour
     public GameObject bulletPrefab;
     [SerializeField]
     private BulletData bulletData;
-
-    private BaseCharacter ObjectData;
-
     private void Awake()
     {
         _contoller = GetComponent<TopDownCharacterController>();
-        //ObjectData = GetComponent<PlayerData>();
-        ObjectData = new PlayerData("Palyer", 100, 10, 10, false);
     }
     // Start is called before the first frame update
     void Start()
@@ -38,9 +33,10 @@ public class TopDownShooting : MonoBehaviour
 
     private void CreateProjectile()
     {
-        GameObject newBullet = Instantiate(bulletPrefab, projectileSpawnPosition.position, projectileSpawnPosition.rotation);
-        newBullet.GetComponent<BulletController>().BulletData = bulletData;
-        newBullet.GetComponent<BulletController>().Direction = bulletData.Foward(transform.rotation);
-        newBullet.GetComponent<BulletController>().ThisObjectData = ObjectData;
+        var newBullet = Instantiate(bulletPrefab, projectileSpawnPosition.position, projectileSpawnPosition.rotation).GetComponent<BulletController>();
+        newBullet.BulletData = bulletData;
+        newBullet.Direction = bulletData.Foward(transform.rotation);
+        //newBullet.ThisObjectData = ObjectData;
     }
+
 }

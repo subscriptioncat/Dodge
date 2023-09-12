@@ -1,12 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.UIElements.Experimental;
 
 public class PlayerData : BaseCharacter
 {
-    public PlayerData(string name, int hp, int atk, int atkSpeed, bool isDie) : base(name , hp, atk)
+    public float Speed { get; private set; }
+    
+    public PlayerData(string name, int hp, int atk, float atkSpeed, bool isDie, float Speed) : base(name,hp,atk)
     {
-        AtkSpeed = atkSpeed;
-        IsDie = isDie;
+        AtkSpeed = 10f;
+        IsDie = false;
+        Speed = 5f;
     }
 }
