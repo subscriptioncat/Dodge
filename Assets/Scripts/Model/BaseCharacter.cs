@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BaseCharacter : MonoBehaviour
 {
-    protected string m_Name;
+    protected string name;
     [SerializeField] protected int hp;
     [SerializeField] protected int atk;
     [SerializeField] protected float atkSpeed;
