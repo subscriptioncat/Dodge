@@ -2,18 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BaseCharacter : MonoBehaviour
+public interface BaseCharacter
 {
-    protected string name;
-    [SerializeField] protected int hp;
-    [SerializeField] protected int atk;
-    [SerializeField] protected float atkSpeed;
-    protected bool isDie;
+    string Name { get; set; }
+    string Type { get; set; } // boss, enemy, player
+    int Hp { get; set; }
+    int Atk { get; set; }
+    float AtkSpeed { get; set; }
+    float Speed { get; set; }
+    bool IsDead { get; set; }
+
     
-    public virtual void TakeDamage(int damage) {
-        hp -= damage;
-        if (hp <= 0) {
-            isDie = true;
-        }
-    }
+
+    public void TakeDamage(int damage);
+
+    //public void Shooting();
 }

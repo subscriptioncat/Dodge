@@ -7,28 +7,30 @@ using UnityEngine.UIElements.Experimental;
 
 public class PlayerData : BaseCharacter
 {
-    public string Name { get { return name; } }
-    public int HP { get { return hp; } }
-    public int ATK { get { return atk; } }
-    public float ATKSpeed { get { return atkSpeed; } }
-    public bool IsDie { get { return isDie; } }
+    public string Name { get; set; }
+    public string Type { get; set; } // boss, enemy, player
+    public int Hp { get; set; }
+    public int Atk { get; set; }
+    public float AtkSpeed { get; set; }
+    public float Speed { get; set; }
+    public bool IsDead { get; set; }
 
-    [SerializeField]
-    private float speed;
-    public float Speed { get { return speed; } }
-
-    public PlayerData()
-    {
-
+    public PlayerData(string _name, string _type, int _hp, int _atk, float _atkSpeed, float _speed) {
+        Name = _name;
+        Type = _type;
+        Hp = _hp;
+        Atk = _atk;
+        AtkSpeed = _atkSpeed;
+        Speed = _speed;
+        IsDead = false;
     }
 
-    public PlayerData(string _name, int _hp, int _atk, float _atkSpeed, float _speed)
-    {
-        name = _name;
-        hp = _hp;
-        atk = _atk;
-        atkSpeed = _atkSpeed;
-        isDie = false;
-        speed = _speed;
+    public void TakeDamage(int damage) {
+        Hp -= damage;
+        if (Hp <= 0) {
+            IsDead = true;
+        }
     }
+
+    //public void Shooting();
 }
