@@ -10,14 +10,6 @@ public class BaseCharacter : MonoBehaviour
     public float AtkSpeed { get; set; }
     public bool IsDie { get; set; }
     
-    public BaseCharacter()
-    {
-        Name = "Player";
-        HP = 100;
-        Atk = 10;
-        AtkSpeed = 10f;
-        IsDie = false;
-    }
 
     public BaseCharacter(string name, int hp, int atk) {
         this.Name = name;

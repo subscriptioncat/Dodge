@@ -22,7 +22,7 @@ public class TopDownShooting : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _contoller.OnFireEvent += OnShoot;
+        _contoller.OnAttackEvent += OnShoot;
         _contoller.OnLookEvent += OnAim;
     }
 
@@ -30,19 +30,16 @@ public class TopDownShooting : MonoBehaviour
     {
         _aimDirection = newAimDirection;
     }
-    private void OnShoot(Vector2 Direction)
+    private void OnShoot()
     {
-        CreateProjectile(Direction);
+        CreateProjectile();
     }
 
-    private void CreateProjectile(Vector2 Direction)
+    private void CreateProjectile()
     {
-        var newBullet = Instantiate(bulletPrefab, projectileSpawnPosition.position, projectileSpawnPosition.rotation).GetComponent<BulletController>();
+        var newBullet = Instantiate(bulletPrefab, projectileSpawnPosition.position, Quaternion.identity).GetComponent<BulletController>();
         newBullet.BulletData = bulletData;
-        if(bulletData.IsPlayer == false)
-            newBullet.Direction = Direction;
-        else
-            newBullet.Direction = Foward(transform.rotation);
+        newBullet.Direction = Foward(transform.rotation);
         
     }
     public Vector2 Foward(Quaternion quaternion)

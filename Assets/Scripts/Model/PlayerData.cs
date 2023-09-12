@@ -8,10 +8,10 @@ public class PlayerData : BaseCharacter
 {
     public float Speed { get; private set; }
     
-    public PlayerData(string name, int hp, int atk, float atkSpeed, bool isDie, float Speed) : base(name,hp,atk)
+    public PlayerData(string name, int hp, int atk, float atkSpeed, bool isDie, float speed) : base(name,hp,atk)
     {
         AtkSpeed = 10f;
         IsDie = false;
-        Speed = 5f;
+        Speed = speed;
     }
 }
