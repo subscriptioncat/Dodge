@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Airplane
   - Item
+  - Monster
   layers:
   - Default
   - TransparentFX
