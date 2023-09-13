@@ -39,7 +39,6 @@ public class SelectManager : MonoBehaviour
         InitPlayer();
         InitAirplane();
         InitCursor();
-        DataManager dataManager = new DataManager();
     }
 
     private void Update()
