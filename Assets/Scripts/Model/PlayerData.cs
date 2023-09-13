@@ -37,13 +37,16 @@ public class PlayerData : BaseCharacter
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        // ì , ì  ì´ì•Œ íƒœê·¸ê°€ ë‹¤ë¥´ë©´ ìˆ˜ì •í•´ì£¼ì„¸ìš”. ***
-        if (collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "EnemyBullet")
+        // Àû, Àû ÃÑ¾Ë ÅÂ±×°¡ ´Ù¸£¸é ¼öÁ¤ÇØÁÖ¼¼¿ä. ***
+        if (
+            collision.gameObject.tag == "Enemy"
+            || collision.gameObject.GetComponent<BulletController>().isPlayer == false
+        )
         {
-            // ë¬´ì ì‹œê°„
+            // ¹«Àû½Ã°£
             if (isUnHitTime)
                 return;
-            // ì´ì•Œ ê²¹ì³ìˆì„ë•Œ ì—°ì†ìœ¼ë¡œ íˆíŠ¸ ë°©ì§€
+            // ÃÑ¾Ë °ãÃÄÀÖÀ»¶§ ¿¬¼ÓÀ¸·Î È÷Æ® ¹æÁö
             if (isHit)
                 return;
 
@@ -80,18 +83,18 @@ public class PlayerData : BaseCharacter
     {
         for (int i = 0; i < 15; i++)
         {
-            // ì  íƒœê·¸ ë‹¤ë¥´ë©´ ìˆ˜ì •í•´ì£¼ì„¸ìš” ***
+            // Àû ÅÂ±× ´Ù¸£¸é ¼öÁ¤ÇØÁÖ¼¼¿ä ***
             GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
-            // ì  ì´ì•Œ íƒœê·¸ ë‹¤ë¥´ë©´ ìˆ˜ì •í•´ì£¼ì„¸ìš” ***
+            // Àû ÃÑ¾Ë ÅÂ±× ´Ù¸£¸é ¼öÁ¤ÇØÁÖ¼¼¿ä ***
             GameObject[] bullet = GameObject.FindGameObjectsWithTag("EnemyBullet");
             for (int index = 0; index < enemies.Length; index++)
             {
-                // ì  ì†ë„ ê°ì†Œ
+                // Àû ¼Óµµ °¨¼Ò
                 //enemies[index].GetComponent<EnemyData>().Speed = 0.3f;
             }
             for (int index = 0; index < bullet.Length; index++)
             {
-                // ì  íƒ„í™˜ ì†ë„ ê°ì†Œ
+                // Àû ÅºÈ¯ ¼Óµµ °¨¼Ò
                 bullet[index].GetComponent<BulletData>().Speed = 0.6f;
             }
             yield return new WaitForSeconds(0.2f);
