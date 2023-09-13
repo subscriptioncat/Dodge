@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,28 +6,23 @@ using UnityEngine;
 public class MoveBackground : MonoBehaviour
 {
     [SerializeField]
-    public float speed;
+    [Range(1f, 20f)]
+    float speed;
 
     [SerializeField]
-    private GameObject background1;
+    private float posValue;
 
-    [SerializeField]
-    private GameObject background2;
+    Vector2 startPos;
+    float newPos;
 
-    private Vector3 location;
-    BoxCollider2D triggerY;
-
-    private void Awake()
+    private void Start()
     {
-        // triggerY
+        startPos = transform.position;
     }
 
     private void Update()
     {
-        location = transform.position;
-
-        transform.position += speed * Time.deltaTime * Vector3.down;
-
-        // if ()
+        newPos = Mathf.Repeat(Time.deltaTime * speed, posValue);
+        transform.position = startPos + Vector2.down * newPos;
     }
 }
