@@ -4,7 +4,7 @@ using System.Data;
 using UnityEngine;
 using UnityEngine.Android;
 
-public class DataManager
+public class DataManager : MonoBehaviour
 {
     public static DataManager Instance = null;
 
@@ -13,11 +13,9 @@ public class DataManager
         if (Instance == null)
             Instance = this;
     }
-    public int playerCount;
-    public GameObject Bullet;
-    public Sprite User1Image;
-    public Sprite User2Image;
 
-    public float EffectVolume = 0.5f;
-    public float BGMVolume = 0.5f;
+    public int playerCount { get; set; }
+    public GameObject Bullet { get; set; }
+    public Sprite User1Image { get; set; }
+    public Sprite User2Image { get; set; }
 }
