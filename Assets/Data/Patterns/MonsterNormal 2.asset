@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a37fc43aece4c954ba481b231e4f5ad4, type: 3}
+  m_Name: MonsterNormal 2
+  m_EditorClassIdentifier: 
+  PatternBundles:
+  - Patterns:
+    - Type: 1
+      Direction: {x: -0.5, y: 0.3}
+      Power: 1
+      Duration: 1
+      Condition:
+        Type: 0
+        floatPoint: 0
+        intPoint: 5
+    - Type: 2
+      Direction: {x: 0, y: 1}
+      Power: 1
+      Duration: 1
+      Condition:
+        Type: 0
+        floatPoint: 0
+        intPoint: 5

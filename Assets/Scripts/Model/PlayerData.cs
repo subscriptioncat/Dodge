@@ -29,9 +29,6 @@ public class PlayerData : BaseCharacter
         Hp = 100;
         Atk = 10;
         Speed = 5;
-
-        spriteRenderer = sprite.GetComponent<SpriteRenderer>();
-
         //bullet = GetComponent<BulletData>();
     }
 

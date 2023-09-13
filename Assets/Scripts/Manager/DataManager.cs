@@ -13,7 +13,7 @@ public class DataManager
         if (Instance == null)
             Instance = this;
     }
-    public int playerCount;
+    public int playerCount = 1;
     public GameObject Bullet;
     public Sprite User1Image;
     public Sprite User2Image;
