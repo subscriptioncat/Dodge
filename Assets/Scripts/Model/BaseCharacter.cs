@@ -39,7 +39,7 @@ public class BaseCharacter : MonoBehaviour
         if (Hp <= 0)
         {
             IsDead = true;
-            OnDestroy();
+            Destroy(gameObject);
         }
     }
 
@@ -56,7 +56,7 @@ public class BaseCharacter : MonoBehaviour
 
     private void OnDestroy()
     {
-        Destroy(gameObject);
+        
         //기체 폭팔 또는 사라지는 애니메이션 실행  -> 나중에 만들어야됨
     }
 
