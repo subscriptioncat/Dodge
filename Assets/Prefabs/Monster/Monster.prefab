@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 2739207185042643137}
   - component: {fileID: 5428112534896842158}
   - component: {fileID: -6856055707699812555}
+  - component: {fileID: -6005619135170094532}
   m_Layer: 0
   m_Name: Monster
   m_TagString: Monster
@@ -184,6 +185,19 @@ MonoBehaviour:
   FireClip: {fileID: 8300000, guid: 6445b27f701a6f042967f22dd2cef948, type: 3}
   HitClip: {fileID: 8300000, guid: 9ac884390d5e3ee4495e4ee0e79c4f64, type: 3}
   TEST: 0
+--- !u!114 &-6005619135170094532
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1311166733523053786}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03c6eb91bce61427e8d9205fa77031f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sprite: {fileID: 3719640285607873377}
 --- !u!1 &2929780080656855079
 GameObject:
   m_ObjectHideFlags: 0
