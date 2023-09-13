@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Microsoft.Unity.VisualStudio.Editor;
 using UnityEditor.U2D;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -90,11 +91,6 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        DataManager dataManager = new DataManager();
-        if (test)
-        {
-            DataManager.Instance.User1Image = Resources.Load<Sprite>("Planes/ship_0000");
-        }
         InitPlayer();
     }
 
@@ -105,7 +101,7 @@ public class GameManager : MonoBehaviour
             case 1:
                 player1.GetComponent<PlayerSprite>().SetSprite(DataManager.Instance.User1Image);
                 player1.transform.position = new Vector2(0, -2);
-                player2.SetActive(false);
+                Destroy(player2);
                 break;
 
             case 2:
@@ -127,22 +123,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    //public void HitBullet(BaseCharacter gameObject, bool isPlayer)
-    //{
-    //    if (isPlayer)
-    //    {
-    //        gameObject.TakeDamage(DataManager.Instance.PlayerATK);
-    //    }
-    //    else
-    //    {
-    //        gameObject.TakeDamage(DataManager.Instance.EnemyATK);
-    //    }
-    //}
-    //public void GameOver()
-    //{
-    //    Time.timeScale = 0;
-    //    // 버튼 및 점수등을 출력
-    //}
     public void MonsterSpawn()
     {
         System.Random random = new System.Random();
