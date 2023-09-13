@@ -14,7 +14,8 @@ public class BulletController : MonoBehaviour
 
     void Start()
     {
-        GetComponentInChildren<SpriteRenderer>().sprite = Re
+        Debug.Log(bulletData.ImageName);
+        transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Bullets/" + bulletData.ImageName);
         GetComponent<Rigidbody2D>().velocity = direction * bulletData.Speed;
         Destroy(gameObject, 3f);
     }

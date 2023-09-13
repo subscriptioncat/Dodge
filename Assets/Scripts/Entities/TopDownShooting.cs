@@ -32,25 +32,11 @@ public class TopDownShooting : MonoBehaviour
         _aimDirection = newAimDirection;
     }
 
-
-    private void CreateProjectile()
-    {
-        var newBullet = Instantiate(bulletPrefab, projectileSpawnPosition.position, projectileSpawnPosition.rotation).GetComponent<BulletController>();
-        newBullet.BulletData = bulletData;
-        newBullet.Direction = Foward(transform.rotation);
-        
-    }
-
     private void CreateProjectile(Vector2 direction)
     {
         var newBullet = Instantiate(bulletPrefab, projectileSpawnPosition.position, projectileSpawnPosition.rotation).GetComponent<BulletController>();
         newBullet.BulletData = bulletData;
         newBullet.Direction = direction;
-    }
-    public Vector2 Foward(Quaternion quaternion)
-    {
-        float z = quaternion.eulerAngles.z + 90f;
-        return new Vector2(Mathf.Cos(z * Mathf.Deg2Rad), Mathf.Sin(z * Mathf.Deg2Rad));
     }
     public Vector2 Foward(float z)
     {
@@ -76,19 +62,13 @@ public class TopDownShooting : MonoBehaviour
     {
 
         int n = bulletData.Count;
-        int pos = -(n / 2);
+        int pos = -(n / 2) - 1;
         float nowPosZ = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        nowPosZ += n % 2 == 0 ? 0.5f : 0f;
         for (int i = 0; i < n; i++)
         {
-            pos += i;
-            if (n % 2 == 0 && n / 2 == i)
-            {
-                continue;
-            }
-            else
-            {
-                CreateProjectile(Foward(nowPosZ + pos * 0.5f));
-            }
+            pos += 1;
+            CreateProjectile(Foward(nowPosZ + pos));
         }
     }
 
