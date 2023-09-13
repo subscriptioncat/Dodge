@@ -98,7 +98,7 @@ public class SelectManager : MonoBehaviour
                 {
                     DataManager.Instance.playerCount = 2;
                 }
-
+                BGMPlayer.PlayBGM(2);
                 SceneManager.LoadScene("MainScene");
             }
         }
