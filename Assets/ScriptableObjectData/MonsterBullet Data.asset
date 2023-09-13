@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb04ded9b9c031a44a04df7a6cd6c16d, type: 3}
   m_Name: MonsterBullet Data
   m_EditorClassIdentifier: 
-  count: 2
+  count: 1
   isPlayer: 0
-  speed: 10
+  speed: 5
   imageName: tile_0002
-  delay: 5
+  delay: 3
