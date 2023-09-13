@@ -31,6 +31,10 @@ public class GameManager : MonoBehaviour
     private MonsterPattern MonsterData2;
     [SerializeField]
     private MonsterPattern MonsterData3;
+    [SerializeField]
+    private MonsterPattern MonsterData4;
+    [SerializeField]
+    private MonsterPattern MonsterData5;
 
     [SerializeField]
     private GameObject spawn1;
@@ -41,6 +45,12 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private GameObject spawn3;
     public GameObject Spawn3 { get { return spawn3; } }
+    [SerializeField]
+    private GameObject spawn4;
+    public GameObject Spawn4 { get { return spawn4; } }
+    [SerializeField]
+    private GameObject spawn5;
+    public GameObject Spawn5 { get { return spawn5; } }
 
     [SerializeField]
     private float spawnCycle;
@@ -106,7 +116,7 @@ public class GameManager : MonoBehaviour
     public void MonsterSpawn()
     {
         System.Random random = new System.Random();
-        int n = random.Next(1, 4);
+        int n = random.Next(1, 8);
         switch (n)
         {
             case 1:
@@ -117,6 +127,18 @@ public class GameManager : MonoBehaviour
                 break;
             case 3:
                 MonsterInstantiate(spawn3, MonsterData3);
+                break;
+            case 4:
+                MonsterInstantiate(spawn4, MonsterData4);
+                break;
+            case 5:
+                MonsterInstantiate(spawn5, MonsterData5);
+                break;
+            case 6:
+                MonsterInstantiate(spawn4, MonsterData2);
+                break;
+            case 7:
+                MonsterInstantiate(spawn5, MonsterData2);
                 break;
         }
     }

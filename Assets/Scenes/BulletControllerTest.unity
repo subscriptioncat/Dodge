@@ -1048,7 +1048,7 @@ MonoBehaviour:
   spawn1: {fileID: 1699044672}
   spawn2: {fileID: 119788852}
   spawn3: {fileID: 1524134588}
-  spawnCycle: 10
+  spawnCycle: 1
   test: 1
 --- !u!4 &1353454114
 Transform:
