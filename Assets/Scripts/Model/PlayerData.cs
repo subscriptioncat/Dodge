@@ -10,7 +10,7 @@ public class PlayerData : BaseCharacter
         get => m_AttackSpeed;
         set
         {
-            this.GetComponent<PlayerInputController>()
+            GetComponent<PlayerInputController>()
                 .SetAttackSpeed(value <= 0 ? float.MinValue : value);
             m_AttackSpeed = value <= 0 ? float.MinValue : value;
         }
