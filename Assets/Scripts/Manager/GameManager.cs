@@ -17,10 +17,10 @@ public class GameManager : MonoBehaviour
     }
 
     [SerializeField]
-    private GameObject Player1;
+    private GameObject player1;
 
     [SerializeField]
-    private GameObject Player2;
+    private GameObject player2;
 
     private void Awake()
     {
@@ -32,22 +32,17 @@ public class GameManager : MonoBehaviour
         switch (DataManager.Instance.playerCount)
         {
             case 1:
-                Player1.GetComponentInChildren<SpriteRenderer>().sprite = DataManager
-                    .Instance
-                    .User1Image;
-                Player2.SetActive(false);
-                Player1.transform.position = Vector2.zero;
+                player1.GetComponent<PlayerSprite>().SetSprite(DataManager.Instance.User1Image);
+                player2.SetActive(false);
+
+                player1.transform.position = Vector2.zero;
                 break;
 
             case 2:
-                Player1.GetComponentInChildren<SpriteRenderer>().sprite = DataManager
-                    .Instance
-                    .User1Image;
-                Player2.GetComponentInChildren<SpriteRenderer>().sprite = DataManager
-                    .Instance
-                    .User2Image;
-                Player1.transform.position = new Vector2(-2, 0);
-                Player2.transform.position = new Vector2(2, 0);
+                player1.GetComponent<PlayerSprite>().SetSprite(DataManager.Instance.User1Image);
+                player2.GetComponent<PlayerSprite>().SetSprite(DataManager.Instance.User2Image);
+                player1.transform.position = new Vector2(-2, 0);
+                player2.transform.position = new Vector2(2, 0);
                 break;
         }
     }
