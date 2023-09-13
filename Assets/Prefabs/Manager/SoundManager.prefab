@@ -344,11 +344,13 @@ MonoBehaviour:
   AudioClips:
   - {fileID: 8300000, guid: 0052c2a6738e58a4183e736b47f5eb17, type: 3}
   - {fileID: 8300000, guid: 728126f084d4bf2458c36f71bf927b54, type: 3}
+  - {fileID: 8300000, guid: 0861f7220f77de445aee21cc1b2b3fcc, type: 3}
   m_NowClipIndex: 0
   m_NextClipIndex: 0
   m_StopFlag: 0
   m_PlayFlag: 1
   TEST: 0
+  StartBGMIndex: 0
 --- !u!82 &5959497010587087465
 AudioSource:
   m_ObjectHideFlags: 0

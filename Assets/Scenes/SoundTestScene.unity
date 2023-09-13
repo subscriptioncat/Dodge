@@ -169,7 +169,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FireClip: {fileID: 8300000, guid: 6445b27f701a6f042967f22dd2cef948, type: 3}
   HitClip: {fileID: 8300000, guid: 9ac884390d5e3ee4495e4ee0e79c4f64, type: 3}
-  TEST: 1
+  TEST: 0
 --- !u!1 &891140529
 GameObject:
   m_ObjectHideFlags: 0
@@ -403,6 +403,14 @@ PrefabInstance:
       propertyPath: ListenerTarget
       value: 
       objectReference: {fileID: 761135822}
+    - target: {fileID: 3374603426620684532, guid: ef4e8f1d6d9f5ea4db5cfc7551e21496, type: 3}
+      propertyPath: TEST
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3374603426620684532, guid: ef4e8f1d6d9f5ea4db5cfc7551e21496, type: 3}
+      propertyPath: StartBGMIndex
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 8331945927607170878, guid: ef4e8f1d6d9f5ea4db5cfc7551e21496, type: 3}
       propertyPath: m_Name
       value: SoundManager

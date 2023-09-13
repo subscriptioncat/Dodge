@@ -14,7 +14,7 @@ public class BGMPlayer : MonoBehaviour
     [SerializeField] private bool m_StopFlag = false;
     [SerializeField] private bool m_PlayFlag = true;
     public bool TEST;
-    public int StartBGMIndex = 0;
+    public int StartBGMIndex;
 
     private void Awake()
     {
