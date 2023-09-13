@@ -14,12 +14,19 @@ public class BGMPlayer : MonoBehaviour
     [SerializeField] private bool m_StopFlag = false;
     [SerializeField] private bool m_PlayFlag = true;
     public bool TEST;
+    public int StartBGMIndex = 0;
 
     private void Awake()
     {
         m_AudioSource = GetComponent<AudioSource>();
         if (Instance == null)
             Instance = this;
+    }
+
+    private void Start()
+    {
+        m_AudioSource.Stop();
+        PlayBGM(StartBGMIndex);
     }
 
     private void FixedUpdate()

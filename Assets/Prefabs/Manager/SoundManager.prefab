@@ -348,7 +348,7 @@ MonoBehaviour:
   m_NextClipIndex: 0
   m_StopFlag: 0
   m_PlayFlag: 1
-  TEST: 1
+  TEST: 0
 --- !u!82 &5959497010587087465
 AudioSource:
   m_ObjectHideFlags: 0
@@ -608,7 +608,7 @@ Transform:
   - {fileID: 7658916147027191214}
   - {fileID: 5776825104326595249}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2428713688197777114
 MonoBehaviour:
