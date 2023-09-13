@@ -12,19 +12,21 @@ public class MoveBackground : MonoBehaviour
     private Vector2 startPos;
     private float repeatWidth;
 
-    private void Awake()
+    private void Start()
     {
         startPos = transform.position;
-        repeatWidth = GetComponent<BoxCollider2D>().size.y / 2;
+        Debug.Log("startPos : " + startPos);
+        repeatWidth = GetComponent<BoxCollider2D>().size.y;
+        Debug.Log("repeatWidth : " + repeatWidth);
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
+        transform.Translate(Vector3.down * Time.deltaTime * speed);
+
         if (transform.position.y < startPos.y - repeatWidth)
         {
             transform.position = startPos;
         }
-
-        transform.position += Vector3.down * Time.deltaTime * speed;
     }
 }

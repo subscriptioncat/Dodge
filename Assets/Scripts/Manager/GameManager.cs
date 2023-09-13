@@ -33,16 +33,15 @@ public class GameManager : MonoBehaviour
         {
             case 1:
                 player1.GetComponent<PlayerSprite>().SetSprite(DataManager.Instance.User1Image);
+                player1.transform.position = new Vector2(0, -2);
                 player2.SetActive(false);
-
-                player1.transform.position = Vector2.zero;
                 break;
 
             case 2:
                 player1.GetComponent<PlayerSprite>().SetSprite(DataManager.Instance.User1Image);
                 player2.GetComponent<PlayerSprite>().SetSprite(DataManager.Instance.User2Image);
-                player1.transform.position = new Vector2(-2, 0);
-                player2.transform.position = new Vector2(2, 0);
+                player1.transform.position = new Vector2(-2, -2);
+                player2.transform.position = new Vector2(2, -2);
                 break;
         }
     }
