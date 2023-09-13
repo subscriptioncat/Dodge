@@ -14,8 +14,10 @@ public class BulletController : MonoBehaviour
 
     void Start()
     {
+        Debug.Log(bulletData.ImageName);
+        transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Bullets/" + bulletData.ImageName);
         GetComponent<Rigidbody2D>().velocity = direction * bulletData.Speed;
-        Destroy(gameObject, 5f);
+        Destroy(gameObject, 3f);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

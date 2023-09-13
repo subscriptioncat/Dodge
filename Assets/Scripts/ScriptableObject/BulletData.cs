@@ -6,13 +6,16 @@ using UnityEngine;
 public class BulletData : ScriptableObject
 {
     [SerializeField]
-    private float count;
-    public float Count { get { return count; } }
+    private int count;
+    public int Count { get { return count; } }
     [SerializeField]
     private bool isPlayer;
     public bool IsPlayer { get { return isPlayer; } }
     [SerializeField]
     private float speed;
     public float Speed { get { return speed; } }
-    
+    [SerializeField]
+    private string imageName;
+    public string ImageName { get { return imageName; } }
+
 }
