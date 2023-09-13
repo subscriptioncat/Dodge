@@ -221,7 +221,7 @@ RectTransform:
   - {fileID: 944325983}
   - {fileID: 2094133357}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -481,7 +481,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2374236984688107681, guid: 016afc6a60bdf438fa7f9992784863f3, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2374236984688107681, guid: 016afc6a60bdf438fa7f9992784863f3, type: 3}
       propertyPath: m_LocalPosition.x
@@ -729,8 +729,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 0, y: -150}
-  m_SizeDelta: {x: 350, y: -150}
+  m_AnchoredPosition: {x: 20, y: -120}
+  m_SizeDelta: {x: 350, y: -120}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &763945971
 MonoBehaviour:
@@ -930,8 +930,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -20, y: -150}
-  m_SizeDelta: {x: 350, y: -150}
+  m_AnchoredPosition: {x: -80, y: -120}
+  m_SizeDelta: {x: 290, y: -120}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &944325984
 MonoBehaviour:
@@ -4032,7 +4032,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2374236984688107681, guid: 016afc6a60bdf438fa7f9992784863f3, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2374236984688107681, guid: 016afc6a60bdf438fa7f9992784863f3, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4493,7 +4493,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 10, y: -50}
+  m_AnchoredPosition: {x: 20, y: -51}
   m_SizeDelta: {x: 500, y: 50}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &2126670466
@@ -4549,7 +4549,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
