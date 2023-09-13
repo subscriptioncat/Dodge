@@ -39,7 +39,7 @@ public class BGMPlayer : MonoBehaviour
 
     private void SlowlyStop()
     {
-        if (m_AudioSource.volume <= DataManager.Instance.BGMVolume * 0.2f)
+        if (m_AudioSource.volume <= (DataManager.Instance?.BGMVolume??0.5f) * 0.2f)
         {
             if (Instance.TEST)
                 Debug.Log($"Slowly Stop BGM {m_NowClipIndex}");
@@ -56,9 +56,9 @@ public class BGMPlayer : MonoBehaviour
 
     private void SlowlyPlay()
     {
-        if (m_AudioSource.volume > DataManager.Instance.BGMVolume * 0.9f)
+        if (m_AudioSource.volume > (DataManager.Instance?.BGMVolume??0.5f) * 0.9f)
         {
-            m_AudioSource.volume = DataManager.Instance.BGMVolume;
+            m_AudioSource.volume = DataManager.Instance?.BGMVolume??0.5f;
             m_PlayFlag = false;
             if (Instance.TEST)
                 Debug.Log($"Slowly Play BGM {m_NowClipIndex}");
