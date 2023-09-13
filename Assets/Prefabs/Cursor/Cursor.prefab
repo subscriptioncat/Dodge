@@ -208,6 +208,7 @@ MonoBehaviour:
   player: 0
   unselectedCursor: {fileID: 4458116137771490849}
   selectedCursor: {fileID: 1236611508788515804}
+  ClickClip: {fileID: 8300000, guid: 045c3d51d7072c64db6a2b4c37682d72, type: 3}
 --- !u!1 &1297689271535105680
 GameObject:
   m_ObjectHideFlags: 0

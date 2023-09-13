@@ -17,6 +17,8 @@ public class Cursor : MonoBehaviour
     [SerializeField]
     private GameObject selectedCursor;
 
+    public AudioClip ClickClip;
+
     private void Start()
     {
         InitCursor();
@@ -33,6 +35,7 @@ public class Cursor : MonoBehaviour
     // 커서 이동
     protected void CursorDirection(Direction direction)
     {
+        SoundManager.PlayAudio(eSoundType.Player, new SoundManager.SoundData(ClickClip, Vector2.zero));
         // 이전 커서 위치 값을 현재 커서 위치 값으로 초기화
         pastCursorLocation = currentCursorLocation;
 
