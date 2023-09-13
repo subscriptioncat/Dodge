@@ -8,6 +8,16 @@ public class PlayerData : MonoBehaviour, BaseCharacter {
     public string Type { get; set; } // boss, enemy, player
     public int Hp { get; set; }
     public int Atk { get; set; }
+    public float AtkSpeed
+    {
+        get => m_AttackSpeed;
+        set
+        {
+            this.GetComponent<PlayerInputController>().SetAttackSpeed(value <= 0 ? float.MinValue : value);
+            m_AttackSpeed = value <= 0 ? float.MinValue : value;
+        }
+    }
+    private float m_AttackSpeed;
     public float Speed { get; set; }
     public int Score { get; set; }
     public bool IsDead { get; set; }

@@ -34,5 +34,8 @@ public class PlayerInputController : TopDownCharacterController
        
     }
 
-    
+    public void SetAttackSpeed(float speed)
+    {
+        base.m_Delay = 1.0f / speed;
+    }
 }
