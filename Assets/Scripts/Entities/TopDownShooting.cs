@@ -6,12 +6,14 @@ using UnityEngine;
 public class TopDownShooting : MonoBehaviour
 {
     private TopDownCharacterController _contoller;
-    private Vector2 _aimDirection = Vector2.right;
+    private Vector2 aimDirection = Vector2.right;
 
     [SerializeField]
     private Transform projectileSpawnPosition;
+
     [SerializeField]
     private GameObject bulletPrefab;
+
     [SerializeField]
     private BulletData bulletData;
 
@@ -19,6 +21,7 @@ public class TopDownShooting : MonoBehaviour
     {
         _contoller = GetComponent<TopDownCharacterController>();
     }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -29,15 +32,21 @@ public class TopDownShooting : MonoBehaviour
 
     private void OnAim(Vector2 newAimDirection)
     {
-        _aimDirection = newAimDirection;
+        aimDirection = newAimDirection;
     }
 
     private void CreateProjectile(Vector2 direction)
     {
-        var newBullet = Instantiate(bulletPrefab, projectileSpawnPosition.position, projectileSpawnPosition.rotation).GetComponent<BulletController>();
+        var newBullet = Instantiate(
+                bulletPrefab,
+                projectileSpawnPosition.position,
+                projectileSpawnPosition.rotation
+            )
+            .GetComponent<BulletController>();
         newBullet.BulletData = bulletData;
         newBullet.Direction = direction;
     }
+
     public Vector2 Foward(float z)
     {
         z += 90f;
@@ -47,13 +56,13 @@ public class TopDownShooting : MonoBehaviour
     private void OnShoot()
     {
         int n = bulletData.Count;
-        int pos = -(n / 2) -1;
+        int pos = -(n / 2) - 1;
         float nowPosZ = transform.rotation.eulerAngles.z;
         nowPosZ += n % 2 == 0 ? 0.5f : 0f;
         for (int i = 0; i < n; i++)
         {
             pos += 1;
-            CreateProjectile(Foward(nowPosZ  + pos));
+            CreateProjectile(Foward(nowPosZ + pos));
         }
     }
 
@@ -69,5 +78,4 @@ public class TopDownShooting : MonoBehaviour
             CreateProjectile(Foward(nowPosZ + pos));
         }
     }
-
 }

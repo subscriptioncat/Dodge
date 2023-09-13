@@ -1,10 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using UnityEngine;
 
 public class PlayerData : BaseCharacter
 {
+    [SerializeField]
+    private int player;
+
     public float AtkSpeed
     {
         get => m_AttackSpeed;
@@ -26,13 +30,9 @@ public class PlayerData : BaseCharacter
     {
         Name = "Pilot";
         Type = "player";
-        Hp = 100;
+        Hp = 5;
         Atk = 10;
         Speed = 5;
-
-        spriteRenderer = sprite.GetComponent<SpriteRenderer>();
-
-        //bullet = GetComponent<BulletData>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -48,8 +48,7 @@ public class PlayerData : BaseCharacter
                 return;
 
             isHit = true;
-            // enemydata 클래스 만들어지면 공격력 넣어주세요. ***
-            //TakeDamage(collision.gameObject.GetComponent<EnemyData>().Atk);
+            TakeDamage(player, 1);
             Invoke("OffDamage", 3f);
             isHit = false;
         }
@@ -59,14 +58,14 @@ public class PlayerData : BaseCharacter
             switch (item.GetComponent<Item>().type)
             {
                 case "bulletTime":
-                    Debug.Log("bulletTime");
+                    UnityEngine.Debug.Log("bulletTime");
                     //bullet.Delay /= 2;
                     break;
                 case "timeSlow":
                     StartCoroutine(EnemySlow());
                     break;
                 case "superPower":
-                    Debug.Log("superPower");
+                    UnityEngine.Debug.Log("superPower");
                     isUnHitTime = true;
                     spriteRenderer.color = new Color(1, 1, 1, 0.4f);
                     Invoke("OffDamage", 5f);
