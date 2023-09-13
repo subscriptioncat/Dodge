@@ -8,6 +8,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance = null;
+
     public GameManager()
     {
         if (Instance = null)
@@ -27,28 +28,46 @@ public class GameManager : MonoBehaviour
 
     [SerializeField]
     private MonsterPattern MonsterData1;
+
     [SerializeField]
     private MonsterPattern MonsterData2;
+
     [SerializeField]
     private MonsterPattern MonsterData3;
 
     [SerializeField]
     private GameObject spawn1;
-    public GameObject Spawn1 { get { return spawn1; } }
+    public GameObject Spawn1
+    {
+        get { return spawn1; }
+    }
+
     [SerializeField]
     private GameObject spawn2;
-    public GameObject Spawn2 { get { return spawn2; } }
+    public GameObject Spawn2
+    {
+        get { return spawn2; }
+    }
+
     [SerializeField]
     private GameObject spawn3;
-    public GameObject Spawn3 { get { return spawn3; } }
+    public GameObject Spawn3
+    {
+        get { return spawn3; }
+    }
 
     [SerializeField]
     private float spawnCycle;
-    public float SpawnCycle { get { return spawnCycle; } }
+    public float SpawnCycle
+    {
+        get { return spawnCycle; }
+    }
 
     private float time;
+
     [SerializeField]
     private bool test;
+
     private void Awake()
     {
         DataManager dataManager = new DataManager();
@@ -77,6 +96,7 @@ public class GameManager : MonoBehaviour
                 break;
         }
     }
+
     private void Update()
     {
         time += Time.deltaTime;
@@ -84,9 +104,9 @@ public class GameManager : MonoBehaviour
         {
             MonsterSpawn();
             time = 0;
-            Debug.Log("Ãâ·Â");
         }
     }
+
     //public void HitBullet(BaseCharacter gameObject, bool isPlayer)
     //{
     //    if (isPlayer)
@@ -120,9 +140,14 @@ public class GameManager : MonoBehaviour
                 break;
         }
     }
+
     public void MonsterInstantiate(GameObject spawn, MonsterPattern MonsterData)
     {
-        var newMonster = Instantiate(MonsterPrefabs, spawn.transform.position, spawn.transform.rotation);
+        var newMonster = Instantiate(
+            MonsterPrefabs,
+            spawn.transform.position,
+            spawn.transform.rotation
+        );
         newMonster.GetComponent<MonsterController>().Pattern = MonsterData;
     }
 }

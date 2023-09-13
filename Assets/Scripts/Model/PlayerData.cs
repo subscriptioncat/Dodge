@@ -28,18 +28,18 @@ public class PlayerData : BaseCharacter
 
     private void Awake()
     {
-        Name = "Pilot";
         Type = "player";
         Hp = 5;
         Atk = 10;
         Speed = 5;
+
+        spriteRenderer = sprite.GetComponent<SpriteRenderer>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        // 적, 적 총알 태그가 다르면 수정해주세요. ***
         if (
-            collision.gameObject.tag == "Enemy"
+            collision.gameObject.CompareTag("Monster")
             || collision.gameObject.GetComponent<BulletController>().isPlayer == false
         )
         {

@@ -7,20 +7,20 @@ public class PlayerHealthSprite : MonoBehaviour
     [SerializeField]
     GameObject[] health;
 
-    int pastIndex = -1;
+    int startIndex = 5;
 
     public void SetHealthSprite(int healthPoint)
     {
-        if (pastIndex != healthPoint)
+        if (startIndex != healthPoint)
         {
-            if (pastIndex != -1)
+            if (startIndex != -1)
             {
-                health[healthPoint].SetActive(false);
+                health[startIndex].SetActive(false);
             }
 
             health[healthPoint].SetActive(true);
 
-            pastIndex = healthPoint;
+            startIndex = healthPoint;
         }
     }
 }

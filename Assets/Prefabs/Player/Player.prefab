@@ -221,7 +221,7 @@ GameObject:
   - component: {fileID: 5501360087941232199}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -251,7 +251,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8570003759690822570}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -376,7 +376,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d01ea5ef6943f7458c1f591cbc9f5a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterRenderer: {fileID: 0}
+  characterRenderer: {fileID: 1197494178894192784}
+  shadowRenderer: {fileID: 8352492590930649608}
 --- !u!114 &2652870440272306615
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -401,9 +402,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 789bcfe9133829c43835322a7ccfe6e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectileSpawnPosition: {fileID: 0}
+  projectileSpawnPosition: {fileID: 7088043360662063709}
   bulletPrefab: {fileID: 6541546620542565700, guid: 06109c1dcbfe9c2408090c98994e05d4, type: 3}
-  bulletData: {fileID: 0}
+  bulletData: {fileID: 11400000, guid: 226b687431d77f044a794119b1525347, type: 2}
 --- !u!114 &4998112468362029118
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -428,3 +429,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04b31a743471dce42bda40e87e29e8cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sprite: {fileID: 7106589190254583096}
+  player: 0

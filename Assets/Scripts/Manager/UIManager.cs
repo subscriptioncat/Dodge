@@ -9,16 +9,13 @@ public class UIManager : MonoBehaviour
 
     public UIManager()
     {
-        if (Instance = null)
+        if (Instance == null)
         {
             Instance = this;
         }
     }
 
-    [SerializeField]
     public GameObject player1Panel;
-
-    [SerializeField]
     public GameObject player2Panel;
 
     [SerializeField]
@@ -43,6 +40,7 @@ public class UIManager : MonoBehaviour
                 break;
 
             case 2:
+                player2Panel.SetActive(true);
                 player1AirplaneSprite.GetComponent<Image>().sprite = DataManager
                     .Instance
                     .User1Image;

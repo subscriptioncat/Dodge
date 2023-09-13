@@ -6,9 +6,11 @@ using UnityEngine;
 
 public class MonsterController : TopDownCharacterController
 {
-    [SerializeField] public MonsterPattern Pattern;
+    [SerializeField]
+    public MonsterPattern Pattern;
     private Pattern[] _currentPattern = null;
     private int _index = 0;
+
     private void PatternUpdate()
     {
         int endCount = 0;
@@ -45,7 +47,6 @@ public class MonsterController : TopDownCharacterController
                     default:
                         break;
                 }
-
             }
         }
         if (_currentPattern == null || endCount >= _currentPattern.Length)
@@ -55,7 +56,6 @@ public class MonsterController : TopDownCharacterController
             for (int i = 0; i < item.Length; ++i)
             {
                 _currentPattern[i] = new Pattern(item[i]);
-                Debug.Log($"[{_index}] {item[i].Type} Start");
             }
         }
     }
@@ -83,7 +83,6 @@ public class MonsterController : TopDownCharacterController
         {
             //var currentPos = this.gameObject.transform.position;
             //Vector2 targetPos = (Vector2)currentPos + pattern.Direction;
-            Debug.Log($"[{_index}] {pattern.Type}");
             //CallMoveEvent(targetPos);
             CallMoveEvent(pattern.Direction);
         }
@@ -100,7 +99,6 @@ public class MonsterController : TopDownCharacterController
         }
         else if (pattern.IsNeedRun())
         {
-            Debug.Log($"[{_index}] {pattern.Type}");
             CallFireEvent(pattern.Direction);
         }
     }
@@ -126,10 +124,7 @@ public class MonsterController : TopDownCharacterController
 
     private void Dead(Pattern pattern)
     {
-        if (pattern.IsEnd())
-        {
-
-        }
+        if (pattern.IsEnd()) { }
         else if (pattern.IsNeedRun())
         {
             Destroy(transform.gameObject);

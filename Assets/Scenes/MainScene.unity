@@ -268,7 +268,6 @@ GameObject:
   m_Component:
   - component: {fileID: 519420032}
   - component: {fileID: 519420031}
-  - component: {fileID: 519420029}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -276,14 +275,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &519420029
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 519420028}
-  m_Enabled: 1
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
@@ -493,10 +484,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 885456128780129738, guid: 016afc6a60bdf438fa7f9992784863f3, type: 3}
-      propertyPath: characterRenderer
-      value: 
-      objectReference: {fileID: 699094703}
     - target: {fileID: 1197494178894192784, guid: 016afc6a60bdf438fa7f9992784863f3, type: 3}
       propertyPath: m_Size.x
       value: 0.5
@@ -513,14 +500,6 @@ PrefabInstance:
       propertyPath: m_WasSpriteAssigned
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 1238934030028647977, guid: 016afc6a60bdf438fa7f9992784863f3, type: 3}
-      propertyPath: bulletData
-      value: 
-      objectReference: {fileID: 11400000, guid: 226b687431d77f044a794119b1525347, type: 2}
-    - target: {fileID: 1238934030028647977, guid: 016afc6a60bdf438fa7f9992784863f3, type: 3}
-      propertyPath: projectileSpawnPosition
-      value: 
-      objectReference: {fileID: 699094702}
     - target: {fileID: 1649184439648691818, guid: 016afc6a60bdf438fa7f9992784863f3, type: 3}
       propertyPath: m_Actions
       value: 
@@ -593,6 +572,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 8570003759690822570, guid: 016afc6a60bdf438fa7f9992784863f3, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -601,16 +584,6 @@ PrefabInstance:
 --- !u!1 &699094701 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8570003759690822570, guid: 016afc6a60bdf438fa7f9992784863f3, type: 3}
-  m_PrefabInstance: {fileID: 699094700}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &699094702 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7088043360662063709, guid: 016afc6a60bdf438fa7f9992784863f3, type: 3}
-  m_PrefabInstance: {fileID: 699094700}
-  m_PrefabAsset: {fileID: 0}
---- !u!212 &699094703 stripped
-SpriteRenderer:
-  m_CorrespondingSourceObject: {fileID: 1197494178894192784, guid: 016afc6a60bdf438fa7f9992784863f3, type: 3}
   m_PrefabInstance: {fileID: 699094700}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &741733313
@@ -1117,6 +1090,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 1662083311, guid: fecc48992da3f4e37b19522a7af21cab, type: 3}
+    - target: {fileID: 1452209805071753024, guid: e2066fe030cc146fbaeea7df32a849d0, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 902476429, guid: fecc48992da3f4e37b19522a7af21cab, type: 3}
     - target: {fileID: 1481286171014902326, guid: e2066fe030cc146fbaeea7df32a849d0, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -1132,6 +1109,10 @@ PrefabInstance:
     - target: {fileID: 4335331286364177068, guid: e2066fe030cc146fbaeea7df32a849d0, type: 3}
       propertyPath: m_Name
       value: PlayerPanel (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4335331286364177068, guid: e2066fe030cc146fbaeea7df32a849d0, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4865602319177282105, guid: e2066fe030cc146fbaeea7df32a849d0, type: 3}
       propertyPath: m_Sprite
@@ -6539,7 +6520,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 5}
@@ -6611,10 +6592,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 885456128780129738, guid: 016afc6a60bdf438fa7f9992784863f3, type: 3}
-      propertyPath: characterRenderer
-      value: 
-      objectReference: {fileID: 1717143431}
     - target: {fileID: 1197494178894192784, guid: 016afc6a60bdf438fa7f9992784863f3, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -6623,14 +6600,6 @@ PrefabInstance:
       propertyPath: m_WasSpriteAssigned
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 1238934030028647977, guid: 016afc6a60bdf438fa7f9992784863f3, type: 3}
-      propertyPath: bulletData
-      value: 
-      objectReference: {fileID: 11400000, guid: 226b687431d77f044a794119b1525347, type: 2}
-    - target: {fileID: 1238934030028647977, guid: 016afc6a60bdf438fa7f9992784863f3, type: 3}
-      propertyPath: projectileSpawnPosition
-      value: 
-      objectReference: {fileID: 1717143430}
     - target: {fileID: 1649184439648691818, guid: 016afc6a60bdf438fa7f9992784863f3, type: 3}
       propertyPath: m_Actions
       value: 
@@ -6715,16 +6684,6 @@ PrefabInstance:
 --- !u!1 &1717143429 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8570003759690822570, guid: 016afc6a60bdf438fa7f9992784863f3, type: 3}
-  m_PrefabInstance: {fileID: 1717143428}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &1717143430 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7088043360662063709, guid: 016afc6a60bdf438fa7f9992784863f3, type: 3}
-  m_PrefabInstance: {fileID: 1717143428}
-  m_PrefabAsset: {fileID: 0}
---- !u!212 &1717143431 stripped
-SpriteRenderer:
-  m_CorrespondingSourceObject: {fileID: 1197494178894192784, guid: 016afc6a60bdf438fa7f9992784863f3, type: 3}
   m_PrefabInstance: {fileID: 1717143428}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1913089687
@@ -7013,6 +6972,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 763945970}
     m_Modifications:
+    - target: {fileID: 168366788100356396, guid: e2066fe030cc146fbaeea7df32a849d0, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 402612906243967871, guid: e2066fe030cc146fbaeea7df32a849d0, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 467770172786448407, guid: e2066fe030cc146fbaeea7df32a849d0, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
@@ -7041,10 +7008,18 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: -1118941715, guid: fecc48992da3f4e37b19522a7af21cab, type: 3}
+    - target: {fileID: 1452209805071753024, guid: e2066fe030cc146fbaeea7df32a849d0, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -1029953200, guid: fecc48992da3f4e37b19522a7af21cab, type: 3}
     - target: {fileID: 1481286171014902326, guid: e2066fe030cc146fbaeea7df32a849d0, type: 3}
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: -2108256672, guid: fecc48992da3f4e37b19522a7af21cab, type: 3}
+    - target: {fileID: 1926317082979415119, guid: e2066fe030cc146fbaeea7df32a849d0, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2257157432210889924, guid: e2066fe030cc146fbaeea7df32a849d0, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -7169,6 +7144,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5990807755409860995, guid: e2066fe030cc146fbaeea7df32a849d0, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6942285831730833891, guid: e2066fe030cc146fbaeea7df32a849d0, type: 3}
       propertyPath: m_text
       value: 'Player 1
@@ -7198,6 +7177,10 @@ PrefabInstance:
     - target: {fileID: 8548122842606864537, guid: e2066fe030cc146fbaeea7df32a849d0, type: 3}
       propertyPath: m_Name
       value: Player1AirplaneSprite
+      objectReference: {fileID: 0}
+    - target: {fileID: 8567723286167778781, guid: e2066fe030cc146fbaeea7df32a849d0, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:

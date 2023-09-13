@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class BaseCharacter : MonoBehaviour
 {
-    protected string Name { get; set; }
     protected string Type { get; set; } // boss, enemy, player
     protected int Hp { get; set; }
     protected int Atk { get; set; }
     protected float Speed { get; set; }
     protected bool IsDead { get; set; }
 
+    [SerializeField]
     protected GameObject sprite;
     protected SpriteRenderer spriteRenderer;
 
@@ -26,20 +26,26 @@ public class BaseCharacter : MonoBehaviour
         {
             case 1: // 플레이어 1 UI
                 UIManager.Instance.player1Panel.GetComponent<PlayerHealthSprite>().SetHealthSprite(Hp);
+
+                if (Hp <= 0)
+                {
+                    IsDead = true;
+                    Destroy(gameObject);
+                }
                 break;
             case 2:
                 UIManager.Instance.player2Panel
                     .GetComponent<PlayerHealthSprite>()
                     .SetHealthSprite(Hp);
+
+                if (Hp <= 0)
+                {
+                    IsDead = true;
+                    Destroy(gameObject);
+                }
                 break;
             default:
                 break;
-        }
-
-        if (Hp <= 0)
-        {
-            IsDead = true;
-            Destroy(gameObject);
         }
     }
 
@@ -56,7 +62,6 @@ public class BaseCharacter : MonoBehaviour
 
     private void OnDestroy()
     {
-        
         //기체 폭팔 또는 사라지는 애니메이션 실행  -> 나중에 만들어야됨
     }
 
