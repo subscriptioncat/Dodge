@@ -15,9 +15,7 @@ public class MoveBackground : MonoBehaviour
     private void Start()
     {
         startPos = transform.position;
-        Debug.Log("startPos : " + startPos);
         repeatWidth = GetComponent<BoxCollider2D>().size.y;
-        Debug.Log("repeatWidth : " + repeatWidth);
     }
 
     private void FixedUpdate()
