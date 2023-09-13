@@ -7095,6 +7095,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player1Panel: {fileID: 7170172121420932656}
   player2Panel: {fileID: 1075657788}
+  bulletCount: {fileID: 741733315}
+  timeCount: {fileID: 2024411454}
   player1AirplaneSprite: {fileID: 2109066607}
   player2AirplaneSprite: {fileID: 1075657787}
 --- !u!4 &1557177887
