@@ -17,5 +17,7 @@ public class BulletData : ScriptableObject
     [SerializeField]
     private string imageName;
     public string ImageName { get { return imageName; } }
-
+    [SerializeField]
+    private float delay;
+    public float Delay { get { return delay; } }
 }

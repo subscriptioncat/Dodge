@@ -16,3 +16,4 @@ MonoBehaviour:
   isPlayer: 1
   speed: 10
   imageName: tile_0018
+  delay: 5
