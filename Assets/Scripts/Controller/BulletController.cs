@@ -14,8 +14,9 @@ public class BulletController : MonoBehaviour
 
     void Start()
     {
+        GetComponentInChildren<SpriteRenderer>().sprite = Re
         GetComponent<Rigidbody2D>().velocity = direction * bulletData.Speed;
-        Destroy(gameObject, 5f);
+        Destroy(gameObject, 3f);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
