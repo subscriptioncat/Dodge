@@ -6,7 +6,6 @@ using UnityEngine.InputSystem;
 public class PlayerInputController : TopDownCharacterController
 {
     private Camera _camera;
-    
 
     private void Awake()
     {
@@ -15,7 +14,6 @@ public class PlayerInputController : TopDownCharacterController
 
     public void OnMove(InputValue value)
     {
-        
         Vector2 moveInput = value.Get<Vector2>().normalized;
         CallMoveEvent(moveInput);
     }
@@ -29,9 +27,7 @@ public class PlayerInputController : TopDownCharacterController
 
     public void OnFire(InputValue value)
     {
-
         IsAttacking = value.isPressed;
-       
     }
 
     public void SetAttackSpeed(float speed)
