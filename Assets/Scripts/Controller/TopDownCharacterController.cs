@@ -13,6 +13,7 @@ public class TopDownCharacterController : MonoBehaviour
 
     private float _timeSinceLastAttack = float.MaxValue;
     protected bool IsAttacking { get; set; }
+    protected float m_Delay;
 
     protected virtual void Update()
     {
@@ -21,11 +22,11 @@ public class TopDownCharacterController : MonoBehaviour
 
     private void HandleAttackDelay()
     {
-        if (_timeSinceLastAttack <= 0.15f)
+        if (_timeSinceLastAttack <= m_Delay)
         {
             _timeSinceLastAttack += Time.deltaTime;
         }
-        else if (IsAttacking && _timeSinceLastAttack > 0.15f)
+        else if (IsAttacking && _timeSinceLastAttack > m_Delay)
         {
             _timeSinceLastAttack = 0;
             CallAttackEvent();
