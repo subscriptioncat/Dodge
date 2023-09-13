@@ -19,12 +19,6 @@ public class UIManager : MonoBehaviour
     GameObject player2Panel;
 
     [SerializeField]
-    GameObject player1IconSprite;
-
-    [SerializeField]
-    GameObject player2IconSprite;
-
-    [SerializeField]
     GameObject player1AirplaneSprite;
 
     [SerializeField]
