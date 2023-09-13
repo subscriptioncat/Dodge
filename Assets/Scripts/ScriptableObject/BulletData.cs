@@ -14,5 +14,8 @@ public class BulletData : ScriptableObject
     [SerializeField]
     private float speed;
     public float Speed { get { return speed; } }
-    
+    [SerializeField]
+    private string imageName;
+    public string ImageName { get { return imageName; } }
+
 }
