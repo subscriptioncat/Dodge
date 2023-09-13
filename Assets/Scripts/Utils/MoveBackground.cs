@@ -6,23 +6,25 @@ using UnityEngine;
 public class MoveBackground : MonoBehaviour
 {
     [SerializeField]
-    [Range(1f, 20f)]
+    [Range(1.0f, 20.0f)]
     float speed;
 
-    [SerializeField]
-    private float posValue;
+    private Vector2 startPos;
+    private float repeatWidth;
 
-    Vector2 startPos;
-    float newPos;
-
-    private void Start()
+    private void Awake()
     {
         startPos = transform.position;
+        repeatWidth = GetComponent<BoxCollider2D>().size.y / 2;
     }
 
     private void Update()
     {
-        newPos = Mathf.Repeat(Time.deltaTime * speed, posValue);
-        transform.position = startPos + Vector2.down * newPos;
+        if (transform.position.y < startPos.y - repeatWidth)
+        {
+            transform.position = startPos;
+        }
+
+        transform.position += Vector3.down * Time.deltaTime * speed;
     }
 }
