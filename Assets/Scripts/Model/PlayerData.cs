@@ -26,6 +26,7 @@ public class PlayerData : BaseCharacter
     private bool isUnHitTime;
     private bool isHit;
 
+    private CharacterAudio m_Audio;
     private void Awake()
     {
         Type = "player";
@@ -34,6 +35,7 @@ public class PlayerData : BaseCharacter
         Speed = 5;
 
         spriteRenderer = sprite.GetComponent<SpriteRenderer>();
+        m_Audio = gameObject.GetComponent<CharacterAudio>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -107,5 +109,11 @@ public class PlayerData : BaseCharacter
             }
             yield return new WaitForSeconds(0.2f);
         }
+    }
+
+    public override void TakeDamage(int player, int damage)
+    {
+        base.TakeDamage(player, damage);
+        m_Audio.PlayHit();
     }
 }

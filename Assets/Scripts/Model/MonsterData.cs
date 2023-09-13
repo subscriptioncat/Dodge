@@ -9,4 +9,16 @@ public class MonsterData : BaseCharacter
             Destroy(gameObject);
         }
     }
+
+    private CharacterAudio m_Audio;
+
+    private void Awake()
+    {
+        m_Audio = this.gameObject.GetComponent<CharacterAudio>();
+    }
+    public override void TakeDamage(int player, int damage)
+    {
+        base.TakeDamage(player, damage);
+        m_Audio.PlayHit();
+    }
 }

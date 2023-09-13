@@ -13,7 +13,7 @@ public class BaseCharacter : MonoBehaviour
     protected GameObject sprite;
     protected SpriteRenderer spriteRenderer;
 
-    public void TakeDamage(int player, int damage)
+    public virtual void TakeDamage(int player, int damage)
     {
         // player == 1 ; 1P
         // player == 2 ; 2P
