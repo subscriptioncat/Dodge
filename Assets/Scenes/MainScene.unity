@@ -555,6 +555,10 @@ PrefabInstance:
       propertyPath: m_WasSpriteAssigned
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1649184439648691818, guid: 016afc6a60bdf438fa7f9992784863f3, type: 3}
+      propertyPath: m_Actions
+      value: 
+      objectReference: {fileID: -944628639613478452, guid: 2a20e07b2de9f334c90da721144b25f1, type: 3}
     - target: {fileID: 2374236984688107681, guid: 016afc6a60bdf438fa7f9992784863f3, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -6513,6 +6517,14 @@ PrefabInstance:
     - target: {fileID: 1197494178894192784, guid: 016afc6a60bdf438fa7f9992784863f3, type: 3}
       propertyPath: m_WasSpriteAssigned
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1649184439648691818, guid: 016afc6a60bdf438fa7f9992784863f3, type: 3}
+      propertyPath: m_Actions
+      value: 
+      objectReference: {fileID: -944628639613478452, guid: 6e8c8475f38b1574082b10cc671d16ba, type: 3}
+    - target: {fileID: 1649184439648691818, guid: 016afc6a60bdf438fa7f9992784863f3, type: 3}
+      propertyPath: m_DefaultActionMap
+      value: Player1
       objectReference: {fileID: 0}
     - target: {fileID: 2374236984688107681, guid: 016afc6a60bdf438fa7f9992784863f3, type: 3}
       propertyPath: m_RootOrder

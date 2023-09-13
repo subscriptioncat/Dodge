@@ -2,18 +2,49 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface BaseCharacter
+public class BaseCharacter : MonoBehaviour
 {
-    string Name { get; set; }
-    string Type { get; set; } // boss, enemy, player
-    int Hp { get; set; }
-    int Atk { get; set; }
-    float Speed { get; set; }
-    bool IsDead { get; set; }
+    protected string Name { get; set; }
+    protected string Type { get; set; } // boss, enemy, player
+    protected int Hp { get; set; }
+    protected int Atk { get; set; }
+    protected float Speed { get; set; }
+    protected bool IsDead { get; set; }
 
-    
+    protected GameObject sprite;
+    protected SpriteRenderer spriteRenderer;
 
-    public void TakeDamage(int damage);
+    public void TakeDamage(int damage)
+    {
+        Hp -= damage;
+        StartCoroutine(DamageEffect());
 
-    //public void Shooting();
+        if (Hp <= 0)
+        {
+            IsDead = true;
+            OnDestroy();
+        }
+    }
+
+    IEnumerator DamageEffect()
+    {
+        for (int i = 0; i < 3; i++)
+        {
+            spriteRenderer.color = Color.red;
+            yield return new WaitForSeconds(0.2f);
+            spriteRenderer.color = Color.white;
+            yield return new WaitForSeconds(0.2f);
+        }
+    }
+
+    private void OnDestroy()
+    {
+        Destroy(gameObject);
+        //기체 폭팔 또는 사라지는 애니메이션 실행  -> 나중에 만들어야됨
+    }
+
+    public void OffDamage()
+    {
+        spriteRenderer.color = new Color(1, 1, 1, 1);
+    }
 }
