@@ -5,6 +5,17 @@ using UnityEngine;
 
 public class PlayerData : BaseCharacter
 {
+    public float AtkSpeed
+    {
+        get => m_AttackSpeed;
+        set
+        {
+            this.GetComponent<PlayerInputController>()
+                .SetAttackSpeed(value <= 0 ? float.MinValue : value);
+            m_AttackSpeed = value <= 0 ? float.MinValue : value;
+        }
+    }
+    private float m_AttackSpeed;
     public int Score { get; set; }
 
     //BulletData bullet;
