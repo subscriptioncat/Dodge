@@ -14,10 +14,27 @@ public class BaseCharacter : MonoBehaviour
     protected GameObject sprite;
     protected SpriteRenderer spriteRenderer;
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(int player, int damage)
     {
+        // player == 1 ; 1P
+        // player == 2 ; 2P
+
         Hp -= damage;
         StartCoroutine(DamageEffect());
+
+        switch (player)
+        {
+            case 1: // 플레이어 1 UI
+                UIManager.Instance.player1Panel.GetComponent<PlayerHealthSprite>().SetHealthSprite(Hp);
+                break;
+            case 2:
+                UIManager.Instance.player2Panel
+                    .GetComponent<PlayerHealthSprite>()
+                    .SetHealthSprite(Hp);
+                break;
+            default:
+                break;
+        }
 
         if (Hp <= 0)
         {
