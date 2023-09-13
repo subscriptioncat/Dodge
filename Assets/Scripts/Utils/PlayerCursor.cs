@@ -30,7 +30,7 @@ public class PlayerCursor : Cursor
                 break;
             case 2:
                 // 플레이어 2 추가 여부 확인 && 아직 플레이어 비행기를 선택하지 않았다면
-                if (SelectManager.instance.player[2] == true && isSelect == false)
+                if (SelectManager.Instance.player[2] == true && isSelect == false)
                 {
                     if (Input.GetKeyDown(KeyCode.UpArrow))
                     {
