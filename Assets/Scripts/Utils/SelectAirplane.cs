@@ -5,8 +5,8 @@ using UnityEngine;
 public class SelectAirplane : MonoBehaviour
 {
     [SerializeField]
-    private GameObject unselectedAirplane;
+    public GameObject unselectedAirplane;
 
     [SerializeField]
-    private GameObject selectedAirplane;
+    public GameObject selectedAirplane;
 }

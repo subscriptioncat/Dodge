@@ -3,7 +3,15 @@ using UnityEngine.SceneManagement;
 
 public class SelectManager : MonoBehaviour
 {
-    public static SelectManager instance = null;
+    public static SelectManager Instance = null;
+
+    public SelectManager()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+    }
 
     [SerializeField]
     private GameObject player1Cursor;
@@ -28,21 +36,10 @@ public class SelectManager : MonoBehaviour
 
     private void Awake()
     {
-        if (instance == null)
-        {
-            instance = this;
-        }
-        // else
-        // {
-        //     if (instance != this)
-        //     {
-        //         Destroy(this.gameObject);
-        //     }
-        // }
-
         InitPlayer();
         InitAirplane();
         InitCursor();
+        DataManager dataManager = new DataManager();
     }
 
     private void Update()
@@ -93,12 +90,26 @@ public class SelectManager : MonoBehaviour
                 || ((player[2] == true) && (player1Airplane != null) && (player2Airplane != null))
             )
             {
+                if (player[2] == false)
+                {
+                    DataManager.Instance.playerCount = 1;
+                }
+                else
+                {
+                    DataManager.Instance.playerCount = 2;
+                }
+
                 SceneManager.LoadScene("MainScene");
             }
         }
         else if (Input.GetKeyDown(KeyCode.F1)) // 플레이어 1 비행기 선택
         {
             player1Airplane = airplanes[player1CursorComponent.SelectAirplane()];
+
+            DataManager.Instance.User1Image = player1Airplane
+                .GetComponent<SelectAirplane>()
+                .selectedAirplane.GetComponent<SpriteRenderer>()
+                .sprite;
         }
         else if (Input.GetKeyDown(KeyCode.F2)) // 플레이어 2 커서 추가
         {
@@ -120,6 +131,11 @@ public class SelectManager : MonoBehaviour
             else // 플레이어 2 비행기 선택
             {
                 player2Airplane = airplanes[player2CursorComponent.SelectAirplane()];
+
+                DataManager.Instance.User2Image = player2Airplane
+                    .GetComponent<SelectAirplane>()
+                    .selectedAirplane.GetComponent<SpriteRenderer>()
+                    .sprite;
             }
         }
     }

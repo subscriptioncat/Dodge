@@ -17,6 +17,8 @@ public class Cursor : MonoBehaviour
     [SerializeField]
     private GameObject selectedCursor;
 
+    public AudioClip ClickClip;
+
     private void Start()
     {
         InitCursor();
@@ -24,8 +26,8 @@ public class Cursor : MonoBehaviour
 
     private void InitCursor()
     {
-        airplanesCount = SelectManager.instance.airplanesCount; // SelectManager에 접근해서 비행기 개수 가져오기
-        airplanesRowCount = SelectManager.instance.airplanesRowCount; // 가로줄마다 위치하고 있는 비행기 개수
+        airplanesCount = SelectManager.Instance.airplanesCount; // SelectManager에 접근해서 비행기 개수 가져오기
+        airplanesRowCount = SelectManager.Instance.airplanesRowCount; // 가로줄마다 위치하고 있는 비행기 개수
         pastCursorLocation = -1; // 이전 커서 위치 -1로 초기화
         isSelect = false; // 선택 여부 초기화
     }
@@ -33,11 +35,12 @@ public class Cursor : MonoBehaviour
     // 커서 이동
     protected void CursorDirection(Direction direction)
     {
+        SoundManager.PlayAudio(eSoundType.Player, new SoundManager.SoundData(ClickClip, Vector2.zero));
         // 이전 커서 위치 값을 현재 커서 위치 값으로 초기화
         pastCursorLocation = currentCursorLocation;
 
         // 이전 커서가 위치하고 있던 비행기 상태를 'Unselected'로 변경
-        SelectManager.instance.airplanesStatus[pastCursorLocation] = SelectManager
+        SelectManager.Instance.airplanesStatus[pastCursorLocation] = SelectManager
             .Airplane
             .Unselected;
 
@@ -53,7 +56,7 @@ public class Cursor : MonoBehaviour
                         currentCursorLocation += airplanesCount;
                     }
                 } while (
-                    SelectManager.instance.airplanesStatus[currentCursorLocation]
+                    SelectManager.Instance.airplanesStatus[currentCursorLocation]
                     != SelectManager.Airplane.Unselected
                 );
                 break;
@@ -68,7 +71,7 @@ public class Cursor : MonoBehaviour
                         currentCursorLocation -= airplanesCount;
                     }
                 } while (
-                    SelectManager.instance.airplanesStatus[currentCursorLocation]
+                    SelectManager.Instance.airplanesStatus[currentCursorLocation]
                     != SelectManager.Airplane.Unselected
                 );
                 break;
@@ -83,7 +86,7 @@ public class Cursor : MonoBehaviour
                         currentCursorLocation += airplanesCount;
                     }
                 } while (
-                    SelectManager.instance.airplanesStatus[currentCursorLocation]
+                    SelectManager.Instance.airplanesStatus[currentCursorLocation]
                     != SelectManager.Airplane.Unselected
                 );
                 break;
@@ -98,16 +101,16 @@ public class Cursor : MonoBehaviour
                         currentCursorLocation -= airplanesCount;
                     }
                 } while (
-                    SelectManager.instance.airplanesStatus[currentCursorLocation]
+                    SelectManager.Instance.airplanesStatus[currentCursorLocation]
                     != SelectManager.Airplane.Unselected
                 );
                 break;
         }
 
-        transform.position = SelectManager.instance.airplanes[currentCursorLocation]
+        transform.position = SelectManager.Instance.airplanes[currentCursorLocation]
             .transform
             .position;
-        SelectManager.instance.airplanesStatus[currentCursorLocation] = SelectManager
+        SelectManager.Instance.airplanesStatus[currentCursorLocation] = SelectManager
             .Airplane
             .Standby;
     }
@@ -119,7 +122,7 @@ public class Cursor : MonoBehaviour
         isSelect = true;
 
         // 해당 커서가 위치하고 있는 비행기 정보를 'Selected'로 변경
-        SelectManager.instance.airplanesStatus[currentCursorLocation] = SelectManager
+        SelectManager.Instance.airplanesStatus[currentCursorLocation] = SelectManager
             .Airplane
             .Selected;
 
