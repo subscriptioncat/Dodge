@@ -39,6 +39,9 @@ public class MonsterController : TopDownCharacterController
                     case ePatternType.Look:
                         Look(pattern);
                         break;
+                    case ePatternType.Dead:
+                        Dead(pattern);
+                        break;
                     default:
                         break;
                 }
@@ -118,6 +121,18 @@ public class MonsterController : TopDownCharacterController
             Debug.Log($"[{_index}] {pattern.Type}");
             //CallLookEvent(targetPos);
             CallLookEvent(pattern.Direction);
+        }
+    }
+
+    private void Dead(Pattern pattern)
+    {
+        if (pattern.IsEnd())
+        {
+
+        }
+        else if (pattern.IsNeedRun())
+        {
+            Destroy(transform.gameObject);
         }
     }
 }

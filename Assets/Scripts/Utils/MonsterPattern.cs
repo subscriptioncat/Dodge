@@ -35,7 +35,8 @@ public enum ePatternType
     None,
     Move,
     Fire,
-    Look
+    Look,
+    Dead
 }
 [Serializable]
 public class PatternBundle
