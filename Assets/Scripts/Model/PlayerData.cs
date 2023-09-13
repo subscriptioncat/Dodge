@@ -79,6 +79,14 @@ public class PlayerData : BaseCharacter
         }
     }
 
+    private void OnTriggerStay2D(Collider2D other)
+    {
+        if (other.CompareTag("Wall"))
+        {
+            UnityEngine.Debug.Log("Wall!!");
+        }
+    }
+
     IEnumerator EnemySlow()
     {
         for (int i = 0; i < 15; i++)
