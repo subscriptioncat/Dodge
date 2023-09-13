@@ -179,7 +179,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d01ea5ef6943f7458c1f591cbc9f5a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterRenderer: {fileID: 0}
+  characterRenderer: {fileID: 532372090861123379}
+  shadowRenderer: {fileID: 532372090861123379}
 --- !u!114 &917913925140666179
 MonoBehaviour:
   m_ObjectHideFlags: 0
