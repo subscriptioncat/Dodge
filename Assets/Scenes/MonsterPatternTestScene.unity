@@ -335,7 +335,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d18b66a3be62b6842a9baf9cb522e645, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Pattern: {fileID: 11400000, guid: 959268c053d4e99479a6550c4921e4aa, type: 2}
+  Pattern: {fileID: 11400000, guid: b400a522d53812a448731274bd578556, type: 2}
 --- !u!114 &942175465
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -374,8 +374,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectileSpawnPosition: {fileID: 1893013332}
-  bulletPrefab: {fileID: 783845233890724201, guid: ad2ccac20a7a9e44d82512ef700a59b7, type: 3}
-  bulletData: {fileID: 0}
+  bulletPrefab: {fileID: 6541546620542565700, guid: 06109c1dcbfe9c2408090c98994e05d4, type: 3}
+  bulletData: {fileID: 11400000, guid: 801222582a7f53d489b26ccad614ba69, type: 2}
 --- !u!4 &942175468
 Transform:
   m_ObjectHideFlags: 0
