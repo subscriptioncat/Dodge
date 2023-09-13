@@ -8,11 +8,20 @@ public class CharacterAudio : MonoBehaviour
     public AudioClip HitClip;
     public bool TEST;
     private float m_Time;
+    private TopDownCharacterController m_Controller;
 
+    private void Awake()
+    {
+        m_Controller = GetComponent<TopDownCharacterController>();
+    }
     private void Start()
     {
         if (TEST)
             BGMPlayer.PlayBGM(0);
+        if (m_Controller != null)
+        {
+            m_Controller.OnFireEvent += PlayFire;
+        }
     }
     private void Update()
     {
@@ -20,6 +29,10 @@ public class CharacterAudio : MonoBehaviour
             Test();
     }
 
+    public void PlayFire(Vector2 NotUse)
+    {
+        PlayFire();
+    }
     public void PlayFire()
     {
         SoundManager.PlayAudio(eSoundType.Player, new SoundManager.SoundData(FireClip, (Vector2)transform.position, 0.9f, 1.1f));
