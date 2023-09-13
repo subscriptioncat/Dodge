@@ -13,7 +13,7 @@ public class BulletData : ScriptableObject
     public bool IsPlayer { get { return isPlayer; } }
     [SerializeField]
     private float speed;
-    public float Speed { get { return speed; } }
+    public float Speed { get { return speed; } set { speed = value; } }
     [SerializeField]
     private string imageName;
     public string ImageName { get { return imageName; } }

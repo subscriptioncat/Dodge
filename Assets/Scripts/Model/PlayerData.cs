@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using UnityEngine;
 
-public class PlayerData : MonoBehaviour, BaseCharacter
-{
+public class PlayerData : MonoBehaviour, BaseCharacter {
     public string Name { get; set; }
     public string Type { get; set; } // boss, enemy, player
     public int Hp { get; set; }
@@ -15,49 +14,103 @@ public class PlayerData : MonoBehaviour, BaseCharacter
     public bool IsDead { get; set; }
     [SerializeField]
     private Sprite image;
-    public Sprite Image { get { return image; } }
 
-    public PlayerData() { }
-    public PlayerData(string _name, string _type, int _hp, int _atk, float _atkSpeed, float _speed, Sprite _image) {
-        Name = _name;
-        Type = _type;
-        Hp = _hp;
-        Atk = _atk;
-        AtkSpeed = _atkSpeed;
-        Speed = _speed;
-        Score = 0;
-        IsDead = false;
-        transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = _image;
+    Rigidbody2D rigid;
+    SpriteRenderer spriteRenderer;
+    public bool isUnHitTime;
+    public bool isHit;
+
+    private void Awake() {
+        Name = "Pilot";
+        Type = "player";
+        Hp = 100;
+        Atk = 10;
+        AtkSpeed = 2;
+        Speed = 5;
+        transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = image;
+
+        rigid = GetComponent<Rigidbody2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
-    void Start()
-    {
-        if (Name == null)
-            Name = "Player";
-        if (Type == null)
-            Type = "player";
-        if (Hp <= 0)
-            Hp = 100;
-        if (Atk <= 0)
-            Atk = 10;
-        if (AtkSpeed <= 0)
-            AtkSpeed = 2;
-        if (Speed <= 0)
-            Speed = 5;
-        if (transform.GetChild(0).GetComponent<SpriteRenderer>().sprite == null)
-            transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = image;
+    private void OnTriggerEnter2D(Collider2D collision) {
+        // 적, 적 총알 태그가 다르면 수정해주세요. ***
+        if (collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "EnemyBullet") {
+            // 무적시간
+            if (isUnHitTime)
+                return;
+            // 총알 겹쳐있을때 연속으로 히트 방지
+            if (isHit)
+                return;
+
+            isHit = true;
+            // enemydata 클래스 만들어지면 공격력 넣어주세요. ***
+            //TakeDamage(collision.gameObject.GetComponent<EnemyData>().Atk);
+            Invoke("OffDamage", 3f);
+            isHit = false;
+
+        } else if (collision.gameObject.tag == "Item") {
+            GameObject item = collision.gameObject;
+            switch (item.GetComponent<Item>().type) {
+                case "bulletTime":
+                    AtkSpeed = AtkSpeed / 2;
+                    break;
+                case "timeSlow":
+                    StartCoroutine(EnemySlow());
+                    break;
+                case "superPower":
+                    isUnHitTime = true;
+                    spriteRenderer.color = new Color(1, 1, 1, 0.4f);
+                    Invoke("OffDamage", 5f);
+                    isUnHitTime = false;
+                    break;
+            }
+            Destroy(item);
+        }
     }
 
     public void TakeDamage(int damage) {
         Hp -= damage;
+        StartCoroutine(DamageEffect());
+
         if (Hp <= 0) {
             IsDead = true;
-            Destroy(gameObject);
+            OnDestroy();
         }
     }
 
-    private void OnDestroy()
-    {
+    IEnumerator DamageEffect() {
+        for (int i = 0; i < 3; i++) {
+            spriteRenderer.color = Color.red;
+            yield return new WaitForSeconds(0.2f);
+            spriteRenderer.color = Color.white;
+            yield return new WaitForSeconds(0.2f);
+        }
+    }
+    IEnumerator EnemySlow() {
+        for (int i = 0; i < 15; i++) {
+            // 적 태그 다르면 수정해주세요 ***
+            GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+            // 적 총알 태그 다르면 수정해주세요 ***
+            GameObject[] bullet = GameObject.FindGameObjectsWithTag("EnemyBullet");
+            for (int index = 0; index < enemies.Length; index++) {
+                // 적 속도 감소
+                //enemies[index].GetComponent<EnemyData>().Speed = 0.3f;
+            }
+            for (int index = 0; index < bullet.Length; index++) {
+                // 적 탄환 속도 감소
+                bullet[index].GetComponent<BulletData>().Speed = 0.3f;
+            }
+            yield return new WaitForSeconds(0.2f);
+        }
+    }
+
+    public void OffDamage() {
+        spriteRenderer.color = new Color(1, 1, 1, 1);
+    }
+
+    private void OnDestroy() {
+        Destroy(gameObject);
         //기체 폭팔 또는 사라지는 애니메이션 실행  -> 나중에 만들어야됨
     }
     //public void Shooting(); <= TopDownShooting에 구현완료
