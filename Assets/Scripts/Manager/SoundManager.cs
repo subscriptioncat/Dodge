@@ -14,17 +14,19 @@ public class SoundManager : MonoBehaviour
 {
     static SoundManager Instance;
     public AudioListener Listener;
-    public Transform ListenerTarget;
+    //public Transform ListenerTarget;
     public AudioSource[] AudioMixer;
 
     private void Awake()
     {
         Instance = this;
+        Listener.transform.position = Camera.main.transform.position;
+        DontDestroyOnLoad(transform.gameObject);
     }
 
     private void Update()
     {
-        Listener.transform.position = ListenerTarget.transform.position;
+        //Listener.transform.position = ListenerTarget?.position??Vector3.zero;
     }
 
     public static void PlayAudio(eSoundType type, SoundData data)
