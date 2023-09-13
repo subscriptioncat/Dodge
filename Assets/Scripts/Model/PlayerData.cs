@@ -8,7 +8,6 @@ public class PlayerData : MonoBehaviour, BaseCharacter {
     public string Type { get; set; } // boss, enemy, player
     public int Hp { get; set; }
     public int Atk { get; set; }
-    public float AtkSpeed { get; set; }
     public float Speed { get; set; }
     public int Score { get; set; }
     public bool IsDead { get; set; }
@@ -17,20 +16,21 @@ public class PlayerData : MonoBehaviour, BaseCharacter {
 
     Rigidbody2D rigid;
     SpriteRenderer spriteRenderer;
-    public bool isUnHitTime;
-    public bool isHit;
+    //BulletData bullet;
+    private bool isUnHitTime;
+    private bool isHit;
 
     private void Awake() {
         Name = "Pilot";
         Type = "player";
         Hp = 100;
         Atk = 10;
-        AtkSpeed = 2;
         Speed = 5;
         transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = image;
 
         rigid = GetComponent<Rigidbody2D>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteRenderer = transform.GetChild(0).GetComponent<SpriteRenderer>();
+        //bullet = GetComponent<BulletData>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision) {
@@ -53,12 +53,14 @@ public class PlayerData : MonoBehaviour, BaseCharacter {
             GameObject item = collision.gameObject;
             switch (item.GetComponent<Item>().type) {
                 case "bulletTime":
-                    AtkSpeed = AtkSpeed / 2;
+                    Debug.Log("bulletTime");
+                    //bullet.Delay /= 2;
                     break;
                 case "timeSlow":
                     StartCoroutine(EnemySlow());
                     break;
                 case "superPower":
+                    Debug.Log("superPower");
                     isUnHitTime = true;
                     spriteRenderer.color = new Color(1, 1, 1, 0.4f);
                     Invoke("OffDamage", 5f);
@@ -99,7 +101,7 @@ public class PlayerData : MonoBehaviour, BaseCharacter {
             }
             for (int index = 0; index < bullet.Length; index++) {
                 // 적 탄환 속도 감소
-                bullet[index].GetComponent<BulletData>().Speed = 0.3f;
+                bullet[index].GetComponent<BulletData>().Speed = 0.6f;
             }
             yield return new WaitForSeconds(0.2f);
         }

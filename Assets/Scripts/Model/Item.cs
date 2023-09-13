@@ -11,7 +11,7 @@ public class Item : MonoBehaviour {
     }
 
     void Start() {
-        Jump();
+        //Jump();
     }
 
     void Jump() {

@@ -8,7 +8,6 @@ public interface BaseCharacter
     string Type { get; set; } // boss, enemy, player
     int Hp { get; set; }
     int Atk { get; set; }
-    float AtkSpeed { get; set; }
     float Speed { get; set; }
     bool IsDead { get; set; }
 

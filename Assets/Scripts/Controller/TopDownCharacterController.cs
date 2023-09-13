@@ -10,7 +10,7 @@ public class TopDownCharacterController : MonoBehaviour
     public event Action<Vector2> OnLookEvent;
     public event Action<Vector2> OnFireEvent;
     public event Action OnAttackEvent;
-
+    public float AtkSpeed = 0.15f;
     private float _timeSinceLastAttack = float.MaxValue;
     protected bool IsAttacking { get; set; }
 
@@ -21,11 +21,11 @@ public class TopDownCharacterController : MonoBehaviour
 
     private void HandleAttackDelay()
     {
-        if (_timeSinceLastAttack <= 0.15f)
+        if (_timeSinceLastAttack <= AtkSpeed)
         {
             _timeSinceLastAttack += Time.deltaTime;
         }
-        else if (IsAttacking && _timeSinceLastAttack > 0.15f)
+        else if (IsAttacking && _timeSinceLastAttack > AtkSpeed)
         {
             _timeSinceLastAttack = 0;
             CallAttackEvent();
