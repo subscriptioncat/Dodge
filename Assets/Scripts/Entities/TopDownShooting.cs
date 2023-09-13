@@ -46,7 +46,6 @@ public class TopDownShooting : MonoBehaviour
 
     private void OnShoot()
     {
-
         int n = bulletData.Count;
         int pos = -(n / 2) -1;
         float nowPosZ = transform.rotation.eulerAngles.z;
@@ -60,7 +59,6 @@ public class TopDownShooting : MonoBehaviour
 
     private void OnShoot(Vector2 direction)
     {
-
         int n = bulletData.Count;
         int pos = -(n / 2) - 1;
         float nowPosZ = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;

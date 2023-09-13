@@ -19,22 +19,34 @@ public class BulletController : EnemyBullet
         Movement();
         DelayDestroy(bulletData.Delay);
     }
-
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.tag == "Player" && bulletData.IsPlayer == false)
+        if (collision.tag == "Player" && bulletData.IsPlayer == false)
         {
-
             //GameManager.TakeDamage(thisObjectData.collision.GetComponent<MonsterData>());
             NowDestroy();
         }
-        else if(collision.tag == "Monster" && bulletData.IsPlayer == true)
+        else if (collision.tag == "Monster" && bulletData.IsPlayer == true)
         {
             //GameManager.TakeDamage(thisObjectData.collision.GetComponent<PlayerData>());
             NowDestroy();
         }
+        if (collision.tag == "Wall" && bulletData.IsPlayer == false)
+        {
+            if(collision.transform.position.x != 0)
+                direction = new Vector2(-direction.x, direction.y);
+            else
+                direction = new Vector2(direction.x, -direction.y);
+            float posZ = (Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg) - 90;
+            transform.rotation = Quaternion.Euler(0, 0, posZ);
+            Movement();
+        }
+        else if(collision.tag == "Wall")
+        {
+            NowDestroy();
+        }
     }
+
     private void NowDestroy()
     {
         Destroy(gameObject);
