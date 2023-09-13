@@ -8,7 +8,6 @@ public class BaseCharacter : MonoBehaviour
     protected int Hp { get; set; }
     protected int Atk { get; set; }
     protected float Speed { get; set; }
-    protected bool IsDead { get; set; }
 
     [SerializeField]
     protected GameObject sprite;
@@ -29,7 +28,8 @@ public class BaseCharacter : MonoBehaviour
 
                 if (Hp <= 0)
                 {
-                    IsDead = true;
+                    GameManager.Instance.IsDead[0] = 1;
+                    GameManager.Instance.IsDead[1] = 1;
                     Destroy(gameObject);
                 }
                 break;
@@ -40,7 +40,8 @@ public class BaseCharacter : MonoBehaviour
 
                 if (Hp <= 0)
                 {
-                    IsDead = true;
+                    GameManager.Instance.IsDead[0] = 2;
+                    GameManager.Instance.IsDead[2] = 1;
                     Destroy(gameObject);
                 }
                 break;

@@ -116,7 +116,6 @@ public class MonsterController : TopDownCharacterController
         {
             //var currentPos = this.gameObject.transform.position;
             //Vector2 targetPos = (Vector2)currentPos + pattern.Direction;
-            Debug.Log($"[{_index}] {pattern.Type}");
             //CallLookEvent(targetPos);
             CallLookEvent(pattern.Direction);
         }

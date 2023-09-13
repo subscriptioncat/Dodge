@@ -10,9 +10,11 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance = null;
 
+    public int[] IsDead;
+
     public GameManager()
     {
-        if (Instance = null)
+        if (Instance == null)
         {
             Instance = this;
         }
@@ -86,9 +88,6 @@ public class GameManager : MonoBehaviour
 
     private float time;
 
-    [SerializeField]
-    private bool test;
-
     private void Awake()
     {
         InitPlayer();
@@ -96,6 +95,8 @@ public class GameManager : MonoBehaviour
 
     private void InitPlayer()
     {
+        IsDead = new int[3] { 0, 0, 0 };
+
         switch (DataManager.Instance.playerCount)
         {
             case 1:
@@ -115,11 +116,25 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
+        CheckEnd();
+
         time += Time.deltaTime;
         if (time >= spawnCycle)
         {
             MonsterSpawn();
             time = 0;
+        }
+    }
+
+    private void CheckEnd()
+    {
+        if (
+            (IsDead[0] == 1 && IsDead[1] == 1)
+            || (IsDead[0] == 2 && IsDead[1] == 1 && IsDead[2] == 1)
+        )
+        {
+            Debug.Log("Game Over!");
+            SceneManager.LoadScene("EndingScene");
         }
     }
 
