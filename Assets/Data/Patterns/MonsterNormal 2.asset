@@ -14,16 +14,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PatternBundles:
   - Patterns:
+    - Type: 2
+      Direction: {x: -1, y: 0}
+      Power: 1
+      Duration: 1
+      Condition:
+        Type: 0
+        floatPoint: 0
+        intPoint: 1
     - Type: 1
-      Direction: {x: -0.5, y: 0.3}
+      Direction: {x: 0, y: -0.15}
       Power: 1
       Duration: 1
       Condition:
         Type: 0
         floatPoint: 0
         intPoint: 5
-    - Type: 2
-      Direction: {x: 0, y: 1}
+    - Type: 3
+      Direction: {x: 1, y: 0}
       Power: 1
       Duration: 1
       Condition:
