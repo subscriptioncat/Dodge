@@ -180,6 +180,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterRenderer: {fileID: 0}
+  shadowRenderer: {fileID: 0}
 --- !u!114 &917913925140666179
 MonoBehaviour:
   m_ObjectHideFlags: 0

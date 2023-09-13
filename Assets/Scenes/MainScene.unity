@@ -274,6 +274,7 @@ GameObject:
   - component: {fileID: 151377471}
   - component: {fileID: 151377473}
   - component: {fileID: 151377472}
+  - component: {fileID: 151377474}
   m_Layer: 0
   m_Name: Square
   m_TagString: Wall
@@ -393,6 +394,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &151377474
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 151377470}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9f2b90ea6f5beb418407a54950c3893, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &199987590
 GameObject:
   m_ObjectHideFlags: 0
@@ -684,6 +697,7 @@ GameObject:
   - component: {fileID: 584632410}
   - component: {fileID: 584632412}
   - component: {fileID: 584632411}
+  - component: {fileID: 584632413}
   m_Layer: 0
   m_Name: Square (1)
   m_TagString: Wall
@@ -699,7 +713,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 584632409}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 6.2, z: 0}
+  m_LocalPosition: {x: 0, y: 5.9, z: 0}
   m_LocalScale: {x: 20, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -803,6 +817,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &584632413
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 584632409}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9f2b90ea6f5beb418407a54950c3893, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &680553680
 GameObject:
   m_ObjectHideFlags: 0
@@ -1882,6 +1908,7 @@ GameObject:
   - component: {fileID: 1418741752}
   - component: {fileID: 1418741754}
   - component: {fileID: 1418741753}
+  - component: {fileID: 1418741755}
   m_Layer: 0
   m_Name: Square (2)
   m_TagString: Wall
@@ -1897,7 +1924,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1418741751}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 7.2, y: 0, z: 0}
+  m_LocalPosition: {x: 6.9, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 13, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2001,6 +2028,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1418741755
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1418741751}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9f2b90ea6f5beb418407a54950c3893, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1451689812
 GameObject:
   m_ObjectHideFlags: 0
@@ -7186,6 +7225,7 @@ GameObject:
   - component: {fileID: 1835847509}
   - component: {fileID: 1835847511}
   - component: {fileID: 1835847510}
+  - component: {fileID: 1835847512}
   m_Layer: 0
   m_Name: Square (3)
   m_TagString: Wall
@@ -7201,7 +7241,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1835847508}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -7.2, y: 0, z: 0}
+  m_LocalPosition: {x: -6.9, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 13, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7305,6 +7345,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1835847512
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1835847508}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9f2b90ea6f5beb418407a54950c3893, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1913089687
 GameObject:
   m_ObjectHideFlags: 0

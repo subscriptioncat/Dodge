@@ -21,24 +21,7 @@ MonoBehaviour:
       Condition:
         Type: 0
         floatPoint: 0
-        intPoint: 1
-    - Type: 3
-      Direction: {x: 1, y: 0}
-      Power: 1
-      Duration: 1
-      Condition:
-        Type: 0
-        floatPoint: 0
-        intPoint: 1
-  - Patterns:
-    - Type: 1
-      Direction: {x: 0, y: 0}
-      Power: 1
-      Duration: 1
-      Condition:
-        Type: 0
-        floatPoint: 0
-        intPoint: 2
+        intPoint: 7
     - Type: 2
       Direction: {x: -1, y: 0}
       Power: 1
@@ -46,4 +29,13 @@ MonoBehaviour:
       Condition:
         Type: 0
         floatPoint: 0
-        intPoint: 2
+        intPoint: 7
+  - Patterns:
+    - Type: 4
+      Direction: {x: -1, y: 0}
+      Power: 1
+      Duration: 1
+      Condition:
+        Type: 0
+        floatPoint: 0
+        intPoint: 1
