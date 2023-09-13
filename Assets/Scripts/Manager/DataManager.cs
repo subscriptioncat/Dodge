@@ -7,12 +7,13 @@ using UnityEngine.Android;
 public class DataManager : MonoBehaviour
 {
     public static DataManager Instance = null;
+
     public DataManager()
     {
         if (Instance == null)
             Instance = this;
     }
-
+    public int playerCount;
     public GameObject Bullet;
     public Sprite User1Image;
     public Sprite User2Image;
