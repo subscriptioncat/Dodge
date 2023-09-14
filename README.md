@@ -17,3 +17,7 @@ SelectScene씬에서 F1(Player1)누르면 Player1캐릭터 선택할 수 있으�
 게임에서 화면밖으로 이동이 불가하며 총알을 맞거나 적이랑 부딪치면 체력이 감소합니다.     
 만약 체력이 0이 된다면 게임이 끝나고 EndingScene으로 전환되며 점수가 표시됩니다.      
     
+
+
+https://github.com/subscriptioncat/Dodge/assets/119589973/04b6f44a-9c23-45fd-9f71-bf09479c8f43
+
