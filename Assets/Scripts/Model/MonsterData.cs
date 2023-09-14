@@ -2,10 +2,16 @@ using UnityEngine;
 
 public class MonsterData : BaseCharacter 
 {
+    public GameObject superPower;
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.GetComponent<BulletController>().isPlayer)
         {
+            int ran = Random.Range(0, 10);
+            if (ran < 9)
+                return;
+            else if (ran < 10)
+                Instantiate(superPower, transform.position, superPower.transform.rotation);
             Destroy(gameObject);
         }
     }

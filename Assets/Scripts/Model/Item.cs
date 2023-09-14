@@ -11,7 +11,7 @@ public class Item : MonoBehaviour {
     }
 
     void Start() {
-        //Jump();
+        Jump();
     }
 
     void Jump() {
@@ -21,10 +21,7 @@ public class Item : MonoBehaviour {
         rigid.AddForce(jumpVelocity, ForceMode2D.Impulse);
     }
 
-    void Update() {
-        // 10 ¿¡ y ÁÂÇ¥ ³Ö±â
-        //if (transform.position.y < 10) {
-        //    Destroy(gameObject);
-        //}
+    private void OnBecameInvisible() {
+        Destroy(gameObject);
     }
 }
