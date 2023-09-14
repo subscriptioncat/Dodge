@@ -185,6 +185,7 @@ MonoBehaviour:
   FireClip: {fileID: 8300000, guid: 6445b27f701a6f042967f22dd2cef948, type: 3}
   HitClip: {fileID: 8300000, guid: 9ac884390d5e3ee4495e4ee0e79c4f64, type: 3}
   TEST: 0
+  m_SoundType: 1
 --- !u!114 &-6005619135170094532
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -198,6 +199,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sprite: {fileID: 3719640285607873377}
+  superPower: {fileID: 0}
 --- !u!1 &2929780080656855079
 GameObject:
   m_ObjectHideFlags: 0
