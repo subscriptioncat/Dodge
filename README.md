@@ -17,7 +17,6 @@ F1, F2로 캐릭터 선택 후 Space Bar를 누르면 MainScene으로 전환되�
 게임에서 화면밖으로 이동이 불가하며 총알을 맞거나 적이랑 부딪치면 체력이 감소합니다.     
 만약 체력이 0이 된다면 게임이 끝나고 EndingScene으로 전환되며 점수가 표시됩니다.      
     
+https://github.com/subscriptioncat/Dodge/assets/119589973/3dc94ee0-bd1c-4977-8885-66a58d025fc9
 
-
-https://github.com/subscriptioncat/Dodge/assets/119589973/04b6f44a-9c23-45fd-9f71-bf09479c8f43
 
