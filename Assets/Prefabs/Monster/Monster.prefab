@@ -199,7 +199,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sprite: {fileID: 3719640285607873377}
-  superPower: {fileID: 0}
+  superPower: {fileID: 9018041852337815256, guid: a19555c18cf92904ba1bf0c93b10ad3a, type: 3}
 --- !u!1 &2929780080656855079
 GameObject:
   m_ObjectHideFlags: 0
