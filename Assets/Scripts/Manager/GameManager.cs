@@ -129,8 +129,8 @@ public class GameManager : MonoBehaviour
     private void CheckEnd()
     {
         if (
-            (IsDead[0] == 1 && IsDead[1] == 1)
-            || (IsDead[0] == 2 && IsDead[1] == 1 && IsDead[2] == 1)
+            (DataManager.Instance.playerCount == 1 && IsDead[1] == 1)
+            || (DataManager.Instance.playerCount == 2 && IsDead[1] == 1 && IsDead[2] == 1)
         )
         {
             Debug.Log("Game Over!");

@@ -27,6 +27,7 @@ public class PlayerData : BaseCharacter
     private bool isHit;
 
     private CharacterAudio m_Audio;
+
     private void Awake()
     {
         Type = "player";

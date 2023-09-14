@@ -52,6 +52,9 @@ public class UIManager : MonoBehaviour
         switch (DataManager.Instance.playerCount)
         {
             case 1:
+                player1Panel.GetComponent<PlayerHealthSprite>().health[6].SetActive(true);
+                player1Panel.GetComponent<PlayerHealthSprite>().startIndex = 6;
+
                 player1AirplaneSprite.GetComponent<Image>().sprite = DataManager
                     .Instance
                     .User1Image;
@@ -59,6 +62,12 @@ public class UIManager : MonoBehaviour
 
             case 2:
                 player2Panel.SetActive(true);
+
+                player1Panel.GetComponent<PlayerHealthSprite>().health[6].SetActive(true);
+                player2Panel.GetComponent<PlayerHealthSprite>().health[6].SetActive(true);
+                player1Panel.GetComponent<PlayerHealthSprite>().startIndex = 6;
+                player2Panel.GetComponent<PlayerHealthSprite>().startIndex = 6;
+
                 player1AirplaneSprite.GetComponent<Image>().sprite = DataManager
                     .Instance
                     .User1Image;

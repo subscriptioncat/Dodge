@@ -28,7 +28,6 @@ public class BaseCharacter : MonoBehaviour
 
                 if (Hp <= 0)
                 {
-                    GameManager.Instance.IsDead[0] = 1;
                     GameManager.Instance.IsDead[1] = 1;
                     Destroy(gameObject);
                 }
@@ -40,7 +39,6 @@ public class BaseCharacter : MonoBehaviour
 
                 if (Hp <= 0)
                 {
-                    GameManager.Instance.IsDead[0] = 2;
                     GameManager.Instance.IsDead[2] = 1;
                     Destroy(gameObject);
                 }

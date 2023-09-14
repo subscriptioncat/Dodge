@@ -5,22 +5,16 @@ using UnityEngine;
 public class PlayerHealthSprite : MonoBehaviour
 {
     [SerializeField]
-    GameObject[] health;
+    public GameObject[] health;
 
-    int startIndex = 5;
+    public int startIndex;
 
     public void SetHealthSprite(int healthPoint)
     {
-        if (startIndex != healthPoint)
-        {
-            if (startIndex != -1)
-            {
-                health[startIndex].SetActive(false);
-            }
+        health[startIndex].SetActive(false);
 
-            health[healthPoint].SetActive(true);
+        health[healthPoint].SetActive(true);
 
-            startIndex = healthPoint;
-        }
+        startIndex = healthPoint;
     }
 }
