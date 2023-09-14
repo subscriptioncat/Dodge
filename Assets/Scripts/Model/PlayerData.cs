@@ -34,7 +34,7 @@ public class PlayerData : BaseCharacter
         Hp = 5;
         Atk = 10;
         Speed = 5;
-        AtkSpeed = 1.5f;
+        AtkSpeed = 4f;
 
         spriteRenderer = sprite.GetComponent<SpriteRenderer>();
         m_Audio = gameObject.GetComponent<CharacterAudio>();
