@@ -59,25 +59,11 @@ public class PlayerData : BaseCharacter
         }
         else if (collision.gameObject.tag == "Item")
         {
-            GameObject item = collision.gameObject;
-            switch (item.GetComponent<Item>().type)
-            {
-                case "bulletTime":
-                    UnityEngine.Debug.Log("bulletTime");
-                    //bullet.Delay /= 2;
-                    break;
-                case "timeSlow":
-                    StartCoroutine(EnemySlow());
-                    break;
-                case "superPower":
-                    UnityEngine.Debug.Log("superPower");
-                    isUnHitTime = true;
-                    spriteRenderer.color = new Color(1, 1, 1, 0.4f);
-                    Invoke("OffDamage", 5f);
-                    isUnHitTime = false;
-                    break;
-            }
-            Destroy(item);
+            isUnHitTime = true;
+            spriteRenderer.color = new Color(1, 1, 1, 0.4f);
+            Invoke("OffDamage", 5f);
+            isUnHitTime = false;
+            Destroy(collision.gameObject);
         }
     }
 
@@ -86,28 +72,6 @@ public class PlayerData : BaseCharacter
         if (other.CompareTag("Wall"))
         {
             UnityEngine.Debug.Log("Wall!!");
-        }
-    }
-
-    IEnumerator EnemySlow()
-    {
-        for (int i = 0; i < 15; i++)
-        {
-            // 적 태그 다르면 수정해주세요 ***
-            GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
-            // 적 총알 태그 다르면 수정해주세요 ***
-            GameObject[] bullet = GameObject.FindGameObjectsWithTag("EnemyBullet");
-            for (int index = 0; index < enemies.Length; index++)
-            {
-                // 적 속도 감소
-                //enemies[index].GetComponent<EnemyData>().Speed = 0.3f;
-            }
-            for (int index = 0; index < bullet.Length; index++)
-            {
-                // 적 탄환 속도 감소
-                bullet[index].GetComponent<BulletData>().Speed = 0.6f;
-            }
-            yield return new WaitForSeconds(0.2f);
         }
     }
 
