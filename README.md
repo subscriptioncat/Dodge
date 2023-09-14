@@ -5,7 +5,7 @@
 >- 프로젝트 명 : 땃쥐는 오늘도 닷지     
 >- 프로젝트 소개 : 곰플레이어의 닷지 게임을 모티브로 만든 게임입니다.     
 >- 팀장 : 김도현 - BulletData.cs, BulletController.cs, EnemtyBullet.cs, TopDownShooting.cs, 몬스터 패턴     
->- 팀원 : 배인호 - PlayerData.cs, RankingManager.cs, SelectManager.cs, StartManager.cs, UIManager.cs, MonsterData.cs, Utils폴 EndCondition파일 및 MonsterPattern을 제외한 모든 파일들, EndingScene제외 모든 UI들    
+>- 팀원 : 배인호 - PlayerData.cs, RankingManager.cs, SelectManager.cs, StartManager.cs, UIManager.cs, MonsterData.cs, Utils폴더 EndCondition파일 및 MonsterPattern을 제외한 모든 파일들, EndingScene제외 모든 UI들    
 >- 팀원 : 채이환 - SoundManager.cs, DataManager.cs, MonsterController.cs, CharacterAudio, BGMPlayer, MonsterPattern.cs,         
 >- 팀원 : 손병의 - PlayerInputController.cs, TopDownCharacterController.cs, TopDownAimRotation.cs, TopDownMovement.cs, RankingManager.cs         
 >- 팀원 : 곽민규 - BaseCharacter.cs, Item.cs    
