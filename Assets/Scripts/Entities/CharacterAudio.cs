@@ -9,6 +9,7 @@ public class CharacterAudio : MonoBehaviour
     public bool TEST;
     private float m_Time;
     private TopDownCharacterController m_Controller;
+    [SerializeField] private eSoundType m_SoundType;
 
     private void Awake()
     {
@@ -21,6 +22,7 @@ public class CharacterAudio : MonoBehaviour
         if (m_Controller != null)
         {
             m_Controller.OnFireEvent += PlayFire;
+            m_Controller.OnAttackEvent += PlayFire;
         }
     }
     private void Update()
@@ -33,13 +35,13 @@ public class CharacterAudio : MonoBehaviour
     {
         PlayFire();
     }
-    public void PlayFire()
+    public virtual void PlayFire()
     {
-        SoundManager.PlayAudio(eSoundType.Player, new SoundManager.SoundData(FireClip, (Vector2)transform.position, 0.9f, 1.1f));
+        SoundManager.PlayAudio(m_SoundType, new SoundManager.SoundData(FireClip, (Vector2)transform.position, 0.9f, 1.1f));
     }
-    public void PlayHit()
+    public virtual void PlayHit()
     {
-        SoundManager.PlayAudio(eSoundType.Player, new SoundManager.SoundData(HitClip, (Vector2)transform.position, 0.8f, 1.2f));
+        SoundManager.PlayAudio(m_SoundType, new SoundManager.SoundData(HitClip, (Vector2)transform.position, 0.8f, 1.2f));
     }
     private void Test()
     {

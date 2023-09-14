@@ -361,7 +361,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d8ff51c0488cdc4c9de527f208387dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FireClip: {fileID: 8300000, guid: 6445b27f701a6f042967f22dd2cef948, type: 3}
+  FireClip: {fileID: 8300000, guid: 199096e230de1d946a997e70239ea90a, type: 3}
   HitClip: {fileID: 8300000, guid: 9ac884390d5e3ee4495e4ee0e79c4f64, type: 3}
   TEST: 0
 --- !u!114 &885456128780129738
