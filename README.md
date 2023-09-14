@@ -13,7 +13,7 @@
 StartScene씬에서 Space Bar 누르면 SelectScene씬으로 전환       
 SelectScene씬에서 F1(Player1)누르면 Player1캐릭터 선택할 수 있으며 F2(Player2)를 누르면 Player2커서가 활성화 되면서 캐릭터 선택이 가능합니다.     
 커서는 1P W,A,S,D로 조작가능하며 2P는 방향키로 조작이 가능합니다.     
-스페이스바로 캐릭터를 선택시 MainScene으로 전환되며 게임이 시작됩니다.     
+F1, F2로 캐릭터 선택 후 Space Bar를 누르면 MainScene으로 전환되며 게임이 시작됩니다.     
 게임에서 화면밖으로 이동이 불가하며 총알을 맞거나 적이랑 부딪치면 체력이 감소합니다.     
 만약 체력이 0이 된다면 게임이 끝나고 EndingScene으로 전환되며 점수가 표시됩니다.      
     
